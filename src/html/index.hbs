@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang='en' data-version='{{timestamp}}'>
+<style>
+
+@media screen and (max-width: 600px) {
+
+.tap--final{
+  left: 45%;
+  bottom: 1%;
+  animation: shake 2.0s;
+  animation-iteration-count: infinite;
+}
+
+.tap--back{
+  left: 45%;
+  top: 3%;
+  animation: shake 2.0s;
+  animation-iteration-count: infinite;
+ }
+  
+
+	@keyframes shake {
+  0% { transform: translate(0px, 1px) rotate(0deg); }
+  10% { transform: translate(0px, -1px) rotate(0deg); }
+  20% { transform: translate(0px, 1px) rotate(0deg); }
+  30% { transform: translate(0px, -1px) rotate(0deg); }
+  40% { transform: translate(0px, 1px) rotate(0deg); }
+  50% { transform: translate(0px, -1px) rotate(0deg); }
+  60% { transform: translate(0px, 1px) rotate(0deg); }
+  70% { transform: translate(0px, -1px) rotate(0deg); }
+  80% { transform: translate(0px,1px) rotate(0deg); }
+  90% { transform: translate(0px, -1px) rotate(0deg); }
+  100% { transform: translate(0px, 1px) rotate(0deg); }
+}
+
+}
+
+@media screen and (min-width: 600px) {
+
+.tap--final{
+  left: 45%;
+  bottom: 1%;
+  animation: shake 2.0s;
+  animation-iteration-count: infinite;
+}
+
+.tap--back{
+  left: 45%;
+  top: 3%;
+  animation: shake 2.0s;
+  animation-iteration-count: infinite;
+ }
+  
+
+	@keyframes shake {
+  0% { transform: translate(0px, 1px) rotate(0deg); }
+  10% { transform: translate(0px, -1px) rotate(0deg); }
+  20% { transform: translate(0px, 1px) rotate(0deg); }
+  30% { transform: translate(0px, -1px) rotate(0deg); }
+  40% { transform: translate(0px, 1px) rotate(0deg); }
+  50% { transform: translate(0px, -1px) rotate(0deg); }
+  60% { transform: translate(0px, 1px) rotate(0deg); }
+  70% { transform: translate(0px, -1px) rotate(0deg); }
+  80% { transform: translate(0px,1px) rotate(0deg); }
+  90% { transform: translate(0px, -1px) rotate(0deg); }
+  100% { transform: translate(0px, 1px) rotate(0deg); }
+}
+
+}
+
+</style>
+<head>
+
+	{{> base/meta}}
+
+	<link inline rel='stylesheet' href='bundle.css' />
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+
+	{{> base/font}}
+
+	<script inline src='head.js'></script>
+
+	{{> base/analytics }}
+
+</head>
+
+<body>
+
+	<!-- {{> base/header 'sticky'}} -->
+
+	<main id='content'>
+
+		{{> story/stepper }}	
+		{{> story/scroller }}
+		{{> story/stack }}
+
+
+	</main>
+
+	<!-- {{> base/footer }} -->
+	<script>
+	function selectCitation(value) {
+        console.log(value)
+        var deselectedCircles = d3.selectAll('circle')
+        	.classed('active',false)
+        var citationDates = d3.select('.slider').attr('dates').split(',')
+        var selected = citationDates.reduce((prev, curr) => Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
+        var selectorName = ('#date' + selected)
+        console.log(selectorName)
+        var selectedCircle = d3.select(selectorName)
+          .classed('active',true)
+        console.log(selected)
+        var citationText = d3.select(selectorName).attr('text')
+        console.log(citationText)
+        d3.select('.citationContainer')
+        	.text('(' + selected + ') ' + citationText)
+      }
+</script>
+
+<script>
+	function overlayOff(id) {
+				//deactivate overlay
+				console.log(id)
+        var overlay = d3.select('#' + id)
+        overlay.classed('active',false)
+        //remove everything in overlay 
+        while (document.getElementById(id).firstChild) {
+    document.getElementById(id).removeChild(document.getElementById(id).firstChild);
+}
+      }
+</script>
+
+<!-- <script>
+import smoothscroll from 'smoothscroll-polyfill';
+
+// kick off the polyfill!
+smoothscroll.polyfill();
+
+</script> -->
+
+	<script src='{{basepath}}assets/scripts/d3.v5.9.1.min.js'></script>
+	<script src='{{basepath}}assets/scripts/scrollama.js'></script>
+	<script src='{{basepath}}assets/scripts/smoothscroll.min.js'></script>
+	<script src='{{basepath}}assets/scripts/intersection-observer.js'></script>
+	<script src='main.js?version={{timestamp}}' async></script>
+</body>
+
+</html>

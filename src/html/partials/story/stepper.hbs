@@ -1,0 +1,111 @@
+<!-- This section holds everything used in the first part of the story   -->
+
+<section class='stepper'>
+
+  <!-- Intro stuff lives here   -->
+  <div class='stepper__intro step0'>
+
+    <img class='header-image' src='assets/images/assberg_quotes.svg'>
+    <h1 class='stepper__hed'>{{meta.title}}</h1>
+      <!-- <p class='stepper__byline'>By
+        <a href='{{meta.author.url}}' target='_blank'>
+          <strong>{{meta.author.name}}</strong>
+        </a>
+      </p>
+    <time class='stepper__time'>August 2019</time> -->
+    <div class='tap--first'>
+      <span>TAP ANYWHERE TO FIND OUT</span>
+   </div>
+  </div>
+
+  <!-- All visuals live here   -->
+
+  <div class='stepper__graphics'>
+  
+    <div class='stepper__video step0' >
+    </div>
+
+    <div class='stepper__video step1'>
+      <video class='ismo step1' src='assets/videos/ismo_1.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+    </div>
+ 
+    <div class='stepper__video step2'>
+      <video class='ismo step2' src='assets/videos/ismo_2.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+    </div>
+
+    <div class='stepper__video step3'>
+      <video class='ismo step3' src='assets/videos/ismo_3.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+    </div>
+ 
+    <div class='stepper__video step4'>
+      <video class='ismo step4' src='assets/videos/ismo_4.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+    </div>
+
+    <div class='stepper__video step5'>
+      <video class='ismo step5' src='assets/videos/ismo_5.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+    </div>
+
+  </div>
+
+  <!-- Forward and back buttons live here   -->
+
+  <div class='stepper__tap'>
+    <div class='tap tap--left'>
+      <svg class='tap--left' width=30vw height=4vh>
+        <g>
+          <rect fill='#1B7EBE' width=30vw height=5vh ></rect>
+          <img inline src='arrow-left.svg'>
+        </g>
+      </svg>
+    </div>
+
+    <div class='tap tap--right'>
+      <svg class='tap--right' width=30vw height=4vh>
+        <g>
+          <rect fill='#1B7EBE' width=30vw height=5vh></rect>
+          <img inline src='arrow-right.svg'>
+        </g>
+      </svg>
+    </div>
+
+    <div class='tap tap--final'>
+      <svg class='tap--final' width=10vh height=10vh>
+        <g>
+          <img inline src='arrow-down-circle.svg'>
+        </g>
+      </svg>
+    </div>
+
+    <div class='tap tap--back'>
+          <img inline class='tap--back' src='arrow-up-circle.svg'>
+    </div>
+  </div>
+
+  <!-- Steps live here   -->
+
+  <div class='stepper__steps'>
+
+    <div id='video-annotation' class='stepper__annotation step1'>
+      <span>{{doc.step1}}</span>
+    </div>
+
+    <div id='video-annotation' class='stepper__annotation step2'>
+      <span>Here’s the script for Ismo’s routine. In this four minute bit, he uses the word “ass” 34 times.</span>
+    </div>
+
+    <div id='video-annotation' class='stepper__annotation step3'> 
+      <span>We’re going to investigate whether “ass” is the most complicated word. Click here if you want to watch the <a src='https://www.youtube.com/watch?v=RAGcDi0DRtU'>full routine</a> first, and keep going to learn why slang words can be so confusing (and enriching).</span>
+    </div>
+
+    <div id='video-annotation' class='stepper__annotation step4'> 
+      <span>{{doc.step4}}</span>
+    </div>
+
+    <div id='video-annotation' class='stepper__annotation step5'> 
+      <span>{{doc.step5}}</span>
+    </div>
+
+  </div>
+
+  
+</section>
