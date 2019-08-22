@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang='en' data-version='1566194658914'>
+<html lang='en' data-version='1566498781862'>
 <style>
 
 @media screen and (max-width: 600px) {
@@ -118,7 +118,9 @@
 		href='assets/fonts/tiempos/TiemposTextWeb-Regular.woff2'>
 	<link rel='preload' type='font/woff2' as='font' crossorigin
 		href='assets/fonts/tiempos/TiemposTextWeb-Bold.woff2'>
-
+	<link rel='preload' type='font/woff2' as='font' crossorigin href='assets/fonts/atlas/AtlasGrotesk-Regular-Web.woff2'> 
+	<link rel='preload' type='font/woff2' as='font' crossorigin href='assets/fonts/atlas/AtlasGrotesk-Medium-Web.woff2'> 
+	<link rel='preload' type='font/woff2' as='font' crossorigin href='assets/fonts/atlas/AtlasGrotesk-Bold-Web.woff2'> 
 	<link inline rel='stylesheet' href='bundle.css' />
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -289,7 +291,6 @@
 		********************
 		*/
 	
-		/*
 		@font-face {
 			font-family: 'Atlas Grotesk Web';
 			src: url('assets/fonts/atlas/AtlasGrotesk-Regular-Web.woff2') format('woff2'),
@@ -319,7 +320,7 @@
 			font-stretch: normal;
 			font-display: swap;
 		}
-		*/
+	
 	</style>
 	<script inline src='head.js'></script>
 
@@ -392,19 +393,23 @@
 		    </div>
 		 
 		    <div class='stepper__video step2'>
-		      <video class='ismo step2' src='assets/videos/ismo_2.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+		      <video class='ismo step2' src='assets/videos/ismo_1.mp4'></video>
 		    </div>
 		
 		    <div class='stepper__video step3'>
-		      <video class='ismo step3' src='assets/videos/ismo_3.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+		      <video class='ismo step3' src='assets/videos/ismo_2.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
 		    </div>
 		 
 		    <div class='stepper__video step4'>
-		      <video class='ismo step4' src='assets/videos/ismo_4.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+		      <video class='ismo step4' src='assets/videos/ismo_3.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
 		    </div>
 		
 		    <div class='stepper__video step5'>
-		      <video class='ismo step5' src='assets/videos/ismo_5.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+		      <video class='ismo step5' src='assets/videos/ismo_4.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+		    </div>
+		
+		    <div class='stepper__video step6'>
+		      <video class='ismo step6' src='assets/videos/ismo_5.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
 		    </div>
 		
 		  </div>
@@ -448,23 +453,22 @@
 		  <div class='stepper__steps'>
 		
 		    <div id='video-annotation' class='stepper__annotation step1'>
-		      <span>This is Ismo, a Finnish comedian who’s struggled with learning the nuances of English. In particular, he’s had trouble learning how to use the word “ass.”</span>
+		      <span>This is Ismo, a Finnish comedian who’s struggled with the nuances of English. In particular, he’s had trouble learning how to use the word “ass.”</span>
 		    </div>
 		
 		    <div id='video-annotation' class='stepper__annotation step2'>
-		      <span>Here’s the script for Ismo’s routine. In this four minute bit, he uses the word “ass” 34 times.</span>
+		      <span>Ismo’s difficulties have resonated with people: this 2018 set on Conan has more than 4 million views on YouTube. We’re going to show some highlights, but you can click here if you want to watch the full routine first.</span>
 		    </div>
 		
-		    <div id='video-annotation' class='stepper__annotation step3'> 
-		      <span>We’re going to investigate whether “ass” is the most complicated word. Click here if you want to watch the <a src='https://www.youtube.com/watch?v=RAGcDi0DRtU'>full routine</a> first, and keep going to learn why slang words can be so confusing (and enriching).</span>
+		    <div id='video-annotation' class='stepper__annotation step3'>Here’s the script for Ismo’s routine. In this four minute bit, he uses the word “ass” 34 times.</span>
 		    </div>
 		
 		    <div id='video-annotation' class='stepper__annotation step4'> 
-		      <span>Throughout the bit, Ismo uses “ass” in different contexts. By doing so, he conveys ten unique meanings with the same word.</span>
+		      <span>We’re going to investigate whether ass is truly the most complicated word. Along the way, we’ll see why slang in general can be so confusing (and enriching).</span>
 		    </div>
 		
 		    <div id='video-annotation' class='stepper__annotation step5'> 
-		      <span></span>
+		      <span>Throughout the bit, Ismo uses “ass” in different contexts. By doing so, he conveys ten unique meanings with the same word.</span>
 		    </div>
 		
 		  </div>
@@ -481,10 +485,10 @@
 		      <p>Unfortunately for Ismo, lexicographer Jonathon Green has beaten him to the punch: Green’s Dictionary of Slang, the most comprehensive collection of English slang in the world, contains over 140,000 words, including “ass.”</p>
 		    </div>
 		    <div class='step' data-step='2'>
-		      <p>Instead of just offering definitions, Green’s relies on historical citations from documents dating back centuries to show how slang evolves. Green is a linguistic detective, combing through text ranging from 16th century religious pamphlets to internet message boards of the late aughts in search of new slang words and usages.</p>
+		      <p>Green’s is fundamentally different than your standard dictionary. For most people, the dictionary is an authority on meaning, a set of rules for using words well. In linguistics, this kind of dictionary is called “prescriptive,” in that it prescribes best practices for speaking. Green’s, on the other hand, is a “descriptive” dictionary. Green’s aim isn’t to teach people how to properly use slang, but to show how slang is used by people. “The acknowledged nature of language is that it tends to trickle down,” Green says. “Slang does not: it pushes upwards.” The difference between prescriptivism and descriptivism comes down to what you value in language: convention or invention.</p>
 		    </div>
 		    <div class='step' data-step='3'>
-		      <p>Green’s is fundamentally different than a traditional dictionary, which is prescriptive: it tells you how words should be used. Green’s is descriptive: it shows how words have been used.</p>
+		      <p>As a descriptive work, Green’s relies on historical citations to show how slang is used, and how it has evolved over time. Green is a linguistic detective, combing through text ranging from 16th century religious pamphlets to internet message boards of the late aughts in search of new slang words and usages.</p>
 		      <!-- <img src='assets/images/caveman_presciptivist.png'>
 		      <span class='caption'>The Invention of Prescriptivism</span> -->
 		    </div>
@@ -492,16 +496,16 @@
 		      <p>Let’s be descriptivists, and look at the ten different ways Ismo uses the word “ass” in his routine.</p>
 		    </div>
 		    <div class='step' data-step='5'>
-		      <p>The first time Ismo uses the word “ass,” he’s using it to mean “butt.” This is, of course, one of the primary usages of the word “ass,” and one of the oldest. The first recorded usage of this sense comes from a collection of British song lyrics published in 1761.</p>
+		      <p>The first time Ismo uses the word “ass,” he’s using it to mean “butt.” But Ismo didn’t choose to analyze the word “ass” just because it’s funny to talk about butts. While slang is used in many domains, it’s most widely used words revolve around a few major themes. “To sum them up as sex, drugs and, in its widest sense, rock ‘n’ roll wouldn’t be so far from the truth,” Green says. “Plus crime, drunkenness, insults, racism and a number of other of our less savoury but quite inescapable activities.” Which is to say, there is some less than savory language in the historical citations that are to follow, so please be advised that you may be offended by the history of slang.</p>
 		    </div>
 		    <div class='step' data-step='6'>
-		      <p>Here is a timeline showing historical citations for this usage of “ass.” The citations fulfill the descriptivist’s credo: meaning is use. Use the scrollbar to see a citation.</p>
+		      <p>Here is a timeline showing historical citations for this usage of “ass.” Green’s first recorded usage of this sense comes from a collection of British song lyrics published in 1761. Because slang originates in subcultures before entering popular vernacular, this usage was certainly circulating before it was first written down. A “first recorded usage” is just that: the first one we know of so far. Use the scrollbar to see a citation.</p>
 		    </div>
 		    <div class='step' data-step='7'>
-		      <p>As we see in Green’s, “ass” is an old word. Its longevity is part of the reason it’s so complicated: over the years, it’s accrued many meanings different forms of usage. Ismo uses “ass” in five different ways: as a noun, an adjective, a suffix, to form a compound word, and as part of a phrase.</p>
+		      <p>Part of the reason “ass” is so complicated is because of its longevity. Over the years, it’s accrued many meanings and different forms of usage. Ismo uses “ass” in five different ways: as a noun, an adjective, a suffix, to form a compound word, and as part of a phrase.</p>
 		    </div>
 		    <div class='step' data-step='8'>
-		      <p>Ismo’s ass exegesis is, to use his words, “just the tip of the ass-berg.” Keep scrolling to see what’s under the surface: all 201 unique usages of the word “ass” documented in Green’s.</p>
+		      <p>But Ismo’s ass exegesis is, to use his words, “just the tip of the ass-berg.” Keep scrolling to see what’s under the surface: more than 200 unique usages of the word “ass” documented by Jonathon Green. Of course, Green’s is also just the tip of a much larger ass-berg — a catalog of slang will never be exhaustive, because people are coming up with new usages every day.</p>
 		    </div>
 		  </article>
 		</div>
@@ -517,13 +521,13 @@
 		      <div class="right-shape" id='right-shape1'></div>
 		      <div id='overlay1' class='overlay' onclick='overlayOff(this.id)'></div>
 		    </div>
-		    <div class='prose'><p>To a slang expert like Green, it’s no surprise that “ass” has accrued so many meanings. The word sits in the center of the potent slang venn diagram — it’s related to sex, it’s considered a curse word, and it’s metaphorically evocative, so it can easily be combined with other words to form new phrases and compounds. “Ass” is not so much exceptional as it is representative of the slang ethos.</p><br><br><p>We can look at other popular slang words to see how these features help terms accrue additional senses. Words like “fuck” (146 senses) and “dick” (120 senses) fulfill the same conditions as “ass,” with a breadth of meaning unique to the sexually explicit and obscene.</p></div>
+		    <div class='prose'><p>It’s no surprise that “ass” has accrued so many meanings. The word sits in the center of the potent slang venn diagram — it’s related to sex, it’s considered a curse word, and it’s metaphorically evocative. “Ass” is not so much exceptional as it is representative of the slang ethos.</p><img src='assets/images/fake_venn.png'><p>We can look at other popular slang words to see how these features help terms accrue additional senses. Words like “fuck” (146 senses) and “dick” (120 senses) fulfill the same conditions as “ass,” with a breadth of meaning unique to the sexually explicit and obscene.</p></div>
 		    <div class='chart' id='iceberg2'>
 		      <div class="left-shape" id='left-shape2'></div>
 		      <div class="right-shape" id='right-shape2'></div>
 		      <div id='overlay2' class='overlay' onclick='overlayOff(this.id)'></div>
 		    </div>
-		    <div class='prose'><p>Words like “dog” (164 senses) and “cat” (104 senses) aren’t curse words, but they draw upon a trove of evocative animal metaphors to form new usages. The same metaphorical heft contributes to the varied usages of visually stimulating words like “black” (131 senses) and “red” (104 senses).</p></div>
+		    <div class='prose'><p>Words like “dog” (164 senses) and “cat” (104 senses) aren’t curse words, but they draw upon a trove of evocative animal metaphors to form new usages. The same metaphorical heft contributes to the varied usages of sensory words like “black” (131 senses) and “red” (104 senses).</p></div>
 		    <div class='chart' id='iceberg3'>
 		      <div class="left-shape" id='left-shape3'></div>
 		      <div class="right-shape" id='right-shape3'></div>
@@ -535,7 +539,7 @@
 		      <div class="right-shape" id='right-shape4'></div>
 		      <div id='overlay4' class='overlay' onclick='overlayOff(this.id)'></div>
 		    </div>
-		    <div class='prose'><p>The reason “ass,” and it’s more complicated counterpart, “shit,” are difficult words to pin down is that slang is fundamentally different than standard English. “The acknowledged nature of language is that it tends to trickle down,” Green says. “Slang does not: it pushes upwards. If it is the language of the gutter, then, looking to impose itself on popular speech, it reaches for the stars.” Slang is democratic; there are no gatekeepers and grammar nazis here. People are coming up with new usages for the word “ass” every day; now that’s some inspiring-ass shit.</p></div>
+		    <div class='prose'><p>The reason “ass,” and it’s more complicated counterpart, “shit,” are difficult words to pin down is that slang is fundamentally different than standard English. Slang is democratic; there are no gatekeepers and grammar nazis to impose restrictions. Learning how to use “ass” might seem complicated, but the story of slang is pretty simple: it’s slippery, messy, transgressive, clever, cruel, confusing, industrious, evocative, vulgar, adaptable. In Green’s words: “Slang is humanity at its most human.”</p></div>
 		
 		  </div>
 		
@@ -660,7 +664,7 @@ smoothscroll.polyfill();
 	<script src='assets/scripts/scrollama.js'></script>
 	<script src='assets/scripts/smoothscroll.min.js'></script>
 	<script src='assets/scripts/intersection-observer.js'></script>
-	<script src='main.js?version=1566194658914' async></script>
+	<script src='main.js?version=1566498781862' async></script>
 </body>
 
 </html>

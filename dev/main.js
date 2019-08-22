@@ -542,7 +542,7 @@ function resize() {} //----------------//
 
 function setupStepper() {
   //array of step states
-  var steps = [step0, step1, step2, step3, step4, step5, step6]; //define click events on right-left buttons
+  var steps = [step0, step1, step2, step3, step4, step5, step6, step7]; //define click events on right-left buttons
 
   var tapLeft = d3.select('svg.tap--left').on('click', function () {
     currentStep = currentStep - 1;
@@ -601,17 +601,40 @@ function setupStepper() {
     d3.select(".tap.tap--left").transition().duration(1000).style('opacity', '1').style('right', '55%').style('bottom', '5%').style('pointer-events', 'auto');
     d3.select(".tap.tap--right").transition().duration(1000).style('opacity', '1').style('left', '55%').style('bottom', '5%'); //play the first video
 
-    d3.select('video.ismo.step1')['_groups'][0][0].play(); //pause the second video on clickback
+    d3.select('video.ismo.step1')['_groups'][0][0].play();
+  }
 
-    d3.select('video.ismo.step2')['_groups'][0][0].pause();
-    d3.select('video.ismo.step2')['_groups'][0][0].currentTime = 0; //deactivate script on clickback
+  function step2() {
+    // //activate script 
+    // d3.select('.script-container').classed("active",true)
+    //  .transition()
+    //  .duration(1000)
+    //  //deselct active text on clickback
+    //  d3.selectAll('.script-line').classed("active",false)
+    //  //select active text
+    //  d3.selectAll('.script-line')
+    //    .filter(function (d) {
+    //      return d.step_used == 'step2'
+    //    })
+    //    .classed('active',true)
+    //  //stop the first video
+    //  d3.select('video.ismo.step1')['_groups'][0][0].pause()
+    //  d3.select('video.ismo.step1')['_groups'][0][0].currentTime = 0
+    //  //play the second video
+    //  d3.select('video.ismo.step2')['_groups'][0][0].play()
+    // //pause the third video on clickback
+    //  d3.select('video.ismo.step3')['_groups'][0][0].pause()
+    //  d3.select('video.ismo.step3')['_groups'][0][0].currentTime = 0
+    //stop the first video
+    d3.select('video.ismo.step1')['_groups'][0][0].pause();
+    d3.select('video.ismo.step1')['_groups'][0][0].currentTime = 0; //deactivate script on clickback
 
     d3.select('.script-container').classed("active", false); //deselect active text on clickback
 
     d3.selectAll('.script-line').classed("active", false);
   }
 
-  function step2() {
+  function step3() {
     //activate script 
     d3.select('.script-container').classed("active", true).transition().duration(1000); //deselct active text on clickback
 
@@ -621,26 +644,26 @@ function setupStepper() {
       return d.step_used == 'step2';
     }).classed('active', true); //stop the first video
 
-    d3.select('video.ismo.step1')['_groups'][0][0].pause();
-    d3.select('video.ismo.step1')['_groups'][0][0].currentTime = 0; //play the second video
+    d3.select('video.ismo.step2')['_groups'][0][0].pause();
+    d3.select('video.ismo.step2')['_groups'][0][0].currentTime = 0; //play the second video
 
-    d3.select('video.ismo.step2')['_groups'][0][0].play(); //pause the third video on clickback
+    d3.select('video.ismo.step3')['_groups'][0][0].play(); //pause the third video on clickback
 
-    d3.select('video.ismo.step3')['_groups'][0][0].pause();
-    d3.select('video.ismo.step3')['_groups'][0][0].currentTime = 0; //highlight instances of ass
+    d3.select('video.ismo.step4')['_groups'][0][0].pause();
+    d3.select('video.ismo.step4')['_groups'][0][0].currentTime = 0; //highlight instances of ass
 
     highlightAss();
   }
 
-  function step3() {
+  function step4() {
     //stop the second video
-    d3.select('video.ismo.step2')['_groups'][0][0].pause();
-    d3.select('video.ismo.step2')['_groups'][0][0].currentTime = 0; //play the third video
+    d3.select('video.ismo.step3')['_groups'][0][0].pause();
+    d3.select('video.ismo.step3')['_groups'][0][0].currentTime = 0; //play the third video
 
-    d3.select('video.ismo.step3')['_groups'][0][0].play(); //pause the fourth video on clickback
+    d3.select('video.ismo.step4')['_groups'][0][0].play(); //pause the fourth video on clickback
 
-    d3.select('video.ismo.step4')['_groups'][0][0].pause();
-    d3.select('video.ismo.step4')['_groups'][0][0].currentTime = 0; //deselect active text on clickback/clickthrough
+    d3.select('video.ismo.step5')['_groups'][0][0].pause();
+    d3.select('video.ismo.step5')['_groups'][0][0].currentTime = 0; //deselect active text on clickback/clickthrough
 
     d3.selectAll('.script-line').classed("active", false); //select active text
 
@@ -649,15 +672,15 @@ function setupStepper() {
     }).classed('active', true);
   }
 
-  function step4() {
+  function step5() {
     //stop the third video
-    d3.select('video.ismo.step3')['_groups'][0][0].pause();
-    d3.select('video.ismo.step3')['_groups'][0][0].currentTime = 0; //play the fourth video
+    d3.select('video.ismo.step4')['_groups'][0][0].pause();
+    d3.select('video.ismo.step4')['_groups'][0][0].currentTime = 0; //play the fourth video
 
-    d3.select('video.ismo.step4')['_groups'][0][0].play(); //pause the fifth video on clickback
+    d3.select('video.ismo.step5')['_groups'][0][0].play(); //pause the fifth video on clickback
 
-    d3.select('video.ismo.step5')['_groups'][0][0].pause();
-    d3.select('video.ismo.step5')['_groups'][0][0].currentTime = 0; //deselect active text on clickback/clickthrough
+    d3.select('video.ismo.step6')['_groups'][0][0].pause();
+    d3.select('video.ismo.step6')['_groups'][0][0].currentTime = 0; //deselect active text on clickback/clickthrough
 
     d3.selectAll('.script-line').classed("active", false); //select active text
 
@@ -678,12 +701,12 @@ function setupStepper() {
     d3.select('.tap.tap--left').transition().duration(1000).style('right', '55%').style('bottom', '5%').style('opacity', '1');
   }
 
-  function step5() {
+  function step6() {
     //stop the fourth video
-    d3.select('video.ismo.step4')['_groups'][0][0].pause();
-    d3.select('video.ismo.step4')['_groups'][0][0].currentTime = 0; //play the fifth video
+    d3.select('video.ismo.step5')['_groups'][0][0].pause();
+    d3.select('video.ismo.step5')['_groups'][0][0].currentTime = 0; //play the fifth video
 
-    d3.select('video.ismo.step5')['_groups'][0][0].play(); //deselect active text on clickback/clickthrough
+    d3.select('video.ismo.step6')['_groups'][0][0].play(); //deselect active text on clickback/clickthrough
 
     d3.selectAll('.script-line').classed("active", false); //select active text
 
@@ -713,7 +736,7 @@ function setupStepper() {
     d3.selectAll('#ass-instance').transition().duration(1000).style('color', '#b2eafc');
   }
 
-  function step6() {
+  function step7() {
     //remove the stepper and activate the scroller
     d3.select('.stepper__graphics').classed('active', false).attr('display', 'none');
     d3.select('.script-container').classed('active', false);
@@ -723,7 +746,7 @@ function setupStepper() {
 
     d3.selectAll('.script-line').classed("active", false); //pause the fifth video
 
-    d3.select('video.ismo.step5')['_groups'][0][0].pause(); //keep only asses moving into scroll
+    d3.select('video.ismo.step6')['_groups'][0][0].pause(); //keep only asses moving into scroll
 
     assOnlyScript(); //activate tap back button
 
