@@ -5,6 +5,7 @@
   body 
     background-color #f5f5f5
     color #333333   
+    width 100%
 
   .stepper 
     position absolute
@@ -20,14 +21,12 @@
     top 0px
     left 0px
     position absolute
+    background-image url('assets/images/assberg_desktop-01.svg')
+    background-repeat no-repeat
+    background-size cover
 
   .header-image 
     padding-top 1%
-    max-width 30%
-    position relative
-    left 50%
-    margin-left -15%
-
 
   .stepper__graphics
     position absolute
@@ -45,38 +44,60 @@
     left 50% 
     margin-left -45%
 
+  .subtitle
+    opacity 0
+    position fixed
+    bottom 50%
+    font-size 40px
+    font-family $atlas
+    left 50%
+    width 70%
+    margin-left -35%
+    color #f5f5f5
+
 
   video 
     display block
+    object-fit cover
     overflow hidden
     height 70%
 
   .script-container 
     position relative
-    max-width 800px
+    width 88%
     height 68%
     text-align justify
     font-style normal
     font-weight normal
-    font-size 16px
+    font-size 1.5rem
     color rgba(186, 186, 186, 0.4)
     margin auto
     overflow hidden
     opacity 0
-    top 4%
-    font-family 'Roboto Condensed'
+    top 2%
+    font-family $roboto
 
   .script-line.active
     opacity 1
     background-color #333333
     color #f5f5f5
 
+  .pause-overlay
+    display flex
+    opacity 0
+    object-fit cover
+    overflow hidden
+    height 70%
+    width 100.3%
+    background-color rgba(235, 87, 87, 0.65)
+    justify-content center
+    align-items center
+
   .stepper__hed
     font-family $roboto
     font-weight Bold
     text-shadow 2px 2px 2px #2693C2
     font-size 36px
-
 
   .tap--first
     font-family $roboto
@@ -93,24 +114,27 @@
     color white
 
   .tap--right
+    left 55%
     color white 
-    width 50%
-    text-align left
 
   .tap--left
+    right 55%
     color white 
-    width 50%
-    text-align center
+
+  .tap--back
+    height 30%
+    display flex
+    justify-content center 
+    padding-top 5%
 
   .stepper__tap
     position absolute
     opacity 0
     display block
     height 100%
-    width 60%
+    width 100%
     top 0%
-    left 50%
-    margin-left -25%
+    left 0%
 
   .tap 
     opacity 0
@@ -120,35 +144,44 @@
     z-index 100
     
   .stepper__steps
-    font-family $lora
+    font-family $atlas
     position absolute
     height 20%
     width 100%
     left 0px
     top 70%
-    font-size 18px
+    font-size 1.5rem
     display flex
     justify-content center
     align-items center
+    text-align left
+
 
   .stepper__annotation
     opacity 0
 
+
   #video-annotation
     position absolute
-    width 92%
+    max-width 88%
     left 50% 
-    margin-left -46%
-    text-align center
+    margin-left -44%
+    text-align left
 
-  #scroll
+  .scroll
     opacity 0
     display none 
     position relative
+
+  .section-title
+    font-size 24px
+    padding-left 6%
+    font-family $atlas
+    paddint-top 5%
   
 
   span#ass-instance
-    color #b2eafc
+    color rgba(186,186,186,0.4)
     opacity 1
 
 
@@ -156,84 +189,52 @@
     color rgba(186, 186, 186, 0)
     
 
-  #scroll.active
+  .scroll.active
     display inline
     opacity 1
-  
+    
 
-  .scroll__text 
-    position relative
-    padding 0
-    max-width 90%
-    margin 0 auto
-    pointer-events none
+  .scroll-container
+    background-color #d3bfa6
 
   .scroll__graphic
-    background-image linear-gradient(#f5f5f5, #b2eafc)
-    font-family $roboto
-    position -webkit-sticky
-    position sticky
-    left 0
-    width 100%
+    background-image #d3bfa6
+    font-family $atlas
+    position inline
     margin 0
     pointer-events none
     -webkit-transform translate3d(0, 0, 0)
     -moz-transform translate3d(0, 0, 0)
     transform translate3d(0, 0, 0)
-
-  .scroll__graphic .chart 
-    text-align: justify
-    position: relative
-    width: 88%
-    height: 68%
-    font-style: normal
-    font-weight: normal
-    font-size: 12px
-    color: rgba(186, 186, 186, 0.4)
-    margin: auto
-    top:2
+    max-width 40rem
+    position relative
+    left 50%
+    margin-left -20rem
 
   .step 
-    margin: 0 auto 150% auto
+    margin: 0 auto 0 auto
     color: #333333
     pointer-events: none
-  
-
-  .step:last-child 
-    margin-bottom: 40%
-  
+    font-family $atlas
+    display flex
+    justify-content center
 
   .step p 
     text-align: left
-    padding: 2rem
-    font-size: 16px
-    background-color: rgba(245,245,245,.95)
+    padding: 1.5rem
+    margin 0 1.5rem 0 1.5rem
+    font-size: 1.2rem
     line-height: 1.5
-  
-
-  .ass-label 
-    padding-left: 3%
-    padding-bottom 1%
-    top: 3%
-    position: relative
-    display:none
-  
-
-  .ass-label.active 
-    display:block
-
-  .scroll-script-line
-    font-size 14px
-    color rgba(186, 186, 186, 0)
-
-  .scroll__text
-    font-family $lora
+    font-family $national
+    max-width 40rem
 
   .usage-examples 
     color #333333
-    display none
-    font-size 15px
+    display block
+    font-size 12px
     text-align left
+    margin 1% 5% 1% 5%
+    font-family $atlas
 
   .usage-examples.active
     display block
@@ -242,33 +243,45 @@
   .usage-examples-hidden 
     display block
 
+  .stack
+    position relative
+    opacity 0
+    display none
+    padding-top 5%
+    background-color #d3bfa6
+
+  .stack.active
+    display flex
+    justify-content center
+    height 100%
+
+  
   .stack__container .chart
-    background-image linear-gradient(#f5f5f5, #b2eafc)
+    font-family $atlas
+    text-align center
+    overflow hidden
+    max-width 40rem
 
   .stack__container .prose
-    background-image linear-gradient(#b2eafc,#f5f5f5)
-    font-family $lora
-    font-size 16px
-    padding-top 20%
-    padding-bottom 20%
-    padding-left 5%
-    padding-right 5%
-    text-align left
-    line-height 1.65rem
+    text-align: left
+    font-size: 1.2rem
+    line-height: 1.5
+    font-family $national
+    max-width 40rem
 
   .slider-container 
     width: 100%
-    position: fixed
+    position: absolute
     top: 70%
     pointer-events: auto
   
   .slider 
     -webkit-appearance: none
     appearance: none
-    border-radius: 5px
+    border-radius: 3px
     width: 80% 
     left:10%
-    height: 5px
+    height: 3px
     background: #333333
     outline: none 
     opacity: 0.7
@@ -286,15 +299,53 @@
     width: 15px
     height: 15px
     border-radius: 50%
-    background: lightblue
+    background: #b2eafc
     cursor: pointer
+
+  #iceberg0
+    pointer-events auto
   
 
   .slider::-moz-range-thumb 
     width: 10px 
     height: 10px 
     border-radius: 50%
-    background: lightblue 
+    background: #b2eafc
+    cursor: pointer 
+
+  .sliderIceberg 
+    -webkit-appearance: none
+    appearance: none
+    border-radius: 3px
+    width: 80% 
+    left:10%
+    height: 3px
+    background: #333333
+    outline: none 
+    opacity: 0.7
+    -webkit-transition: .2s 
+    transition: opacity .2s
+    position: absolute
+
+  .sliderIceberg:hover 
+    opacity: 1
+  
+
+  .sliderIceberg::-webkit-slider-thumb 
+    -webkit-appearance: none
+    appearance: none
+    width: 15px
+    height: 15px
+    border-radius: 50%
+    background: #b2eafc
+    cursor: pointer
+  
+
+  .sliderIceberg::-moz-range-thumb 
+    width: 10px 
+    height: 10px 
+    border-radius: 50%
+    background: #b2eafc 
     cursor: pointer 
   
   circle.active
@@ -305,22 +356,6 @@
     font-size: 12px
     fill: #333333
     transform: translate(-15px, 0px)
-  
-
-  .stack
-    position: absolute
-    opacity: 0
-    display: none
-  
-
-  .stack.active
-    display: inline
-    height: 100%
-
-  .chart 
-    height: 100%
-    text-align: center
-    overflow: hidden
 
   .left-shape
     shape-outside: polygon(0 0, 50% 0, 10% 20%, 10% 60%, 50% 100%, 0% 100%)
@@ -345,10 +380,10 @@
   
 
   #left-shape3
-    height: 42em
+    height: 60em
 
   #right-shape3
-    height 42em
+    height 60em
 
   #left-shape4
     height: 150em
@@ -360,17 +395,18 @@
     shape-outside: polygon(100% 0, 50% 0, 90% 20%, 90% 60%, 50% 100%, 100% 100%)
     float: right
     width: 50%
-
+    
   .overlay 
     position fixed
     display none
-    width 100%
+    width 40rem
     height 100%
     top 0
-    left 0
+    left 50%
+    margin-left -20rem
     right 0
     bottom 0
-    background-color rgba(245,245,245,0.9)
+    background-color rgba(245,245,245,0.5)
     z-index 2
     cursor pointer
 
@@ -378,12 +414,12 @@
     display flex
 
   .time-line 
-    position fixed
+    position relative
     top 10%
     justify-content center
 
   .citationContainer 
-    background-color lightblue
+    background-color #b2eafc
     width 80%
     left 50%
     margin-left -40%
@@ -397,6 +433,31 @@
     color #333333
     font-family $roboto
 
+  .citationContainerIceberg 
+    background-color #b2eafc
+    width 80%
+    left 50%
+    margin-left -40%
+    top 37%
+    position absolute
+    padding-left 5%
+    padding-right 5%
+    padding-top 2%
+    padding-bottom 2%
+    text-align left
+    color #333333
+    font-family $roboto
+
+  .chart-title
+    font-family $atlas
+    text-align left
+    font-weight bold
+    margin-left 5%
+    font-size 32px
+
+  .stack__container .chart-title
+    text-align center
+    margin-left 0%
 
   .sense-container
     position absolute
@@ -405,14 +466,15 @@
     left 50%
     margin-left -40%
     text-align left
-
+    display inline-block
 
   .word-container
     text-align left
     font-size 40px
     font-family $roboto
+    line-height 40px
     padding-left 3%
-    position fixed
+    position absolute
     top 3%
 
   .active

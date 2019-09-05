@@ -5,18 +5,18 @@
   <!-- Intro stuff lives here   -->
   <div class='stepper__intro step0'>
 
-    <img class='header-image' src='assets/images/assberg_quotes.svg'>
-    <h1 class='stepper__hed'>{{meta.title}}</h1>
+    <!-- <img class='header-image' src='assets/images/assberg_quotes.svg'> -->
+    <!-- <h1 class='stepper__hed'>{{meta.title}}</h1> -->
       <!-- <p class='stepper__byline'>By
         <a href='{{meta.author.url}}' target='_blank'>
           <strong>{{meta.author.name}}</strong>
         </a>
       </p>
     <time class='stepper__time'>August 2019</time> -->
-    <div class='tap--first'>
+<!--     <div class='tap--first'>
       <span>TAP ANYWHERE TO FIND OUT</span>
    </div>
-  </div>
+ -->  </div>
 
   <!-- All visuals live here   -->
 
@@ -26,11 +26,14 @@
     </div>
 
     <div class='stepper__video step1'>
+    <span class='subtitle'>I think the hardest word to truly master has been the word, "ass."</span>
       <video class='ismo step1' src='assets/videos/ismo_1.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
     </div>
  
     <div class='stepper__video step2'>
-      <video class='ismo step2' src='assets/videos/ismo_1.mp4'></video>
+      <div class='pause-overlay'>
+        <img inline src='pause-circle.svg'>
+      </div>
     </div>
 
     <div class='stepper__video step3'>
@@ -78,10 +81,6 @@
           <img inline src='arrow-down-circle.svg'>
         </g>
       </svg>
-    </div>
-
-    <div class='tap tap--back'>
-          <img inline class='tap--back' src='arrow-up-circle.svg'>
     </div>
   </div>
 

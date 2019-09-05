@@ -12,7 +12,7 @@
 }
 
 .tap--back{
-  left: 45%;
+  position: relative;
   top: 3%;
   animation: shake 2.0s;
   animation-iteration-count: infinite;
@@ -99,6 +99,25 @@
 	</main>
 
 	<!-- {{> base/footer }} -->
+	<script>
+	function selectCitationIceberg(value) {
+        console.log(value)
+        var deselectedCircles = d3.selectAll('circle')
+        	.classed('active',false)
+        var citationDates = d3.select('.sliderIceberg').attr('dates').split(',')
+        var selected = citationDates.reduce((prev, curr) => Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
+        var selectorName = ('#date' + selected)
+        console.log(selectorName)
+        var selectedCircle = d3.select(selectorName)
+          .classed('active',true)
+        console.log(selected)
+        var citationText = d3.select(selectorName).attr('text')
+        console.log(citationText)
+        d3.select('.citationContainerIceberg')
+        	.text('(' + selected + ') ' + citationText)
+      }
+</script>
+
 	<script>
 	function selectCitation(value) {
         console.log(value)

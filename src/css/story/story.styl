@@ -20,7 +20,9 @@
     top 0px
     left 0px
     position absolute
-
+    background-image url('assets/images/assberg_art_title_mobile_medium.svg')
+    background-repeat no-repeat
+    background-size cover
 
   .header-image 
     padding-top 1%
@@ -41,6 +43,15 @@
     left 50% 
     margin-left -45%
 
+  .subtitle
+    opacity 0
+    position fixed
+    bottom 50%
+    font-size 24px
+    font-family $atlas
+    padding-left 3%
+    color #f5f5f5
+
 
   video 
     display block
@@ -55,7 +66,7 @@
     text-align justify
     font-style normal
     font-weight normal
-    font-size 14px
+    font-size .89rem
     color rgba(186, 186, 186, 0.4)
     margin auto
     overflow hidden
@@ -67,6 +78,17 @@
     opacity 1
     background-color #333333
     color #f5f5f5
+
+  .pause-overlay
+    display flex
+    opacity 0
+    object-fit cover
+    overflow hidden
+    height 70%
+    width 100.3%
+    background-color rgba(235, 87, 87, 0.65)
+    justify-content center
+    align-items center
 
   .stepper__hed
     font-family $roboto
@@ -96,6 +118,12 @@
     right 55%
     color white 
 
+  .tap--back
+    height 30%
+    display flex
+    justify-content center 
+    padding-top 5%
+
   .stepper__tap
     position absolute
     opacity 0
@@ -119,7 +147,7 @@
     width 100%
     left 0px
     top 70%
-    font-size 16px
+    font-size 1rem
     display flex
     justify-content center
     align-items center
@@ -137,14 +165,27 @@
     margin-left -44%
     text-align left
 
-  #scroll
+  .scroll
     opacity 0
     display none 
     position relative
+
+  .section-title
+    font-size 24px
+    padding-left 6%
+    font-family $atlas
+    paddint-top 5%
+
+  div.step > p.first-graf
+    padding .5rem 1.5rem 1.5rem 1.5rem
+    margin 0
+
+  #first-scroll
+    padding 2rem 0rem 0rem 0rem
   
 
   span#ass-instance
-    color #b2eafc
+    color rgba(186,186,186,0.4)
     opacity 1
 
 
@@ -152,23 +193,26 @@
     color rgba(186, 186, 186, 0)
     
 
-  #scroll.active
+  .scroll.active
     display inline
     opacity 1
+    
+
+  .scroll-container
+    background-color #d3bfa6
   
 
   .scroll__text 
     position relative
     padding 0
-    max-width 90%
     margin 0 auto
     pointer-events none
+    
 
   .scroll__graphic
-    background-image linear-gradient(#f5f5f5, #b2eafc)
+    background-image #d3bfa6
     font-family $roboto
-    position -webkit-sticky
-    position sticky
+    position inline
     left 0
     width 100%
     margin 0
@@ -176,6 +220,7 @@
     -webkit-transform translate3d(0, 0, 0)
     -moz-transform translate3d(0, 0, 0)
     transform translate3d(0, 0, 0)
+    margin-top 5%
 
   .scroll__graphic .chart 
     text-align: justify
@@ -190,30 +235,25 @@
     top:2
 
   .step 
-    margin: 0 auto 150% auto
+    margin: 0 auto 0 auto
     color: #333333
     pointer-events: none
     font-family $atlas
-  
-
-  .step:last-child 
-    margin-bottom: 40%
-  
 
   .step p 
     text-align: left
-    padding: 2rem
+    padding: 1.5rem
     font-size: 16px
-    background-color: rgba(245,245,245,.95)
     line-height: 1.5
+    font-family $national
   
 
   .ass-label 
-    padding-left: 3%
+    padding-left 3%
     padding-bottom 1%
-    top: 3%
-    position: relative
-    display:none
+    top 3%
+    position relative
+    display block
   
 
   .ass-label.active 
@@ -223,14 +263,13 @@
     font-size 14px
     color rgba(186, 186, 186, 0)
 
-  .scroll__text
-    font-family $lora
-
   .usage-examples 
     color #333333
-    display none
-    font-size 15px
+    display block
+    font-size 12px
     text-align left
+    margin 1% 5% 1% 5%
+    font-family $atlas
 
   .usage-examples.active
     display block
@@ -255,17 +294,17 @@
 
   .slider-container 
     width: 100%
-    position: fixed
+    position: absolute
     top: 70%
     pointer-events: auto
   
   .slider 
     -webkit-appearance: none
     appearance: none
-    border-radius: 5px
+    border-radius: 3px
     width: 80% 
     left:10%
-    height: 5px
+    height: 3px
     background: #333333
     outline: none 
     opacity: 0.7
@@ -283,15 +322,53 @@
     width: 15px
     height: 15px
     border-radius: 50%
-    background: lightblue
+    background: #b2eafc
     cursor: pointer
+
+  #iceberg0
+    pointer-events auto
   
 
   .slider::-moz-range-thumb 
     width: 10px 
     height: 10px 
     border-radius: 50%
-    background: lightblue 
+    background: #b2eafc
+    cursor: pointer 
+
+  .sliderIceberg 
+    -webkit-appearance: none
+    appearance: none
+    border-radius: 3px
+    width: 80% 
+    left:10%
+    height: 3px
+    background: #333333
+    outline: none 
+    opacity: 0.7
+    -webkit-transition: .2s 
+    transition: opacity .2s
+    position: absolute
+
+  .sliderIceberg:hover 
+    opacity: 1
+  
+
+  .sliderIceberg::-webkit-slider-thumb 
+    -webkit-appearance: none
+    appearance: none
+    width: 15px
+    height: 15px
+    border-radius: 50%
+    background: #b2eafc
+    cursor: pointer
+  
+
+  .sliderIceberg::-moz-range-thumb 
+    width: 10px 
+    height: 10px 
+    border-radius: 50%
+    background: #b2eafc 
     cursor: pointer 
   
   circle.active
@@ -315,7 +392,7 @@
     height: 100%
 
   .stack .chart
-    font-family $roboto
+    font-family $atlas
 
   .chart 
     height: 100%
@@ -329,32 +406,30 @@
 
 
   #left-shape1
-    height: 101em
+    height 106em
   
 
   #right-shape1
-    height: 101em
+    height 106em
   
 
   #left-shape2
-    height: 65em
+    height: 71em
   
-
   #right-shape2
-    height: 65em
-  
+    height: 71em
 
   #left-shape3
-    height: 42em
+    height: 65em
 
   #right-shape3
-    height 42em
+    height 65em
 
   #left-shape4
-    height: 150em
+    height: 155em
 
   #right-shape4
-    height 150em
+    height 155em
 
   .right-shape
     shape-outside: polygon(100% 0, 50% 0, 90% 20%, 90% 60%, 50% 100%, 100% 100%)
@@ -378,12 +453,12 @@
     display flex
 
   .time-line 
-    position fixed
+    position relative
     top 10%
     justify-content center
 
   .citationContainer 
-    background-color lightblue
+    background-color #b2eafc
     width 80%
     left 50%
     margin-left -40%
@@ -397,6 +472,31 @@
     color #333333
     font-family $roboto
 
+  .citationContainerIceberg 
+    background-color #b2eafc
+    width 80%
+    left 50%
+    margin-left -40%
+    top 37%
+    position absolute
+    padding-left 5%
+    padding-right 5%
+    padding-top 2%
+    padding-bottom 2%
+    text-align left
+    color #333333
+    font-family $atlas
+
+  .chart-title
+    font-family $atlas
+    text-align left
+    font-weight bold
+    margin-left 5%
+    font-size 32px
+
+  .stack__container .chart-title
+    text-align center
+    margin-left 0%
 
   .sense-container
     position absolute
@@ -405,14 +505,16 @@
     left 50%
     margin-left -40%
     text-align left
+    display inline-block
 
 
   .word-container
     text-align left
     font-size 40px
-    font-family $roboto
+    font-family $atlas
+    line-height 40px
     padding-left 3%
-    position fixed
+    position absolute
     top 3%
 
   .active

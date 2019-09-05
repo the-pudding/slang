@@ -1,137 +1,659 @@
-// var svg = d3.select("#button-container").append("svg")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom)
-//     .append("g")
-//     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+clickAhead = (function () {
 
-//   var backButton = svg.append('rect')
-//     .attr('width',50)
-//     .attr('height'30)
-//     .attr('fill','red')
-//     .attr('x',20)
-//     .attr('y',40)
+    var steps = [
+  step0,
+  step1,
+  step2,
+  step3,
+  step4,
+  step5
+]
 
-// packed = {
-//     // Overall vars
-//     const marginLeft = 20
-//     const marginTop = 20
-//     const marginBottom = 20
-//     const marginRight = 20
-//     const height = 500 - marginTop - marginBottom
-//     const width = 1000 - marginLeft - marginRight
-//     const radius=20
-//     const svgW = d3.select(DOM.svg(width + marginLeft + marginRight, height + marginTop + marginBottom))
-//     svgW.append("rect")
-//       .attr("width", "100%")
-//       .attr("height", "100%")
-//       .attr("fill", "#111111");
-//     const data = ass_datapoints
-   
-//     var colorScale = d3.scaleOrdinal().domain(['noun','compound','phrase','adjective','suffix','verb','adverb']).range(['#FABD21','#DB2CCA','#8633FF','#DB772C','#F24C3D','green','gray'])
-//     var xPositionScale = d3.scalePoint().domain(['verb','noun','compound','adjective','phrase','suffix','adverb']).range([0+marginLeft,width-marginRight])
-//     //var yPositionScale = d3.scaleLinear().domain([-20,80]).range([0+marginBottom,height-marginTop])
-//     var ypadding = 10
-//     var xpadding = 10
-    
-//     var tip = d3tip()
-//     .attr('class', 'd3-tip')
-//     .offset([-10, 0])
-//     .html(function(d) {
-//       return "<strong class='tip-platform'>" + d.word + "</strong>" + "<span class='super-font'>" + "<br>" + "&mdash;&mdash;&mdash;&mdash;" + "<br> Flesch Reading Ease Score: " + d.definition + "<br>" + "&mdash;&mdash;&mdash;&mdash;" + "<br>Time to read: " + Math.round(d.time_to_read) + " minutes<br>" + "&mdash;&mdash;&mdash;&mdash;" + "<br>Sample Sentence: " + d.worst_sentence +".</span>"
-//     })
-    
-    
-//     svgW.call(tip)
- 
-//     var nodes = data.map(function(node, index) {
-//     return {
-//       word: node.word,
-//       definition: node.definition,
-//       first_citation_date: node.first_citation_date,
-//       first_citation_text: node.first_citation_text,
-//       part_of_speech: node.part_of_speech
-//     };
-//   });
 
- 
-//     var simulation = d3.forceSimulation(nodes)
-//       .force("y", d3.forceY(function(d) { return height/2; }).strength(.8))
-//       .force("x", d3.forceX(function(d) { return xPositionScale(d.part_of_speech); }).strength(.8))
-//       .force("collide", d3.forceCollide().radius(function(d){ return 19 }))
-//       .force("center", d3.forceCenter(width/2, height/2))
-//       .force("manyBody", d3.forceManyBody().strength(.8))
-//       .stop();
+function switchStep(newStep)
+{
+  $(".step-link").toggleClass("active", false);
+  $("#" + newStep).toggleClass("active", true);
+}
 
-//     for (var i = 0; i < 201; ++i) simulation.tick();
+function switchAnnotation(newStep)
+{
+  $(".annotation-step").hide();
+  $("#" + newStep + "-annotation").delay(300).fadeIn(500);
+}
 
-// var circleGroups = svgW.selectAll('g')
-//       .data(nodes)
-//       .enter().append('g')
-//       .attr("x", function(d) { return d.x} )
-//       .attr("y", function(d) { return d.y} )
-    
-//     var policyCircles = circleGroups.append('circle')
-//       .attr('fill', function (d) {
-//         return colorScale(d.part_of_speech)
-//       })
-//       .attr('r', 18)
-//       .attr('cy', function (d) {
-//         return d3.select(this.parentNode).attr('y')
-//       })
-//       .attr('cx', function (d) {
-//         return d3.select(this.parentNode).attr('x')
-//       })
-//       .attr('stroke','#333333')
-//       .attr('opacity', .8)
-//       .attr('id', function(d){ return 'pos' + d.part_of_speech })
-//       .on('mouseover', function(d, i) {
-//         var currentState = this
-//           d3.select(this).style('opacity', 1);
-//           tip.show(d)
-          
-//       })
-//       .on('mouseout', function(d, i) {
-//         var currentState = this
-//           d3.select(this).style('opacity', .8);
-//           tip.hide(d)
-//       })
-    
-//     var side = 2 * 18 * Math.cos(Math.PI / 4),
-//       dx = 18 - side / 2;
-    
-//     var wordTextLabels = circleGroups.append('foreignObject')
-//       .attr("width", side)
-//       .attr("height", side)
-//       .attr('transform', 'translate(' + [-dx*2, -dx*2] + ')')
-//       .attr('y', function (d) {
-//         return d3.select(this.parentNode).attr('y')
-//       })
-//       .attr('x', function (d) {
-//         return d3.select(this.parentNode).attr('x')
-//       })
-//       .style("font", "9px 'Times New Roman'")
-//       .append("xhtml:span")
-//       .html(function (d) { return  d.word })
+$(document).ready(function() {
+  $("a.step-link").click(function(e) {
+    var clickedStep = $(this).attr('id');
+    switchStep(clickedStep);
+    switchAnnotation(clickedStep);
+    return false;
+  });
+});
+
+
+  var currentStep = 0
+
+  // var tip = d3.tip()
+  //   .attr('class', 'd3-tip')
+  //   .offset([-10, 0])
+  //   .html(function(d) {
+  //     return "<strong style='color:" + colorScale(d.dictionary_definition_tag) + "'>"  + d.title + "</strong>"
+  //   })
+
+  var button = d3.select("#continue-button")
+    .on('click', function() {
+
+        d3.select(this)
+          .transition()
+          .duration(1000)
+          .attr('opacity',1)
+          .attr('z-index', 100)
+          .attr("r", 200);
+
+
+        d3.select(this.parentNode)
+          .append('text')
+          .attr('font-size', 14)
+          .attr('x', function (d) {
+              return xPositionScale(d.x_coord) - 200
+            })
+          .attr('y', function (d) {
+              return yPositionScale(d.y_coord)
+            })
+          .attr("dy", ".35em")
+          .attr('z-index', 101)
+          .text(function(d){ return d.abstract.slice(0,100)});
+})
+
+  // d3.queue()
+  //   .defer(d3.csv, 'github-friendly-coordinates.csv')
+  //   .defer(d3.csv, 'connection_lines_coordinates.csv')
+  //   .await(ready)
+
+  // This is 'ready':
+  // it receives an error (if there is one)
+  // and datapoints, our newly-read-in data
+  // function ready(error, datapoints, connections) {
+  //   console.log("Data is", datapoints, connections)
+    // d3 code goes here
+
+    var entries = svg.selectAll('g')
+      .data(datapoints)
+      .enter().append('g')
+      .attr('id','entry')
+      .attr('x', function (d) {
+        return xPositionScale(d.x_coord)
+      })
+      .attr('y', function (d) {
+        return yPositionScale(d.y_coord)
+      })
+      //.attr("transform", function(d) { return "translate(" + xPositionScale(d.x_coord) + "," + yPositionScale(d.y_coord) + ")"})
+
+    var entryLinks = entries.append('a')
+      .attr("xlink:href", function(d) { return d.url})
+      .attr('target', '_blank')
       
+
+   var entryCircles = entryLinks.append('circle')
+      .attr('r', 4)
+      .attr('cx', function (d) {
+        return xPositionScale(d.x_coord)
+      })
+      .attr('cy', function (d) {
+        return yPositionScale(d.y_coord)
+      })
+      //.attr('r', function (d) {
+       // return radiusScale(d.season)
+      //})
+      .attr('fill', '#DCCCC9')
+      .attr('opacity', .7)
+      .attr('id', function(d){ return 'name' + d.dictionary_definition_tag })
+      .attr('class', function(d){ return d.title})
+      .attr('z-index', -1)
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
+//       .on('click', function() {
+        
+
+//         d3.select(this)
+//           .transition()
+//           .duration(1000)
+//           .attr('opacity',1)
+//           .attr('z-index', 100)
+//           .attr("r", 200);
+
+
+//         d3.select(this.parentNode)
+//           .append('text')
+//           .attr('font-size', 14)
+//           .attr('x', function (d) {
+//               return xPositionScale(d.x_coord) - 200
+//             })
+//           .attr('y', function (d) {
+//               return yPositionScale(d.y_coord)
+//             })
+//           .attr("dy", ".35em")
+//           .attr('z-index', 101)
+//           .text(function(d){ return d.abstract.slice(0,100)});
+// })
+
+      var existenceSize=d3.selectAll("#nameExistence").size()
+      var knowledgeSize=d3.selectAll("#nameKnowledge").size()
+      var noneSize=d3.selectAll("#nameNone").size()
+      var realitySize=d3.selectAll("#nameReality").size()
+
+      console.log(existenceSize)
+      console.log(noneSize)
+      console.log(knowledgeSize)
+      console.log(realitySize)
+
+
+
+    // connectionLines = svg.selectAll('line')
+    //   .data(connections)
+    //   .enter()
+    //   .append('line')
+    //   .attr('class', function(d){ return d.primary_article})
+    //   .attr('stroke','#DCCCC9')
+    //   .attr("stroke-width",1)
+    //   .attr('opacity',.05)
+    //   .attr('x1', function(d) { return xPositionScale(d.start_x) })
+    //   .attr('y1', function(d) { return yPositionScale(d.start_y) })
+    //   .attr('x2', function(d) { return xPositionScale(d.finish_x) })
+    //   .attr('y2', function(d) { return yPositionScale(d.finish_y) })
+
+
+
+
+var gs = d3.graphScroll()
+      .graph(d3.selectAll('#graph'))
+      .container(d3.select('#container'))
+      .sections(d3.selectAll('#sections > div'))
+      .offset(400)
+      .on('active', function(i){
+    currentStep = (i) % 14
+    steps[currentStep].apply()})    
+
+function step0() {
+
+  entryCircles.transition()
+    .duration(1000)
+    .attr("fill", '#DCCCC9')
+    .attr('r', 4)
+
+}
+
+function step1() {
+
+  entryCircles.transition()
+    .duration(1000)
+    .attr('r', 0)
+
+  d3.selectAll('.Aristotle ')
+    .transition()
+    .duration(1000)
+    .attr('r', 8)
+    .attr("fill", '#DCCCC9')
+    .attr('stroke-width', 1)
+
+  d3.selectAll('text')
+    .transition()
+    .attr('font-size', 0)
+    .duration(1000)
+    .remove()
+ 
+}
+
+function step2() {
+
+  entryCircles.transition()
+    .duration(1000)
+    .attr('r', 0)
+
+
+  d3.selectAll('.Feminism')
+    .transition()
+    .duration(1000)
+    .attr('r', 8)
+    .attr("fill", '#DCCCC9')
+    .text('ooh yeah')
+    
+
+  d3.selectAll('.Feminist')
+    .transition()
+    .duration(1000)
+    .attr('r', 8)
+    .attr("fill", '#DCCCC9')
+
   
+}
+
+function step3() {
+
+  d3.selectAll('text')
+    .transition()
+    .attr('font-size', 0)
+    .duration(1000)
+    .remove()
+
+  entryCircles.transition()
+    .duration(1000)
+    .attr('r', 4)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+  
+}
+
+function step4() {
+
+  d3.selectAll('text')
+    .transition()
+    .attr('font-size', 0)
+    .duration(1000)
+    .remove()
+
+  d3.selectAll('#nameExistence')
+    .transition()
+    .duration(1000)
+    .attr('r', 4)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+
+  d3.selectAll('#nameKnowledge')
+    .transition()
+    .duration(1000)
+    .attr('r', 0)
+
+  d3.selectAll('#nameReality')
+    .transition()
+    .duration(1000)
+    .attr('r', 0)
+
+  d3.selectAll('#nameNone')
+    .transition()
+    .duration(1000)
+    .attr('r', 0)
+
+}
+
+function step5() {
+
+  entryCircles.transition()
+    .duration(1000)
+    .attr('r', 0)
+
+  d3.selectAll('.Sartre')
+    .transition()
+    .attr('r', 8)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .duration(1000)
+    
+
+  d3.selectAll('.Camus')
+    .transition()
+    .attr('r', 8)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .duration(1000)
+    
+
+}
+
+function step6() {
+
+  d3.selectAll('text')
+    .transition()
+    .attr('font-size', 0)
+    .duration(1000)
+    .remove()
+  
+   d3.selectAll('#nameExistence')
+    .transition()
+    .duration(1000)
+    .attr('r', 0)
+
+  d3.selectAll('#nameKnowledge')
+    .transition()
+    .duration(1000)
+    .attr('r', 4)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+
+  d3.selectAll('#nameReality')
+    .transition()
+    .duration(1000)
+    .attr('r', 0)
+
+  d3.selectAll('#nameNone')
+    .transition()
+    .duration(1000)
+    .attr('r', 0)
+
+}
+
+function step7() {
+
+  entryCircles.transition()
+    .duration(1000)
+    .attr('r', 0)
+
+  d3.selectAll('.Certainty')
+    .filter('#nameKnowledge')
+    .transition()
+    .attr('r', 8)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .duration(1000)
+
+  d3.selectAll('.Self-Deception')
+    .filter('#nameKnowledge')
+    .transition()
+    .attr('r', 8)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .duration(1000)
+
+  d3.selectAll('.The.Analysis.Of.Knowledge')
+    .filter('#nameKnowledge')
+    .transition()
+    .attr('r', 8)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .duration(1000)
+
+
+}
+
+function step8() {
+
+ d3.selectAll('#nameExistence')
+    .transition()
+    .duration(1000)
+    .attr('r', 0)
+
+  d3.selectAll('#nameKnowledge')
+    .transition()
+    .duration(1000)
+    .attr('r', 0)
+
+  d3.selectAll('#nameReality')
+    .transition()
+    .duration(1000)
+    .attr('r', 4)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+
+  d3.selectAll('#nameNone')
+    .transition()
+    .duration(1000)
+    .attr('r', 0)
+
+}
+
+function step9() {
+
+  entryCircles.transition()
+    .duration(1000)
+    .attr('r', 0)
+
+  d3.selectAll('.Time.Travel')
+    .filter('#nameReality')
+    .transition()
+    .attr('r', 8)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .duration(1000)
+
+  d3.selectAll('.Consciousness')
+    .filter('#nameReality')
+    .transition()
+    .attr('r', 8)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .duration(1000)
+
+  d3.selectAll('.The.Uncertainty.Principle')
+    .filter('#nameReality')
+    .transition()
+    .attr('r', 8)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .duration(1000)
+
+
+}
+
+function step10() {
+
+  entryCircles.transition()
+      .duration(1000)
+      .attr('r', 0)
+      // .attr('cy', function (d) {
+      //     return yPositionScale(d.y_coord)
+      //   })
+      // .attr('cx', function (d) {
+      //     return xPositionScale(d.x_coord)
+      //   })
+
+ // d3.selectAll('#nameExistence')
+ //    .transition()
+ //    .duration(1000)
+ //    .attr('r', 0)
+ //    .attr('cy', function (d) {
+ //        return yPositionScale(d.y_coord)
+ //      })
+ //    .attr('cx', function (d) {
+ //        return xPositionScale(d.x_coord)
+ //      })
+
+ //  d3.selectAll('#nameKnowledge')
+ //    .transition()
+ //    .duration(1000)
+ //    .attr('r', 0)
+ //    .attr('cy', function (d) {
+ //        return yPositionScale(d.y_coord)
+ //      })
+ //    .attr('cx', function (d) {
+ //        return xPositionScale(d.x_coord)
+ //      })
+
+  d3.selectAll('#nameNone')
+    .transition()
+    .duration(1000)
+    .attr('r', 4)
+    .attr('cy', function (d) {
+        return yPositionScale(d.y_coord)
+      })
+    .attr('cx', function (d) {
+        return xPositionScale(d.x_coord)
+      })
+
+}
+
+function step11() {
+
+   d3.selectAll('text')
+    .transition()
+    .duration(1000)
+    .attr('font-size', 0)
+    .remove()
+
+  entryCircles.transition()
+    .duration(1000)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .attr('r', 0)
+    .attr('cy', function (d) {
+        return yPositionScale(d.y_coord)
+      })
+    .attr('cx', function (d) {
+        return xPositionScale(d.x_coord)
+      })
+
+
+  d3.selectAll('.Personal.Identity')
+    .filter('#nameNone')
+    .transition()
+    .duration(1000)
+    .attr('r', 8)
+    .attr('cy', function (d) {
+        return yPositionScale(d.y_coord)
+      })
+    .attr('cx', function (d) {
+        return xPositionScale(d.x_coord)
+      })
+    
+
+  d3.selectAll('.Law')
+    .filter('#nameNone')
+    .transition()
+    .duration(1000)
+    .attr('r', 8)
+    .attr('cy', function (d) {
+        return yPositionScale(d.y_coord)
+      })
+    .attr('cx', function (d) {
+        return xPositionScale(d.x_coord)
+      })
+    
+
+  d3.selectAll('.Political')
+    .filter('#nameNone')
+    .transition()
+    .duration(1000)
+    .attr('r', 8)
+    .attr('cy', function (d) {
+        return yPositionScale(d.y_coord)
+      })
+    .attr('cx', function (d) {
+        return xPositionScale(d.x_coord)
+      })
+    
+
+
+}
+
+function step12() {
+
+  entryCircles.transition()
+    .duration(1700)
+    .attr('r', 4)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+
+  d3.selectAll('#nameExistence')
+    .transition()
+    .duration(1700)
+    .attr('cx',width*.6)
+    .attr('cy',height/2)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .attr('opacity',1)
+    .attr('r', function (d) {
+      return radiusScale(existenceSize)
+    })
+    .filter(function (d) {
+      return d.title != 'Albert Camus'
+    })
+      .attr('r',0)
+
+  d3.selectAll('#nameKnowledge')
+    .transition()
+    .duration(1700)
+    .attr('cx',width*.4)
+    .attr('cy',height/2)
+    .attr('opacity',1)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .attr('r', function (d) {
+      return radiusScale(knowledgeSize)
+    })
+    .filter(function (d) {
+      return d.title != 'Certainty'
+    })
+      .attr('r',0)
+
+  d3.selectAll('#nameReality')
+    .transition()
+    .duration(1700)
+    .attr('cx',width*.8)
+    .attr('cy',height/2)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .attr('opacity',1)
+    .attr('r', function (d) {
+      return radiusScale(realitySize)
+    })
+    .filter(function (d) {
+      return d.title != 'Consciousness'
+    })
+      .attr('r',0)
+
+
+  d3.selectAll('#nameNone')
+    .transition()
+    .duration(1700)
+    .attr('cx',width*.2)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .attr('opacity',1)
+    .attr('cy',height/2)
+    .attr('r', function (d) {
+      return radiusScale(noneSize)
+    })
+    .filter(function (d) {
+      return d.title != 'Feminist Political Philosophy'
+    })
+      .attr('r',0)
+
+}
+
+function step13() {
+
+  d3.selectAll('circle')
+    .transition()
+    .duration(1700)
+    .attr('r',4)
+
+  entryCircles.transition()
+    .duration(1700)
+    .attr('r', 4)
+    .attr("fill", function (d) {
+        return colorScale(d.dictionary_definition_tag)
+      })
+    .attr('cy', function (d) {
+        return yPositionScale(d.y_coord)
+      })
+    .attr('cx', function (d) {
+        return xPositionScale(d.x_coord)
+      })
+}
+
       
-   
-    
-//   var phraseSize=d3.selectAll("#posphrase").size()
-//   var compoundSize=d3.selectAll("#poscompound").size()
-//   var nounSize=d3.selectAll("#posnoun").size()
-//   var adjectiveSize=d3.selectAll("#posadjective").size()
-//   var suffixSize=d3.selectAll("#possuffix").size()
-//   var verbSize=d3.selectAll("#posverb").size()
-//   var adverbSize=d3.selectAll("#posadverb").size()
+      
 
-//   console.log(phraseSize)
-//   console.log(compoundSize)
-//   console.log(nounSize)
-//   console.log(adjectiveSize)
-  
-//   var circleSizes = [phraseSize,compoundSize,nounSize,adjectiveSize,suffixSize,verbSize,adverbSize]
-    
 
-//  return svgW.node() 
-// }
+
+  }
+
+})()
