@@ -1514,6 +1514,8 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
   .scroll-container {
     background-color: #d3bfa6;
     padding-bottom: 50px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#b6ebfc), color-stop(50%, #fceab9), to(#f5f5f5));
+    background: linear-gradient(to bottom, #b6ebfc 0%, #fceab9 50%, #f5f5f5 100%);
   }
   .scroll__text {
     position: relative;
@@ -1522,12 +1524,10 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
     pointer-events: none;
   }
   .scroll__graphic {
-    background-color: #d3bfa6;
     font-family: 'Roboto Condensed', sans-serif;
     position: relative;
     width: 100%;
     margin: 0;
-    pointer-events: none;
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
     margin-top: 5%;
@@ -1548,7 +1548,6 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
   .step {
     margin: 0 auto 0 auto;
     color: #333;
-    pointer-events: none;
     font-family: 'Atlas Grotesk Web';
   }
   .step p {
@@ -1607,26 +1606,36 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
     line-height: 1.65rem;
   }
   .slider-container {
-    width: 100%;
-    position: absolute;
-    top: 70%;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    margin-top: 60px;
+    margin-bottom: 10px;
     pointer-events: auto;
+    position: relative;
+  }
+  .slider-container:before {
+    content: 'Slide to view citations →';
+    position: absolute;
+    font-family: 'Atlas Grotesk Web';
+    font-size: 12px;
+    left: 50%;
+    right: 0px;
+    top: -15px;
+    text-align: center;
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
   }
   .slider {
     -webkit-appearance: none;
     -moz-appearance: none;
          appearance: none;
+    margin: 0 auto;
+    width: 100%;
     border-radius: 3px;
-    width: 80%;
-    left: 10%;
-    height: 3px;
+    height: 4px;
     background: #333;
     outline: none;
-    opacity: 0.7;
-    -webkit-transition: 0.2s;
-    -webkit-transition: opacity 0.2s;
-    transition: opacity 0.2s;
-    position: absolute;
+    opacity: 1;
   }
   .slider:hover {
     opacity: 1;
@@ -1634,20 +1643,20 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: #b2eafc;
+    background: #f24c3d;
     cursor: pointer;
   }
   #iceberg0 {
     pointer-events: auto;
   }
   .slider::-moz-range-thumb {
-    width: 10px;
-    height: 10px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
-    background: #b2eafc;
+    background: #f24c3d;
     cursor: pointer;
   }
   .sliderIceberg {
@@ -1685,14 +1694,20 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
     background: #b2eafc;
     cursor: pointer;
   }
+  .time-line circle {
+    fill: #5d5d5d;
+  }
   circle.active {
     opacity: 1;
+    fill: #f24c3d;
   }
   .year-label {
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: 600;
     fill: #333;
-    -webkit-transform: translate(-15px, 0px);
-            transform: translate(-15px, 0px);
+    -webkit-transform: translate(0px, -10px);
+            transform: translate(0px, -10px);
+    text-anchor: middle;
   }
   .stack {
     position: absolute;
@@ -1765,25 +1780,20 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
   }
   .time-line {
     position: relative;
-    top: 10%;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    height: 50px;
   }
   .citationContainer {
-    background-color: #b2eafc;
     width: 80%;
-    left: 50%;
-    margin-left: -40%;
-    top: 37%;
-    position: fixed;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 2%;
-    padding-bottom: 2%;
     text-align: left;
-    color: #333;
-    font-family: 'Roboto Condensed', sans-serif;
+    color: #f24c3d;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 20px;
   }
   .citationContainerIceberg {
     background-color: #b2eafc;
