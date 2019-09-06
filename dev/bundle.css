@@ -1261,6 +1261,21 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
     z-index: 101;
   }
 }
+#content {
+  overflow: hidden;
+}
+.stepper__intro svg text {
+  display: none;
+  font-family: 'Atlas Grotesk Web';
+}
+.stepper__intro svg .cls-38 {
+  font-family: 'Atlas Grotesk Web';
+  font-size: 12px;
+  letter-spacing: 0px;
+}
+.stepper__intro svg .cls-45 {
+  display: none;
+}
 @media screen and (max-width: 600px) {
   body {
     background-color: #f5f5f5;
@@ -1281,7 +1296,6 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
     top: 0px;
     left: 0px;
     position: absolute;
-    background-image: url("assets/images/assberg_art_title_mobile_medium.svg");
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -1337,7 +1351,7 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
   }
   .script-line.active {
     opacity: 1;
-    background-color: #333;
+    background-color: #213338;
     color: #f5f5f5;
   }
   .pause-overlay {
@@ -1357,6 +1371,10 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+  }
+  .pause-overlay svg circle,
+  .pause-overlay svg line {
+    stroke: #fff;
   }
   .stepper__hed {
     font-family: 'Roboto Condensed', sans-serif;
@@ -1396,6 +1414,9 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
             justify-content: center;
     padding-top: 5%;
   }
+  .tap--back svg {
+    width: 25px;
+  }
   .stepper__tap {
     position: absolute;
     opacity: 0;
@@ -1411,6 +1432,20 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
     position: absolute;
     bottom: 5%;
     z-index: 100;
+    background: #1b7ebe;
+    background: #70a5b5;
+    border-radius: 4px;
+    padding: 3px 2px;
+  }
+  .tap svg {
+    -webkit-transform: translate(0, 1px);
+            transform: translate(0, 1px);
+  }
+  .tap svg rect {
+    display: none;
+  }
+  .tap--final {
+    background: none;
   }
   .stepper__steps {
     font-family: 'Atlas Grotesk Web';
@@ -1434,17 +1469,23 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
   .stepper__annotation {
     opacity: 0;
   }
+  .stepper__annotation span {
+    font-size: 14px;
+    line-height: 1.1;
+  }
   #video-annotation {
     position: absolute;
     max-width: 88%;
     left: 50%;
     margin-left: -44%;
     text-align: left;
+    font-size: 14px;
   }
   .scroll {
     opacity: 0;
     display: none;
     position: relative;
+    margin-top: 100vh;
   }
   .section-title {
     font-size: 24px;
@@ -1467,11 +1508,12 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
     color: rgba(186,186,186,0);
   }
   .scroll.active {
-    display: inline;
+    display: block;
     opacity: 1;
   }
   .scroll-container {
     background-color: #d3bfa6;
+    padding-bottom: 50px;
   }
   .scroll__text {
     position: relative;
@@ -1480,16 +1522,16 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
     pointer-events: none;
   }
   .scroll__graphic {
-    background-image: #d3bfa6;
+    background-color: #d3bfa6;
     font-family: 'Roboto Condensed', sans-serif;
-    position: inline;
-    left: 0;
+    position: relative;
     width: 100%;
     margin: 0;
     pointer-events: none;
     -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
     margin-top: 5%;
+    margin-bottom: 50px;
   }
   .scroll__graphic .chart {
     text-align: justify;
@@ -1511,10 +1553,10 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
   }
   .step p {
     text-align: left;
-    padding: 1.5rem;
     font-size: 16px;
     line-height: 1.5;
-    font-family: 'National 2 Web';
+    font-weight: 400;
+    padding: 0 1.5rem;
   }
   .ass-label {
     padding-left: 3%;
@@ -1533,10 +1575,13 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
   .usage-examples {
     color: #333;
     display: block;
-    font-size: 12px;
+    font-size: 18px;
     text-align: left;
-    margin: 1% 5% 1% 5%;
+    padding: 0 1rem;
+    margin-top: 20px;
+    font-weight: 500;
     font-family: 'Atlas Grotesk Web';
+    line-height: 1.5;
   }
   .usage-examples.active {
     display: block;
@@ -1758,9 +1803,10 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
   .chart-title {
     font-family: 'Atlas Grotesk Web';
     text-align: left;
-    font-weight: bold;
-    margin-left: 5%;
-    font-size: 32px;
+    font-size: 24px;
+    padding: 0 1rem;
+    font-weight: 600;
+    margin-top: 50px;
   }
   .stack__container .chart-title {
     text-align: center;
