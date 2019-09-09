@@ -53,7 +53,7 @@ function setupStepper() {
     //activate container
     d3.select('.stepper').classed('active',true)
 
-      //Activate stepper tap 
+      //Activate stepper tap
       d3.select(".stepper__tap").classed("active", true)
 
     //Activate first-button
@@ -80,8 +80,8 @@ function setupStepper() {
 
       //stop the first video on clickback
       d3.select('video.ismo.step1')['_groups'][0][0].pause()
-   
-    
+
+
   }
 
   function step1() {
@@ -115,9 +115,9 @@ function setupStepper() {
       .duration(1500)
       .style('opacity',0)
 
-    
 
-    
+
+
 
     // function splitSubtitle() {
     // var subtitleWords = document.getElementsByClassName('subtitle')[0]
@@ -134,7 +134,7 @@ function setupStepper() {
 
     // splitSubtitle()
 
-    
+
     d3.select('.subtitle').classed('active',true)
     d3.select('.subtitle')
       .style('opacity',0)
@@ -150,19 +150,19 @@ function setupStepper() {
 
 
 
-    
-    
-        
+
+
+
 
 
       //play the first video
       d3.select('video.ismo.step1')['_groups'][0][0].currentTime = 0
       d3.select('video.ismo.step1')['_groups'][0][0].play()
-   
+
   }
 
   function step2() {
-   // //activate script 
+   // //activate script
    // d3.select('.script-container').classed("active",true)
    //  .transition()
    //  .duration(1000)
@@ -176,7 +176,7 @@ function setupStepper() {
    //    })
    //    .classed('active',true)
 
-    
+
   //  //stop the first video
   //  d3.select('video.ismo.step1')['_groups'][0][0].pause()
   //  d3.select('video.ismo.step1')['_groups'][0][0].currentTime = 0
@@ -212,7 +212,7 @@ function setupStepper() {
   }
 
   function step3() {
-   //activate script 
+   //activate script
    d3.select('.script-container').classed("active",true)
 
     //transition out overlay
@@ -229,8 +229,8 @@ function setupStepper() {
       })
       .classed('active',true)
 
-    
-   
+
+
    //play the second video
    d3.select('video.ismo.step3')['_groups'][0][0].play()
   //pause the third video on clickback
@@ -240,7 +240,7 @@ function setupStepper() {
   }
 
   function step4() {
-    
+
     //stop the second video
     d3.select('video.ismo.step3')['_groups'][0][0].pause()
     d3.select('video.ismo.step3')['_groups'][0][0].currentTime = 0
@@ -266,7 +266,7 @@ function setupStepper() {
         .duration(1000)
         .style('color','rgba(186,186,186,0.4)')
   }
-  
+
 
   function step5() {
 
@@ -320,7 +320,7 @@ function setupStepper() {
         .style('right','55%')
         .style('bottom','5%')
         .style('opacity','1')
-   
+
   }
 
   function step6() {
@@ -363,7 +363,7 @@ function setupStepper() {
       d3.select(".tap.tap--final").transition()
         .duration(1000)
         .style('opacity',1)
-    
+
     //Dectivate clickback button on clickback
       d3.select(".tap.tap--back").classed("active", false)
 
@@ -445,7 +445,7 @@ function setupStepper() {
       //   .style('color','#333333')
       //   .style('opacity',.1)
 
-   
+
   }
   //end of step functions
 
@@ -475,7 +475,7 @@ function setupStepper() {
         x.innerHTML = x.innerHTML.replace(/ ass /g,' <span id="ass-instance">ass</span> ');
       }
       highlightAss = function(){}
-        
+
     }
   //end of highlight asses function
 
@@ -505,7 +505,7 @@ function setupStepper() {
         x.innerHTML = x.innerHTML.replace(/ ass /g,' <span id="ass-instance">ass</span> ');
       }
       assOnlyScript = function(){}
-        
+
     }
   //end of highlight asses function
 
@@ -520,10 +520,10 @@ function setupStepper() {
       d3.select(".stepper__intro.step" + currentStep).classed("active", true);
       console.log(("step" + currentStep))
       //console.log(steps[("step" + currentStep)])
-      
+
       //run that step
       steps[(currentStep)]()
-  
+
     }
   //end of change step function
 
@@ -551,10 +551,10 @@ function setupStepperScript(datapoints) {
     .attr('class','script-line')
     .text(function (d){
       return (d.text + " ")
-}) 
+})
 //end of script function
 }).catch(function(error){
-     // handle error   
+     // handle error
   })
 //end of data read/script
 
@@ -590,7 +590,7 @@ function setupScroller() {
 
       //filter data
       var citationData = datapoints[186].citations
-      var x 
+      var x
       var citationCounter = 0
       for (x of citationData){
         if (x['@first'] == 'yes')
@@ -619,7 +619,7 @@ function setupScroller() {
         var firstDate = citationDates[0]
         var lastDate = citationDates.slice(-1)[0]
 
-      //add the timeline 
+      //add the timeline
       var timeLine = svg.append('path')
           //.transition().duration(2000)
           .attr('d',lineFunction(lineData))
@@ -639,17 +639,17 @@ function setupScroller() {
         .append('text')
           .text(lastDate)
           .attr('class','year-label')
-        
-        //add circle for each citation  
+
+        //add circle for each citation
         var citationCircles = svg.selectAll('circle')
             .data(citationData)
             .enter().append('circle')
             .attr('cx',function (d) {
-              if (d.date.length >4)   
+              if (d.date.length >4)
                 {return  xPositionScale(d.date.slice(0,4))}
               else
                 {return xPositionScale(d.date)}
-              
+
             })
             .attr('cy',height*.02)
             .attr('r',4)
@@ -660,7 +660,7 @@ function setupScroller() {
             .attr('fill','#F24C3D')
             .attr('id', function (d) {
 
-              if (d.date.length >4)   
+              if (d.date.length >4)
                 {return 'date' + d.date.slice(0,4)}
               else
                 {return 'date' + d.date}
@@ -686,15 +686,15 @@ function setupScroller() {
         .attr('dates',citationDates)
         .attr('oninput','selectCitation(this.value)')
         .attr('onstart','selectCitation(this.value)')
-    
+
 //---------------------///
 
     //end of function
     }).catch(function(error){
-         // handle error   
+         // handle error
       })
       //end of data read/script
-        
+
     }
 //end of scrolly function
 
@@ -737,7 +737,7 @@ function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
         {
           var citationData = Array(usageData.citations)
 
-          //add circle for each citation  
+          //add circle for each citation
         var citationCircles = svg.selectAll('.citation-circle')
             .data(citationData)
             .enter().append('circle')
@@ -752,7 +752,7 @@ function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
             .attr('fill','#F24C3D')
             .attr('id', function (d) {
 
-              if (d.date.length >4)   
+              if (d.date.length >4)
                 {return 'date' + d.date.slice(0,4)}
               else
                 {return 'date' + d.date}
@@ -762,7 +762,7 @@ function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
             {var yearLabelText = citationData[0].date.slice(0,4)}
           else
             {var yearLabelText = citationData[0].date}
-           
+
 
         var yearLabelStart = svg.append('g')
           .attr('transform','translate(' + width*.5 +','+ height*.23 + ')')
@@ -775,13 +775,13 @@ function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
         .attr('class','citationContainerIceberg')
         .text('(' + citationData[0].date + ') ' + citationData[0]['#text'])
 
-      
-      } 
+
+      }
       else
         {
           var citationData = usageData.citations
 
-          var x 
+          var x
           var citationCounter = 0
           for (x of citationData){
             if (x['@first'] == 'yes')
@@ -810,7 +810,7 @@ function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
         .domain([d3.min(citationDates),d3.max(citationDates)])
         .range([width*.1,width*.9])
 
-      //add the timeline 
+      //add the timeline
       var timeLine = svg.append('path')
           //.transition().duration(2000)
           .attr('d',lineFunction(lineData))
@@ -830,8 +830,8 @@ function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
         .append('text')
           .text(d3.max(citationDates))
           .attr('class','year-label')
-        
-        //add circle for each citation  
+
+        //add circle for each citation
         var citationCircles = svg.selectAll('.citation-circle')
             .data(citationData)
             .enter().append('circle')
@@ -848,7 +848,7 @@ function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
             .attr('fill','#F24C3D')
             .attr('id', function (d) {
 
-              if (d.date.length >4)   
+              if (d.date.length >4)
                 {return 'date' + d.date.slice(0,4)}
               else
                 {return 'date' + d.date}
@@ -857,7 +857,7 @@ function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
       //add a slider
       var sliderContainer = d3.select(overlaynumber).append('div')
         .attr('class','slider-container')
-        
+
 
       var slider = sliderContainer.append('input')
         .attr('type','range')
@@ -876,8 +876,8 @@ function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
         .attr('class','citationContainerIceberg')
         .text('(' + citationData[0].date + ') ' + citationData[0]['#text'])
 
-      
-    
+
+
 //end of if/else
       }
 
@@ -915,8 +915,8 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
         .attr('class','iceberg-text')
         .attr('opacity',.8)
         .style('color', '#333333')
-        .text(function(d) { 
-          return d.word + ' • ' 
+        .text(function(d) {
+          return d.word + ' • '
         })
         .on('mouseover', function(d, i) {
           var currentState = this
@@ -935,7 +935,7 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
           buildCitationTimeline(usageData,icebergnumber,overlaynumber)
         })
 
-       console.log(d3.select('#iceberg1').style('height')) 
+       console.log(d3.select('#iceberg1').style('height'))
 
       var leftShape = d3.select('#left-shape1')
         .style('height','101em')
@@ -945,7 +945,7 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
 
     //end of function
     }).catch(function(error){
-         // handle error   
+         // handle error
       })
       //end of data read/script
     }
@@ -974,7 +974,7 @@ function buildIcebergTextList(filename,icebergnumber,overlaynumber) {
         .enter().append('span')
         .attr('class','usage-examples')
         .style('color', '#333333')
-        .text(function(d,i) { 
+        .text(function(d,i) {
           return (i+1) + '. ' + d.ismo_example
         })
         .on('mouseout', function(d, i) {
@@ -992,7 +992,7 @@ function buildIcebergTextList(filename,icebergnumber,overlaynumber) {
 
     //end of function
     }).catch(function(error){
-         // handle error   
+         // handle error
       })
       //end of data read/script
     }
@@ -1016,4 +1016,3 @@ function init() {
 
 
 export default { init, resize };
-
