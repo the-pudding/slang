@@ -571,7 +571,7 @@ function setupStepper() {
       switchStep(currentStep);
     }); //activate container
 
-    d3.select('.stepper').classed('active', true); //Activate stepper tap 
+    d3.select('.stepper').classed('active', true); //Activate stepper tap
 
     d3.select(".stepper__tap").classed("active", true); //Activate first-button
 
@@ -621,7 +621,7 @@ function setupStepper() {
   }
 
   function step2() {
-    // //activate script 
+    // //activate script
     // d3.select('.script-container').classed("active",true)
     //  .transition()
     //  .duration(1000)
@@ -658,7 +658,7 @@ function setupStepper() {
   }
 
   function step3() {
-    //activate script 
+    //activate script
     d3.select('.script-container').classed("active", true); //transition out overlay
 
     d3.select('.pause-overlay').transition().duration(2000).style('opacity', 0); //deselct active text on clickback
@@ -738,53 +738,88 @@ function setupStepper() {
       return d.step_used == 'step5';
     }).classed('active', true); //Move out right-left click buttons
 
-    d3.select(".tap.tap--right").transition().duration(1000).style('left', '65%').style('bottom', '20%').style('opacity', '.6');
-    d3.select('.tap.tap--left').transition().duration(1000).style('right', '65%').style('bottom', '20%').style('opacity', '.6'); //Activate final click button
+    // d3.select(".tap.tap--right").transition().duration(1000).style('left', '65%').style('bottom', '20%').style('opacity', '.6');
+    // d3.select('.tap.tap--left').transition().duration(1000).style('right', '65%').style('bottom', '20%').style('opacity', '.6'); //Activate final click button
 
-    d3.select(".tap.tap--final").classed("active", true);
-    d3.select(".tap.tap--final").transition().duration(1).style('opacity', 0);
-    d3.select(".tap.tap--final").transition().duration(1000).style('opacity', 1); //Dectivate clickback button on clickback
+    // d3.select(".tap.tap--final").classed("active", true);
+    // d3.select(".tap.tap--final").transition().duration(1).style('opacity', 0);
+    // d3.select(".tap.tap--final").transition().duration(1000).style('opacity', 1); //Dectivate clickback button on clickback
 
-    d3.select(".tap.tap--back").classed("active", false); //Reactivate left-right click on clickback
+    // d3.select(".tap.tap--back").classed("active", false); //Reactivate left-right click on clickback
 
-    d3.select('.tap.tap--left').classed('active', true);
-    d3.select(".tap.tap--right").classed("active", true); //reactivate on clickback
+    // d3.select('.tap.tap--left').classed('active', true);
+    // d3.select(".tap.tap--right").classed("active", true); //reactivate on clickback
 
-    d3.select('.stepper').classed('active', true);
-    d3.select('.stepper__graphics').classed('active', true).attr('display', 'none');
-    d3.select('.script-container').classed('active', true); //deactivate scroller and stack on clickback
 
-    d3.select('.scroll').classed('active', false);
-    d3.select('.stack').classed('active', false);
+    // d3.select('.tap.tap--left').classed('active', false);
+    d3.select('.tap.tap--right').classed('active', false);
+    // d3.select('.tap.tap--left').transition().style('opacity', '0');
+    d3.select('.tap.tap--right').transition().style('opacity', '0'); // //allow all asses to peek out
+
+
+    setTimeout(function(d){
+      // currentStep = currentStep + 1;
+      d3.select('.scroll').classed('active', true).attr('display', 'inline');
+      d3.select('.stack').classed('active', true); //deselect active text on clickback/clickthrough
+      d3.select('video.ismo.step6')['_groups'][0][0].pause(); //deactivate leftright click button
+
+      d3.transition()
+          .delay(0)
+          .duration(1000)
+          .tween("scroll", scrollTween(window.innerHeight))
+          .on("end",function(d){
+            // d3.select('video.ismo.step6')['_groups'][0][0].pause(); //deactivate leftright click button
+          })
+          ;
+
+      function scrollTween(offset) {
+        return function() {
+          var i = d3.interpolateNumber(window.pageYOffset || document.documentElement.scrollTop, offset);
+          return function(t) { scrollTo(0, i(t)); };
+        };
+      }
+
+      // switchStep(currentStep);
+    },3000)
+
+    // d3.select('.stepper').classed('active', true);
+    // d3.select('.stepper__graphics').classed('active', true).attr('display', 'none');
+    // d3.select('.script-container').classed('active', true); //deactivate scroller and stack on clickback
+
+    // d3.select('.scroll').classed('active', false);
+    // d3.select('.stack').classed('active', false);
   }
 
   function step7() {
     //remove the stepper and activate the scroller
     // d3.select('.stepper__graphics').classed('active',false)
     //   .attr('display','none')
-    d3.select('.stepper').classed('active', false);
-    d3.select('.script-container').classed('active', false);
-    d3.select('.tap.tap--final').classed('active', false);
-    d3.select(".tap.tap--final").transition().duration(1000).style('opacity', 0);
+
+    // d3.select('.stepper').classed('active', false);
+    // d3.select('.script-container').classed('active', false);
+    // d3.select('.tap.tap--final').classed('active', false);
+    // d3.select(".tap.tap--final").transition().duration(1000).style('opacity', 0);
     d3.select('.scroll').classed('active', true).attr('display', 'inline');
     d3.select('.stack').classed('active', true); //deselect active text on clickback/clickthrough
 
-    d3.selectAll('.script-line').classed("active", false); //activate tap back button
+    // d3.selectAll('.script-line').classed("active", false); //activate tap back button
+    //
+    // var tapBack = d3.select('svg.tap--back').on('click', function () {
+    //   currentStep = currentStep - 1;
+    //   switchStep(currentStep);
+    //   console.log('clicked');
+    // });
+    // d3.select('svg.tap--back').classed('active', true);
+    // d3.select('svg.tap--back').transition().duration(1000).style('opacity', 1); //pause the fifth video
+    //
+    // d3.select('video.ismo.step6')['_groups'][0][0].pause(); //deactivate leftright click button
+    //
+    // d3.select('.tap.tap--left').classed('active', false);
+    // d3.select('.tap.tap--right').classed('active', false);
+    // d3.select('.tap.tap--left').transition().style('opacity', '0');
+    // d3.select('.tap.tap--right').transition().style('opacity', '0'); // //allow all asses to peek out
 
-    var tapBack = d3.select('svg.tap--back').on('click', function () {
-      currentStep = currentStep - 1;
-      switchStep(currentStep);
-      console.log('clicked');
-    });
-    d3.select('svg.tap--back').classed('active', true);
-    d3.select('svg.tap--back').transition().duration(1000).style('opacity', 1); //pause the fifth video
 
-    d3.select('video.ismo.step6')['_groups'][0][0].pause(); //deactivate leftright click button
-
-    d3.select('.tap.tap--left').classed('active', false);
-    d3.select('.tap.tap--right').classed('active', false);
-    d3.select('.tap.tap--left').transition().style('opacity', '0');
-    d3.select('.tap.tap--right').transition().style('opacity', '0'); // //allow all asses to peek out
     // d3.select('#script-container')
     //   .transition()
     //   .duration(1000)
@@ -794,6 +829,7 @@ function setupStepper() {
     //   .duration(1000)
     //   .style('color','#333333')
     //   .style('opacity',.1)
+
   } //end of step functions
   //highlight asses function
 
@@ -927,7 +963,7 @@ function setupStepperScript(datapoints) {
   var scriptLines = scriptContainer.selectAll('span').data(datapoints).enter().append('span').attr('class', 'script-line').text(function (d) {
     return d.text + " ";
   }); //end of script function
-}).catch(function (error) {// handle error   
+}).catch(function (error) {// handle error
 }); //end of data read/script
 //begin scrolly function
 
@@ -939,28 +975,42 @@ function setupScroller() {
     console.log(datapoints); //set up variables
 
     var margin = {
-      top: 20,
-      right: 20,
+      top: 40,
+      right: 28,
       bottom: 20,
-      left: 20
+      left: 28
     };
-    var height = (window.innerHeight - margin.top - margin.bottom) / 2;
+    var height = (50 - margin.top - margin.bottom);
     var width = window.innerWidth - margin.left - margin.right;
-    var svg = d3.select('#graphic2').append('svg').attr('class', 'time-line').attr('width', width).attr('height', height - margin.bottom).attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var sliderContainer = d3.select('#graphic2').append('div').attr('class', 'slider-container'); //add the selected citation container
+
+    console.log(width);
+
+    var svg = d3.select('#graphic2').append('svg')
+      .attr('class', 'time-line')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.bottom + margin.top)
+      .style('width', width + margin.left + margin.right + "px")
+      .style('height', height + margin.bottom + margin.top + "px")
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
     var lineFunction = d3.line().x(function (d) {
       return d.x;
     }).y(function (d) {
       return d.y;
     });
+
     var lineData = [{
-      "x": width * .1,
+      "x": 0,
       "y": height * .02
     }, {
-      "x": width * .9,
+      "x": width,
       "y": height * .02
     }]; //set up scales
 
-    var xPositionScale = d3.scaleLinear().domain([1761, 2000]).range([width * .1, width * .9]); //filter data
+    var xPositionScale = d3.scaleLinear().domain([1761, 2000]).range([0, width]); //filter data
 
     var citationData = datapoints[186].citations;
     var x;
@@ -994,7 +1044,6 @@ function setupScroller() {
       }
     }
 
-    console.log(citationData); //grab just the dates
 
     var citationDates = citationData.map(function (d) {
       return d.date;
@@ -1033,15 +1082,18 @@ function setupScroller() {
       }
     }
 
-    console.log(citationDates);
     var firstDate = citationDates[0];
-    var lastDate = citationDates.slice(-1)[0]; //add the timeline 
+    var lastDate = citationDates.slice(-1)[0]; //add the timeline
 
     var timeLine = svg.append('path') //.transition().duration(2000)
     .attr('d', lineFunction(lineData)).attr('stroke-width', 2).attr('stroke', '#333333'); //add axis labels
 
-    var yearLabelStart = svg.append('g').attr('transform', 'translate(' + width * .1 + ',' + height * .06 + ')').append('text').text(firstDate).attr('class', 'year-label');
-    var yearLabelEnd = svg.append('g').attr('transform', 'translate(' + width * .9 + ',' + height * .06 + ')').append('text').text(lastDate).attr('class', 'year-label'); //add circle for each citation  
+    var yearLabelStart = svg.append('g')
+      .attr('transform', 'translate(' + 0 + ',' + 0 + ')')
+      .append('text').text(firstDate).attr('class', 'year-label');
+    var yearLabelEnd = svg.append('g')
+      .attr('transform', 'translate(' + width + ',' + 0 + ')')
+      .append('text').text(lastDate).attr('class', 'year-label'); //add circle for each citation
 
     var citationCircles = svg.selectAll('circle').data(citationData).enter().append('circle').attr('cx', function (d) {
       if (d.date.length > 4) {
@@ -1049,7 +1101,7 @@ function setupScroller() {
       } else {
         return xPositionScale(d.date);
       }
-    }).attr('cy', height * .02).attr('r', 4).attr('opacity', .5).attr('text', function (d) {
+    }).attr('cy', height * .02).attr('r', 7).attr('opacity', .5).attr('text', function (d) {
       return d['#text'];
     }).attr('fill', '#F24C3D').attr('id', function (d) {
       if (d.date.length > 4) {
@@ -1059,12 +1111,16 @@ function setupScroller() {
       }
     }); //add a slider
 
-    var sliderContainer = d3.select('#graphic2').append('div').attr('class', 'slider-container'); //add the selected citation container
-
-    var citationContainer = d3.select('#graphic2').append('div').attr('class', 'citationContainer').text('(' + citationData[0].date + ') ' + citationData[0]['#text']);
+    citationCircles.classed("active",function(d,i){
+      if(i==0){
+        return true;
+      }
+      return false
+    })
     var slider = sliderContainer.append('input').attr('type', 'range').attr('min', firstDate).attr('max', lastDate).attr('id', 'rangeSLider').attr('value', 1761).attr('step', 1).attr('class', 'slider').attr('dates', citationDates).attr('oninput', 'selectCitation(this.value)').attr('onstart', 'selectCitation(this.value)'); //---------------------///
+    var citationContainer = d3.select('#graphic2').append('div').attr('class', 'citationContainer').text('(' + citationData[0].date + ') ' + citationData[0]['#text']);
     //end of function
-  }).catch(function (error) {// handle error   
+  }).catch(function (error) {// handle error
   }); //end of data read/script
 } //end of scrolly function
 //-----------------//
@@ -1077,8 +1133,10 @@ function buildCitationTimeline(usageData, icebergnumber, overlaynumber) {
 
   var margin = {
     top: 20,
-    right: 20,
-    bottom: 20,
+    // right: 20,
+    // bottom: 20,
+    right: 0,
+    bottom: 0,
     left: 20
   };
   var height = window.innerHeight - margin.top - margin.bottom;
@@ -1100,7 +1158,7 @@ function buildCitationTimeline(usageData, icebergnumber, overlaynumber) {
   }]; //filter data and only do line if more than 1 citation
 
   if (usageData.number_of_citations == 1) {
-    var citationData = Array(usageData.citations); //add circle for each citation  
+    var citationData = Array(usageData.citations); //add circle for each citation
 
     var citationCircles = svg.selectAll('.citation-circle').data(citationData).enter().append('circle').attr('cx', width / 2).attr('class', 'citation-circle').attr('cy', height * .2).attr('r', 4).attr('opacity', 1).attr('text', function (d) {
       return d['#text'];
@@ -1193,17 +1251,17 @@ function buildCitationTimeline(usageData, icebergnumber, overlaynumber) {
       }
     }
 
-    var xPositionScale = d3.scaleLinear().domain([d3.min(citationDates), d3.max(citationDates)]).range([width * .1, width * .9]); //add the timeline 
+    var xPositionScale = d3.scaleLinear().domain([d3.min(citationDates), d3.max(citationDates)]).range([width * .1, width * .9]); //add the timeline
 
     var timeLine = svg.append('path') //.transition().duration(2000)
     .attr('d', lineFunction(lineData)).attr('stroke-width', 2).attr('stroke', '#333333'); //add axis labels
 
     var yearLabelStart = svg.append('g').attr('transform', 'translate(' + width * .1 + ',' + height * .23 + ')').append('text').text(d3.min(citationDates)).attr('class', 'year-label');
-    var yearLabelEnd = svg.append('g').attr('transform', 'translate(' + width * .9 + ',' + height * .23 + ')').append('text').text(d3.max(citationDates)).attr('class', 'year-label'); //add circle for each citation  
+    var yearLabelEnd = svg.append('g').attr('transform', 'translate(' + width * .9 + ',' + height * .23 + ')').append('text').text(d3.max(citationDates)).attr('class', 'year-label'); //add circle for each citation
 
     var citationCircles = svg.selectAll('.citation-circle').data(citationData).enter().append('circle').attr('cx', function (d) {
       return xPositionScale(d.date);
-    }).attr('class', 'citation-circle').attr('cy', height * .2).attr('r', 4).attr('opacity', .5).attr('text', function (d) {
+    }).attr('class', 'citation-circle').attr('cy', height * .2).attr('r', 7).attr('opacity', .5).attr('text', function (d) {
       return d['#text'];
     }).attr('fill', '#F24C3D').attr('id', function (d) {
       if (d.date.length > 4) {
@@ -1255,7 +1313,7 @@ function buildIcebergTextChart(filename, icebergnumber, overlaynumber) {
     var leftShape = d3.select('#left-shape1').style('height', '101em'); // .style('height','2000px')
 
     var rightShape = d3.select('#right-shape1').style('height', '101em'); //end of function
-  }).catch(function (error) {// handle error   
+  }).catch(function (error) {// handle error
   }); //end of data read/script
 }
 
@@ -1282,7 +1340,7 @@ function buildIcebergTextList(filename, icebergnumber, overlaynumber) {
       var usageData = d3.select(this)['_groups'][0][0]['__data__'];
       buildCitationTimeline(usageData, icebergnumber, overlaynumber);
     }); //end of function
-  }).catch(function (error) {// handle error   
+  }).catch(function (error) {// handle error
   }); //end of data read/script
 } //run functions
 
