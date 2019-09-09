@@ -629,13 +629,13 @@ function setupScroller() {
       //add axis labels
 
       var yearLabelStart = svg.append('g')
-        .attr('transform','translate(' + width*.1 +','+ height*.06 + ')')
+        .attr('transform','translate(' + width*.1 +','+ height*.12 + ')')
         .append('text')
           .text(firstDate)
           .attr('class','year-label')
 
       var yearLabelEnd = svg.append('g')
-        .attr('transform','translate(' + width*.9 +','+ height*.06 + ')')
+        .attr('transform','translate(' + width*.9 +','+ height*.12 + ')')
         .append('text')
           .text(lastDate)
           .attr('class','year-label')
