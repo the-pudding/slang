@@ -527,7 +527,7 @@ var isMobile = {
 };
 var _default = isMobile;
 exports.default = _default;
-},{}],"TAPd":[function(require,module,exports) {
+},{}],"graphic.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1040,8 +1040,13 @@ function setupScroller() {
     var timeLine = svg.append('path') //.transition().duration(2000)
     .attr('d', lineFunction(lineData)).attr('stroke-width', 2).attr('stroke', '#333333'); //add axis labels
 
+<<<<<<< HEAD
     var yearLabelStart = svg.append('g').attr('transform', 'translate(' + width * .1 + ',' + height * .12 + ')').append('text').text(firstDate).attr('class', 'year-label');
     var yearLabelEnd = svg.append('g').attr('transform', 'translate(' + width * .9 + ',' + height * .12 + ')').append('text').text(lastDate).attr('class', 'year-label'); //add circle for each citation  
+=======
+    var yearLabelStart = svg.append('g').attr('transform', 'translate(' + width * .1 + ',' + height * .06 + ')').append('text').text(firstDate).attr('class', 'year-label');
+    var yearLabelEnd = svg.append('g').attr('transform', 'translate(' + width * .9 + ',' + height * .06 + ')').append('text').text(lastDate).attr('class', 'year-label'); //add circle for each citation
+>>>>>>> master
 
     var citationCircles = svg.selectAll('circle').data(citationData).enter().append('circle').attr('cx', function (d) {
       if (d.date.length > 4) {
@@ -1463,5 +1468,9 @@ function init() {
 }
 
 init();
+<<<<<<< HEAD
 },{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"TAPd","./footer":"v9Q8"}]},{},["epB2"], null)
+=======
+},{"lodash.debounce":"or4r","./utils/is-mobile":"WEtf","./graphic":"graphic.js","./footer":"v9Q8"}]},{},["epB2"], null)
+>>>>>>> master
 //# sourceMappingURL=/main.js.map

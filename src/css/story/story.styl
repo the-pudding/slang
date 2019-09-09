@@ -409,7 +409,7 @@
 
     border-radius 3px
     height: 4px
-    background: #333333
+    background-color rgba(51,51,51,.31)
     outline: none
     opacity 1
 
@@ -473,12 +473,16 @@
     cursor: pointer
 
   .time-line
-    circle
-      fill #5d5d5d
+    path
+      stroke-width 16px
+      stroke rgba(0, 0, 0, 0.16)
+    line
+      stroke rgba(93, 93, 93, 0.55)
+      stroke-width 3px
 
-  circle.active
+  line.active
     opacity:1
-    fill #f24c3d
+    stroke #f24c3d
 
 
 
@@ -487,7 +491,7 @@
     font-size: 16px
     font-weight 600
     fill: #333333
-    transform: translate(0px, -10px)
+    transform: translate(0px, -15px)
     text-anchor middle
 
 
@@ -570,7 +574,7 @@
 
   .citationContainer
     //background-color #b2eafc
-    width 80%
+    width calc(100% - 40px)
     //left 50%
     //margin-left -40%
     //top 37%
@@ -584,7 +588,7 @@
     font-weight 600
     font-size 14px
     margin 0 auto
-    margin-top 30px
+    margin-top 8px
     margin-bottom 20px
     //font-family $roboto
 
