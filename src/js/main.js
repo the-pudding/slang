@@ -34,6 +34,14 @@ function init() {
   // add mobile class to body tag
   $body.classed('is-mobile', isMobile.any());
   // setup resize event
+
+  //set stepperHeight
+
+  var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  d3.select(".stepper").style("height",h+"px");
+
+
   window.addEventListener('resize', debounce(resize, 150));
   // setup sticky header menu
   // setupStickyHeader();
