@@ -400,6 +400,25 @@ function setupStepper() {
         .duration(1000)
         .style('opacity',1)
 
+
+
+    //Making all the timelines here to get the proper window sizing
+      //define the data, run function
+    d3.json('assets/data/ass_long_data.json').then(function(d){
+      setupAssLine(d[186].citations,d3.select("#graphic2"))
+    })
+    .catch(function(error){
+         // handle error
+      })
+      //end of data read/script
+
+
+    buildIcebergTextList('assets/data/ass_ismo_citations_final.json','#iceberg0','#overlay0')
+    buildIcebergTextChart('assets/data/ass_long_data.json','#iceberg1','#overlay1')
+    buildIcebergTextChart('assets/data/fuck_long_data.json','#iceberg2','#overlay2')
+    buildIcebergTextChart('assets/data/dog_long_data.json','#iceberg3','#overlay3')
+    buildIcebergTextChart('assets/data/shit_long_data.json','#iceberg4','#overlay4')
+
       //pause the fifth video
 
       // d3.select('video.ismo.step6')['_groups'][0][0].pause()
@@ -636,8 +655,10 @@ function setupAssLine(datapoints,container) {
 
     //set up variables
     const margin = { top: 20, right: 26, bottom: 20, left: 26 }
+    console.log(document.getElementsByClassName('scroll__graphic')[0].offsetWidth)
     const height = (window.innerHeight - margin.top - margin.bottom) / 2
-    const width = window.innerWidth - margin.left - margin.right
+    const width = container['_groups'][0][0].offsetWidth - margin.left - margin.right
+    console.log(width)
 
     var sliderContainer = container.append('div')
       .attr('class','slider-container')
@@ -800,21 +821,6 @@ function setupAssLine(datapoints,container) {
 
 
 }
-
-//begin scrolly function
-function setupScroller() {
-
-      //define the data, run function
-    d3.json('assets/data/ass_long_data.json').then(function(d){
-      setupAssLine(d[186].citations,d3.select("#graphic2"))
-    })
-    .catch(function(error){
-         // handle error
-      })
-      //end of data read/script
-
-    }
-//end of scrolly function
 
 //-----------------//
 
@@ -1129,14 +1135,8 @@ function init() {
   console.log('Make something awesome!');
   //Run the stepper
   setupStepper()
-  //Run the scroller
-  setupScroller()
-  //Build charts
-  buildIcebergTextList('assets/data/ass_ismo_citations_final.json','#iceberg0','#overlay0')
-  buildIcebergTextChart('assets/data/ass_long_data.json','#iceberg1','#overlay1')
-  buildIcebergTextChart('assets/data/fuck_long_data.json','#iceberg2','#overlay2')
-  buildIcebergTextChart('assets/data/dog_long_data.json','#iceberg3','#overlay3')
-  buildIcebergTextChart('assets/data/shit_long_data.json','#iceberg4','#overlay4')
+  //Build charts moved to last step of stepper
+  
 
 }
 
