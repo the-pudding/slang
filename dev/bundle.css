@@ -1260,6 +1260,17 @@ header.is-sticky.is-dark .header__toggle.is-visible span svg {
     z-index: 101;
   }
 }
+#iceberg1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.left-shape,
+.right-shape {
+  display: none;
+}
 #advisory {
   display: none;
 }
