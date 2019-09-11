@@ -362,6 +362,7 @@ function setupStepper() {
       d3.select('svg.tap--back')
         .classed('active',true)
 
+
       //pause the fifth video
 
       // d3.select('video.ismo.step6')['_groups'][0][0].pause()
@@ -600,6 +601,7 @@ function setupAssLine(datapoints,container) {
 
     //set up variables
     const margin = { top: 20, right: 26, bottom: 20, left: 26 }
+    console.log(document.getElementsByClassName('scroll__graphic')[0].offsetWidth)
     const height = (window.innerHeight - margin.top - margin.bottom) / 2
     const width = Math.min(viewportWidth,550) - margin.left - margin.right
 
@@ -765,7 +767,10 @@ function setupAssLine(datapoints,container) {
 
 }
 
-//begin scrolly function
+//-----------------//
+
+//adding charts to stack
+
 function setupScroller() {
 
       //define the data, run function
@@ -777,12 +782,7 @@ function setupScroller() {
       })
       //end of data read/script
 
-    }
-//end of scrolly function
-
-//-----------------//
-
-//adding charts to stack
+}
 
 function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
 
@@ -1084,6 +1084,7 @@ function init() {
   console.log('Make something awesome!');
   //Run the stepper
   setupStepper()
+  
   //Run the scroller
   setupScroller()
   //Build charts
@@ -1092,6 +1093,9 @@ function init() {
   buildIcebergTextChart('assets/data/fuck_long_data.json','#iceberg2','#overlay2')
   buildIcebergTextChart('assets/data/dog_long_data.json','#iceberg3','#overlay3')
   buildIcebergTextChart('assets/data/shit_long_data.json','#iceberg4','#overlay4')
+
+  //Build charts moved to last step of stepper
+  
 
 }
 
