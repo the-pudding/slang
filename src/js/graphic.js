@@ -20,6 +20,8 @@ function setupStepper() {
     // step7
   ]
 
+  var stepsClicked = 0
+
   //define click events on right-left buttons
   var tapLeft = d3.selectAll('.tap')
     .on('click', function () {
@@ -52,6 +54,7 @@ function setupStepper() {
 
    // define each step
   function step0() {
+
     var entirePage = d3.select('.stepper')
       .on('click', function (d) {
       currentStep = currentStep + 1
@@ -79,6 +82,8 @@ function setupStepper() {
   }
 
   function step1() {
+
+    stepsClicked = stepsClicked + 1 
 
     //Remove full page click
       d3.select('.stepper')
@@ -142,6 +147,8 @@ function setupStepper() {
   }
 
   function step2() {
+
+  stepsClicked = stepsClicked + 1 
    // //activate script
    // d3.select('.script-container').classed("active",true)
    //  .transition()
@@ -191,6 +198,9 @@ function setupStepper() {
   }
 
   function step3() {
+
+   stepsClicked = stepsClicked + 1  
+   console.log(stepsClicked)
    //activate script
    d3.select('.script-container').classed("active",true)
 
@@ -208,6 +218,10 @@ function setupStepper() {
       })
       .classed('active',true)
 
+    if (stepsClicked === 3) {
+     splitSentence()
+    }
+
 
 
    //play the second video
@@ -220,6 +234,7 @@ function setupStepper() {
 
   function step4() {
 
+    stepsClicked = stepsClicked + 1 
     //stop the second video
     d3.select('video.ismo.step3')['_groups'][0][0].pause()
     d3.select('video.ismo.step3')['_groups'][0][0].currentTime = 0
@@ -249,6 +264,7 @@ function setupStepper() {
 
   function step5() {
 
+   stepsClicked = stepsClicked + 1 
     //stop the third video
    d3.select('video.ismo.step4')['_groups'][0][0].pause()
    d3.select('video.ismo.step4')['_groups'][0][0].currentTime = 0
@@ -294,6 +310,7 @@ function setupStepper() {
 
   function step6() {
 
+   stepsClicked = stepsClicked + 1 
     //stop the fourth video
    d3.select('video.ismo.step5')['_groups'][0][0].pause()
    d3.select('video.ismo.step5')['_groups'][0][0].currentTime = 0
@@ -364,6 +381,23 @@ function setupStepper() {
 
       d3.select('svg.tap--back')
         .classed('active',true)
+
+      //build charts
+      buildIcebergTextList('assets/data/ass_ismo_citations_final.json','#iceberg0','#overlay0')
+      buildIcebergTextChart('assets/data/ass_long_data.json','#iceberg1','#overlay1')
+      buildIcebergTextChart('assets/data/fuck_long_data.json','#iceberg2','#overlay2')
+      buildIcebergTextChart('assets/data/dog_long_data.json','#iceberg3','#overlay3')
+      buildIcebergTextChart('assets/data/shit_long_data.json','#iceberg4','#overlay4')
+
+      //last chart
+      //define the data, run function
+      d3.json('assets/data/ass_long_data.json').then(function(d){
+        setupAssLine(d[186].citations,d3.select("#graphic2"))
+      })
+      .catch(function(error){
+           // handle error
+        })
+        //end of data read/script
 
 
       //pause the fifth video
@@ -482,6 +516,31 @@ function setupStepper() {
 
   }
   //end of step functions
+
+  // split sentences by word
+  function splitSentence() {
+    var sentences = document.getElementsByClassName('script-line active')
+    var x
+      for (x of sentences) {
+        x.innerHTML = "<span>".concat(x.innerHTML)
+        x.innerHTML = x.innerHTML.replace(/ /g,"</span> <span>")
+        x.innerHTML = x.innerHTML.slice(0,-7)
+        d3.selectAll('.script-line.active >span').classed('sentence-word',true)
+      }
+
+     var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
+     var numberWords = d3.selectAll('.sentence-word').size()
+     var durationBetween = videoLength / numberWords
+     console.log(durationBetween)
+
+     d3.selectAll('.sentence-word')
+      .transition().duration(0)
+      .style('opacity',0)
+        .transition().duration(videoLength*1000)
+        .delay(function(d,i){ return i * durationBetween })
+        .style('opacity',1)
+
+    }
 
   //highlight asses function
   function highlightAss() {
@@ -604,9 +663,11 @@ function setupAssLine(datapoints,container) {
 
     //set up variables
     const margin = { top: 20, right: 26, bottom: 20, left: 26 }
-    console.log(document.getElementsByClassName('scroll__graphic')[0].offsetWidth)
+    console.log(container['_groups'][0][0].clientWidth)
     const height = (window.innerHeight - margin.top - margin.bottom) / 2
-    const width = Math.min(viewportWidth,550) - margin.left - margin.right
+    // const width = Math.min(viewportWidth,550) - margin.left - margin.right
+    const width = container['_groups'][0][0].clientWidth - margin.left - margin.right
+    console.log(width)
 
     var sliderContainer = container.append('div')
       .attr('class','slider-container')
@@ -771,21 +832,6 @@ function setupAssLine(datapoints,container) {
 }
 
 //-----------------//
-
-//adding charts to stack
-
-function setupScroller() {
-
-      //define the data, run function
-    d3.json('assets/data/ass_long_data.json').then(function(d){
-      setupAssLine(d[186].citations,d3.select("#graphic2"))
-    })
-    .catch(function(error){
-         // handle error
-      })
-      //end of data read/script
-
-}
 
 function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
 
@@ -987,20 +1033,20 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
         .html(function(d) {
           return d.word + "—<span>" +d.definition + '</span>'
         })
-        // .on('mouseover', function(d, i) {
-        //   var currentState = this
-        //     d3.select(this).style('opacity', 1);
-        // })
-        // .on('mouseout', function(d, i) {
-        //   var currentState = this
-        //     d3.select(this).style('opacity', .8);
-        // })
 
-      // var leftShape = d3.select('#left-shape1')
-      //   .style('height','101em')
-      //   // .style('height','2000px')
-      // var rightShape = d3.select('#right-shape1')
-      //   .style('height','101em')
+      //add click to reveal
+      var reveals = spans.append('div')
+        .attr('class','reveal-click')
+        .on('click', function (d) {
+            d3.select(this).selectAll('*').remove()
+            var data = d.citations
+            var container = d3.select(this)
+            setupAssLine(data,container)
+        })
+
+      reveals.append('p')
+        .attr('class','reveal-label')
+        .text('click to reveal citations')
 
     //end of function
     }).catch(function(error){
@@ -1087,19 +1133,7 @@ function init() {
   console.log('Make something awesome!');
   //Run the stepper
   setupStepper()
-
-  //Run the scroller
-  setupScroller()
-  //Build charts
-  buildIcebergTextList('assets/data/ass_ismo_citations_final.json','#iceberg0','#overlay0')
-  buildIcebergTextChart('assets/data/ass_long_data.json','#iceberg1','#overlay1')
-  buildIcebergTextChart('assets/data/fuck_long_data.json','#iceberg2','#overlay2')
-  buildIcebergTextChart('assets/data/dog_long_data.json','#iceberg3','#overlay3')
-  buildIcebergTextChart('assets/data/shit_long_data.json','#iceberg4','#overlay4')
-
   //Build charts moved to last step of stepper
-
-
 }
 
 
