@@ -5,6 +5,9 @@
   <!-- Intro stuff lives here   -->
   <div class='stepper__intro step0'>
     <!-- <img class="iceberg" inline src='assberg_art_no_title_mobile-01.svg'> -->
+    <div class="background-image">
+
+    </div>
     <div class='logo'>
       <img inline src='/pudding/wordmark.svg'>
       <p>INVESTIGATES</p>
@@ -30,7 +33,7 @@
 
     <div class='stepper__video step1'>
     <span class='subtitle'>I think the hardest word to truly master has been the word, "ass."</span>
-      <video class='ismo step1' src='assets/videos/ismo_1.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+      <video class='ismo step1' src='assets/videos/ismo_1.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline></video>
     </div>
 
     <div class='stepper__video step2'>
@@ -40,15 +43,15 @@
     </div>
 
     <div class='stepper__video step3'>
-      <video class='ismo step3' src='assets/videos/ismo_2.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+      <video class='ismo step3' src='assets/videos/ismo_2.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline></video>
     </div>
 
     <div class='stepper__video step4'>
-      <video class='ismo step4' src='assets/videos/ismo_3.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+      <video class='ismo step4' src='assets/videos/ismo_3.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline></video>
     </div>
 
     <div class='stepper__video step5'>
-      <video class='ismo step5' src='assets/videos/ismo_4.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline loop></video>
+      <video class='ismo step5' src='assets/videos/ismo_4.mp4' placeholder='assets/images/ismo_thumbnail.jpg' playsinline></video>
     </div>
 
     <div class='stepper__video step6'>
@@ -61,25 +64,25 @@
 
   <div class='stepper__tap'>
     <div class='tap tap--left'>
-      <svg class='tap--left' width=30vw height=4vh>
+      <svg class='tap--left'>
         <g>
-          <rect fill='#1B7EBE' width=30vw height=5vh ></rect>
+          <rect fill='#1B7EBE'></rect>
           <img inline src='arrow-left.svg'>
         </g>
       </svg>
     </div>
 
     <div class='tap tap--right'>
-      <svg class='tap--right' width=30vw height=4vh>
+      <svg class='tap--right'>
         <g>
-          <rect fill='#1B7EBE' width=30vw height=5vh></rect>
+          <rect fill='#1B7EBE'></rect>
           <img inline src='arrow-right.svg'>
         </g>
       </svg>
     </div>
 
     <div class='tap tap--final'>
-      <svg class='tap--final' width=10vh height=10vh>
+      <svg class='tap--final'>
         <g>
           <img inline src='arrow-down-circle.svg'>
         </g>
@@ -92,14 +95,14 @@
   <div class='stepper__steps'>
 
     <div id='video-annotation' class='stepper__annotation step1'>
-      <span>{{doc.step1}}</span>
+      <span>{{{doc.step1}}}</span>
     </div>
 
     <div id='video-annotation' class='stepper__annotation step2'>
-      <span>{{doc.step2}}</span>
+      <span>{{{doc.step2}}}</span>
     </div>
 
-    <div id='video-annotation' class='stepper__annotation step3'>{{doc.step3}}</span>
+    <div id='video-annotation' class='stepper__annotation step3'>{{{doc.step3}}}</span>
     </div>
 
     <div id='video-annotation' class='stepper__annotation step4'>

@@ -21,19 +21,26 @@ function setupStepper() {
   ]
 
   //define click events on right-left buttons
-  var tapLeft = d3.select('svg.tap--left')
+  var tapLeft = d3.selectAll('.tap')
     .on('click', function () {
-      currentStep = currentStep - 1
-      switchStep(currentStep)
-      console.log('clicked')
-      d3.event.stopPropagation()
+      if(d3.select(this).classed("tap--left")){
+        currentStep = currentStep - 1
+        switchStep(currentStep)
+        console.log('back')
+        d3.event.stopPropagation()
+      }
+      else {
+        currentStep = currentStep + 1
+        switchStep(currentStep)
+        console.log('forward')
+      }
     })
-  var tapRight = d3.select('svg.tap--right')
-    .on('click', function () {
-      currentStep = currentStep + 1
-      switchStep(currentStep)
-      console.log('clicked')
-    })
+  // var tapRight = d3.select('svg.tap--right')
+  //   .on('click', function () {
+  //   })
+
+
+
   var tapDown = d3.select('svg.tap--final')
     .on('click', function () {
       currentStep = currentStep + 1
@@ -62,22 +69,8 @@ function setupStepper() {
 
     //Deactivate right-left click buttons
       d3.select(".tap.tap--left").classed("active", false)
-        .style('opacity','0')
+
       d3.select(".tap.tap--right").classed("active", false)
-        .style('opacity','0')
-
-      d3.select(".tap.tap--left")
-        .transition()
-        .style('right','55%')
-        .style('bottom','5%')
-        .style('opacity','0')
-        .style('pointer-events','none')
-      d3.select(".tap.tap--right")
-        .transition()
-        .style('left','55%')
-        .style('bottom','5%')
-        .style('opacity','0')
-
 
       //stop the first video on clickback
       d3.select('video.ismo.step1')['_groups'][0][0].pause()
@@ -96,25 +89,11 @@ function setupStepper() {
 
     //Activate right-left click buttons
       d3.select(".tap.tap--left").classed("active", true)
+
       d3.select(".tap.tap--right").classed("active", true)
 
-      d3.select(".tap.tap--left")
-        .transition()
-        .duration(1000)
-        .style('opacity','1')
-        .style('right','55%')
-        .style('bottom','5%')
-        .style('pointer-events','auto')
-      d3.select(".tap.tap--right")
-        .transition()
-        .duration(1000)
-        .style('opacity','1')
-        .style('left','55%')
-        .style('bottom','5%')
-
-    d3.select('.pause-overlay').transition()
-      .duration(1500)
-      .style('opacity',0)
+      d3.select('.pause-overlay')
+        .style('opacity',null)
 
 
 
@@ -192,8 +171,7 @@ function setupStepper() {
    d3.select('.stepper__video.step1').classed('active',true)
    // d3.select('video.ismo.step1')['_groups'][0][0].currentTime = 0
 
-   d3.select('.pause-overlay').transition()
-    .duration(1500)
+   d3.select('.pause-overlay')
     .style('opacity',1)
 
 
@@ -300,8 +278,10 @@ function setupStepper() {
         .style('color','#00fff3')
 
     //Reactivate right click buttons on clickback
-      d3.select(".tap.tap--right").classed("active", true)
-       d3.select(".tap.tap--left").classed("active", true)
+      d3.select(".tap.tap--right").classed("active", true).style("display",null).style("opacity",null)
+      d3.select(".tap.tap--left").classed("active", true)
+
+
 
       //Move left tap to top corner
 
@@ -309,20 +289,6 @@ function setupStepper() {
       d3.select(".tap.tap--final").classed("active", false)
       d3.select(".tap.tap--final").transition()
         .style('opacity','0')
-
-    //Move back right-left click buttons
-      d3.select(".tap.tap--right")
-        .style("display",null)
-        .transition()
-        .duration(1000)
-        .style('left','55%')
-        .style('bottom','5%')
-        .style('opacity','1')
-      d3.select('.tap.tap--left').transition()
-        .duration(1000)
-        .style('right','55%')
-        .style('bottom','5%')
-        .style('opacity','1')
 
   }
 
@@ -395,10 +361,6 @@ function setupStepper() {
 
       d3.select('svg.tap--back')
         .classed('active',true)
-
-      d3.select('svg.tap--back').transition()
-        .duration(1000)
-        .style('opacity',1)
 
       //pause the fifth video
 
@@ -632,12 +594,14 @@ function setupAssLine(datapoints,container) {
   if (datapoints.length > 1) {
     var citationData = datapoints;
 
-    console.log(citationData);
+
+    var viewportWidth = document.getElementById('content').offsetWidth;
+
 
     //set up variables
     const margin = { top: 20, right: 26, bottom: 20, left: 26 }
     const height = (window.innerHeight - margin.top - margin.bottom) / 2
-    const width = window.innerWidth - margin.left - margin.right
+    const width = Math.min(viewportWidth,550) - margin.left - margin.right
 
     var sliderContainer = container.append('div')
       .attr('class','slider-container')
@@ -1010,39 +974,30 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
       var container = d3.select(icebergnumber)
 
       //append span groups to svg
-      var spans = container.selectAll('span')
+      var spans = container.selectAll('p')
         .data(datapoints)
-        .enter().append('span')
+        .enter().append('p')
         .sort(function(x, y){
           return y.number_of_citations - x.number_of_citations
         })
         .attr('class','iceberg-text')
-        .attr('opacity',.8)
-        .style('color', '#333333')
-        .text(function(d) {
-          return d.word + ' • '
+        .html(function(d) {
+          return d.word + "—<span>" +d.definition + '</span>'
         })
-        .on('mouseover', function(d, i) {
-          var currentState = this
-            d3.select(this).style('opacity', 1);
-        })
-        .on('mouseout', function(d, i) {
-          var currentState = this
-            d3.select(this).style('opacity', .8);
-        })
-        .on('click', function (d,i) {
-          var overlay = d3.select(overlaynumber)
-            .classed('active',true)
-            .on('click', d3.select(this).classed('active',false))
-          var usageData = d3.select(this)['_groups'][0][0]['__data__']
-          buildCitationTimeline(usageData,icebergnumber,overlaynumber)
-        })
+        // .on('mouseover', function(d, i) {
+        //   var currentState = this
+        //     d3.select(this).style('opacity', 1);
+        // })
+        // .on('mouseout', function(d, i) {
+        //   var currentState = this
+        //     d3.select(this).style('opacity', .8);
+        // })
 
-      var leftShape = d3.select('#left-shape1')
-        .style('height','101em')
-        // .style('height','2000px')
-      var rightShape = d3.select('#right-shape1')
-        .style('height','101em')
+      // var leftShape = d3.select('#left-shape1')
+      //   .style('height','101em')
+      //   // .style('height','2000px')
+      // var rightShape = d3.select('#right-shape1')
+      //   .style('height','101em')
 
     //end of function
     }).catch(function(error){
