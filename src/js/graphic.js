@@ -348,6 +348,9 @@ function setupStepper() {
       d3.select('.scroll').classed('active',true)
         .attr('display','inline')
       d3.select('.stack').classed('active',true)
+
+      d3.select('footer').style('display','block')
+
       //deselect active text on clickback/clickthrough
       d3.selectAll('.script-line').classed("active",false)
 
@@ -1084,7 +1087,7 @@ function init() {
   console.log('Make something awesome!');
   //Run the stepper
   setupStepper()
-  
+
   //Run the scroller
   setupScroller()
   //Build charts
@@ -1095,7 +1098,7 @@ function init() {
   buildIcebergTextChart('assets/data/shit_long_data.json','#iceberg4','#overlay4')
 
   //Build charts moved to last step of stepper
-  
+
 
 }
 

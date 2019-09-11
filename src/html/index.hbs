@@ -17,7 +17,7 @@
   animation: shake 2.0s;
   animation-iteration-count: infinite;
  }
-  
+
 
 	@keyframes shake {
   0% { transform: translate(0px, 1px) rotate(0deg); }
@@ -50,7 +50,7 @@
   animation: shake 2.0s;
   animation-iteration-count: infinite;
  }
-  
+
 
 	@keyframes shake {
   0% { transform: translate(0px, 1px) rotate(0deg); }
@@ -91,14 +91,14 @@
 
 	<main id='content'>
 
-		{{> story/stepper }}	
+		{{> story/stepper }}
 		{{> story/scroller }}
 		{{> story/stack }}
 
 
 	</main>
 
-	<!-- {{> base/footer }} -->
+	{{> base/footer }}
 	<script>
 	function selectCitationIceberg(value) {
         console.log(value)
@@ -143,7 +143,7 @@
 				console.log(id)
         var overlay = d3.select('#' + id)
         overlay.classed('active',false)
-        //remove everything in overlay 
+        //remove everything in overlay
         while (document.getElementById(id).firstChild) {
     document.getElementById(id).removeChild(document.getElementById(id).firstChild);
 }
