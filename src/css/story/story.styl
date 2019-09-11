@@ -1,6 +1,25 @@
-#iceberg1
-  display flex
-  flex-wrap wrap
+#graphic2
+  .word-container
+    text-align center
+    font-size 18px
+
+.stack__container
+  .chart
+    display flex
+    flex-wrap wrap
+    margin 0 auto
+    width 95%
+    justify-content space-between
+    margin-bottom 10px
+    .iceberg-text
+      width 47%
+      text-align left
+      margin-bottom 5px
+      font-size 12px
+      margin-top 0px
+      span
+        font-size 12px
+        font-weight 400
 
 .left-shape, .right-shape
   display none
@@ -23,7 +42,7 @@ body
 #content
   position relative
   display block
-  overflow visible
+  overflow hidden
   width 100%
 
 .stepper__intro
@@ -40,676 +59,719 @@ body
     .cls-45
       display none
 
-@media screen and (max-width: 600px)
 
-  body
-    background-color #f5f5f5
-    color #333333
+.stepper
+  position relative
+  opacity 0
+  height 100%
+  width 100%
+  background linear-gradient(#000 0%, #000 69%,#f5f5f5 70%, #b2eafc 100%)
 
-  .stepper
-    position relative
-    opacity 0
-    height 100%
-    width 100%
-    background-image linear-gradient(#f5f5f5, #b2eafc)
-
-  .stepper__intro
-    opacity 0
-    height 100%
-    width 100%
-    top 0px
-    left 0px
-    display flex
-    flex-direction column
-    justify-content space-between
-    position absolute
+.stepper__intro
+  opacity 0
+  height 100%
+  width 100%
+  top 0px
+  left 0px
+  display flex
+  flex-direction column
+  justify-content space-between
+  position absolute
+  .background-image
     background-image url('assets/images/assberg_art_no_title_mobile-01.svg')
     background-repeat no-repeat
     background-size cover
-
-  .logo
-    text-align center
-    font-family $atlas
-    position relative
-    width 120px
-    margin 0 auto
-    z-index 100
-    margin-top 40px
-    margin-bottom 30px
-    font-size 11px
-    letter-spacing 1px
-    font-weight 600
-    p
-      margin 0 auto
-      font-size 12px
-
-
-  .header-image
-    padding-top 1%
-
-  .stepper__graphics
-    position absolute
     height 100%
     width 100%
+    position absolute
     left 0px
     top 0px
 
-  .stepper__video
-    opacity 0
-    position absolute
-    height 100%
-    width 100%
+body
+  background-color #f5f5f5
+  color #333333
 
-  .subtitle
-    opacity 0
-    font-size 24px
-    font-family $atlas
-    color #f5f5f5
-    font-weight 300
-    top 50%
-    width 98%
+
+
+
+
+.logo
+  text-align center
+  font-family $atlas
+  position relative
+  width 120px
+  margin 0 auto
+  z-index 100
+  margin-top 40px
+  margin-bottom 30px
+  font-size 11px
+  letter-spacing 1px
+  font-weight 600
+  p
+    margin 0 auto
+    font-size 12px
+
+
+.header-image
+  padding-top 1%
+
+.stepper__graphics
+  position absolute
+  height 100%
+  width 100%
+  left 0px
+  top 0px
+
+.stepper__video
+  opacity 0
+  position absolute
+  height 100%
+  width 100%
+
+.subtitle
+  opacity 0
+  font-size 24px
+  font-family $atlas
+  color #f5f5f5
+  font-weight 300
+  top 50%
+  width 98%
+  left 0px
+  text-align center
+  right 0px
+  margin 0 auto
+  position absolute
+  transform translate(0,-50%)
+  text-shadow -3px -3px 1px rgba(0,0,0, 0.4), -3px -2px 1px rgba(0,0,0, 0.4), -3px -1px 1px rgba(0,0,0, 0.4), -3px 0px 1px rgba(0,0,0, 0.4), -3px 1px 1px rgba(0,0,0, 0.4), -3px 2px 1px rgba(0,0,0, 0.4), -3px 3px 1px rgba(0,0,0, 0.4), -2px -3px 1px rgba(0,0,0, 0.4), -2px -2px 1px rgba(0,0,0, 0.4), -2px -1px 1px rgba(0,0,0, 0.4), -2px 0px 1px rgba(0,0,0, 0.4), -2px 1px 1px rgba(0,0,0, 0.4), -2px 2px 1px rgba(0,0,0, 0.4), -2px 3px 1px rgba(0,0,0, 0.4), -1px -3px 1px rgba(0,0,0, 0.4), -1px -2px 1px rgba(0,0,0, 0.4), -1px -1px 1px rgba(0,0,0, 0.4), -1px 0px 1px rgba(0,0,0, 0.4), -1px 1px 1px rgba(0,0,0, 0.4), -1px 2px 1px rgba(0,0,0, 0.4), -1px 3px 1px rgba(0,0,0, 0.4), 0px -3px 1px rgba(0,0,0, 0.4), 0px -2px 1px rgba(0,0,0, 0.4), 0px -1px 1px rgba(0,0,0, 0.4), 0px 1px 1px rgba(0,0,0, 0.4), 0px 2px 1px rgba(0,0,0, 0.4), 0px 3px 1px rgba(0,0,0, 0.4), 1px -3px 1px rgba(0,0,0, 0.4), 1px -2px 1px rgba(0,0,0, 0.4), 1px -1px 1px rgba(0,0,0, 0.4), 1px 0px 1px rgba(0,0,0, 0.4), 1px 1px 1px rgba(0,0,0, 0.4), 1px 2px 1px rgba(0,0,0, 0.4), 1px 3px 1px rgba(0,0,0, 0.4), 2px -3px 1px rgba(0,0,0, 0.4), 2px -2px 1px rgba(0,0,0, 0.4), 2px -1px 1px rgba(0,0,0, 0.4), 2px 0px 1px rgba(0,0,0, 0.4), 2px 1px 1px rgba(0,0,0, 0.4), 2px 2px 1px rgba(0,0,0, 0.4), 2px 3px 1px rgba(0,0,0, 0.4), 3px -3px 1px rgba(0,0,0, 0.4), 3px -2px 1px rgba(0,0,0, 0.4), 3px -1px 1px rgba(0,0,0, 0.4), 3px 0px 1px rgba(0,0,0, 0.4), 3px 1px 1px rgba(0,0,0, 0.4), 3px 2px 1px rgba(0,0,0, 0.4), 3px 3px 1px rgba(0,0,0, 0.4)
+
+
+video
+  display block
+  object-fit cover
+  overflow hidden
+  height 70%
+
+.script-container
+  position relative
+  width 98%
+  height 70%
+  text-align justify
+  font-style normal
+  font-weight normal
+  font-size 12px
+  color rgba(186, 186, 186, 0.4)
+  margin auto
+  overflow hidden
+  opacity 0
+  font-family $roboto
+
+.script-line.active
+  opacity 1
+  background-color #213338
+  color #f5f5f5
+
+.pause-overlay
+  display flex
+  opacity 0
+  object-fit cover
+  overflow hidden
+  height 70%
+  width 100.3%
+  background-color rgba(235, 87, 87, 0.65)
+  justify-content center
+  align-items center
+  transition opacity .5s
+  transition-delay .5s
+  svg
+    circle, line
+      stroke white
+
+.stepper__hed
+  font-family $atlas
+  position relative
+  //font-weight bold
+  font-weight 500
+  letter-spacing -1px
+  //text-shadow 2px 2px 2px #2693C2
+  font-size 34px
+  //position absolute
+  //top 21%
+  text-align center
+
+.hed-highlight
+  color #f5f5f5
+  background-color #333333
+  padding 0 5px
+
+#hed-ass
+  font-size inherit
+
+.sound-warning
+  font-family $atlas
+  color #f5f5f5
+  position relative
+  z-index 100
+  font-size 11px
+  text-align center
+  margin-bottom 10px
+  margin-top 10px
+
+.stepper__byline
+  text-align center
+  color #f5f5f5
+  font-family $atlas
+  font-size 12px
+  position relative
+  z-index 100
+  border-bottom 0px
+  margin 0 auto
+  background none
+  margin-bottom 10px
+  pointer-events all
+  margin-bottom 30px
+  a
+    pointer-events all
+    //text-decoration underline
+    //text-decoration-color white
+    border none
+
+
+.stepper__byline strong
+  color #f5f5f5
+  text-decoration-color #f5f5f5
+  border-bottom 0px solid #f5f5f5
+
+.tap--first
+  font-family $atlas
+  padding 5px
+  background-color #f5f5f5
+  text-align center
+  pointer-events none
+  opacity 0
+  margin 0 auto
+  color #333333
+  font-size 11px
+  letter-spacing 1px
+  position relative
+  z-index 100
+  border-radius 3px
+  margin-bottom 30px
+  max-width 300px
+  width 90%
+
+
+.tap--right
+  left 50%
+  color white
+
+.tap--left
+  right 50%
+  color white
+
+.tap--back
+  height 30%
+  display flex
+  justify-content center
+  padding-top 5%
+  svg
+    width 25px
+
+.stepper__tap
+  position absolute
+  opacity 0
+  display block
+  height 100%
+  width 100%
+  top 0%
+  left 0%
+
+.tap
+  opacity 0
+  pointer-events all
+  position absolute
+  z-index 100
+  //background #1B7EBE
+  //background linear-gradient(180deg, #f9f9f9, transparent)
+  //border-radius 4px
+  //padding 3px 2px
+  bottom 0px
+  cursor pointer
+  height 30%
+  width 50%
+  &:before
+    content ''
+    width 100%
+    height 60px
+    background #1B7EBE
+    position absolute
+    bottom 0px
+    opacity .1
+    pointer-events none
+  svg
+    transform translate(0,1px)
+    width 30px
+    height 30px
+    position absolute
+    bottom 1rem
     left 0px
     right 0px
+    stroke black
     margin 0 auto
-    position absolute
-    transform translate(0,-50%)
-    text-shadow -3px -3px 1px rgba(0,0,0, 0.4), -3px -2px 1px rgba(0,0,0, 0.4), -3px -1px 1px rgba(0,0,0, 0.4), -3px 0px 1px rgba(0,0,0, 0.4), -3px 1px 1px rgba(0,0,0, 0.4), -3px 2px 1px rgba(0,0,0, 0.4), -3px 3px 1px rgba(0,0,0, 0.4), -2px -3px 1px rgba(0,0,0, 0.4), -2px -2px 1px rgba(0,0,0, 0.4), -2px -1px 1px rgba(0,0,0, 0.4), -2px 0px 1px rgba(0,0,0, 0.4), -2px 1px 1px rgba(0,0,0, 0.4), -2px 2px 1px rgba(0,0,0, 0.4), -2px 3px 1px rgba(0,0,0, 0.4), -1px -3px 1px rgba(0,0,0, 0.4), -1px -2px 1px rgba(0,0,0, 0.4), -1px -1px 1px rgba(0,0,0, 0.4), -1px 0px 1px rgba(0,0,0, 0.4), -1px 1px 1px rgba(0,0,0, 0.4), -1px 2px 1px rgba(0,0,0, 0.4), -1px 3px 1px rgba(0,0,0, 0.4), 0px -3px 1px rgba(0,0,0, 0.4), 0px -2px 1px rgba(0,0,0, 0.4), 0px -1px 1px rgba(0,0,0, 0.4), 0px 1px 1px rgba(0,0,0, 0.4), 0px 2px 1px rgba(0,0,0, 0.4), 0px 3px 1px rgba(0,0,0, 0.4), 1px -3px 1px rgba(0,0,0, 0.4), 1px -2px 1px rgba(0,0,0, 0.4), 1px -1px 1px rgba(0,0,0, 0.4), 1px 0px 1px rgba(0,0,0, 0.4), 1px 1px 1px rgba(0,0,0, 0.4), 1px 2px 1px rgba(0,0,0, 0.4), 1px 3px 1px rgba(0,0,0, 0.4), 2px -3px 1px rgba(0,0,0, 0.4), 2px -2px 1px rgba(0,0,0, 0.4), 2px -1px 1px rgba(0,0,0, 0.4), 2px 0px 1px rgba(0,0,0, 0.4), 2px 1px 1px rgba(0,0,0, 0.4), 2px 2px 1px rgba(0,0,0, 0.4), 2px 3px 1px rgba(0,0,0, 0.4), 3px -3px 1px rgba(0,0,0, 0.4), 3px -2px 1px rgba(0,0,0, 0.4), 3px -1px 1px rgba(0,0,0, 0.4), 3px 0px 1px rgba(0,0,0, 0.4), 3px 1px 1px rgba(0,0,0, 0.4), 3px 2px 1px rgba(0,0,0, 0.4), 3px 3px 1px rgba(0,0,0, 0.4)
-
-
-  video
     display block
-    object-fit cover
-    overflow hidden
-    height 70%
+    position absolute
+    rect
+      display none
 
-  .script-container
-    position relative
-    width 98%
-    height 70%
-    text-align justify
-    font-style normal
-    font-weight normal
+.tap--final
+  background none
+  display none
+
+
+.stepper__steps
+  font-family $atlas
+  position absolute
+  height calc(30% - 60px)
+  width 100%
+  left 0px
+  top 70%
+  font-size 1rem
+  display flex
+  justify-content center
+  align-items center
+  text-align left
+  pointer-events none
+
+
+.stepper__annotation
+  opacity 0
+  span
+    font-size 14px
+    line-height 1.1
+
+
+#video-annotation
+  position absolute
+  width 95%
+  max-width 550px
+  text-align left
+  font-size 14px
+
+.scroll
+  opacity 0
+  display none
+  position relative
+
+.section-title
+  font-size 24px
+  padding-left 6%
+  font-family $atlas
+  paddint-top 5%
+
+div.step > p.first-graf
+  padding .5rem 1.5rem 1.5rem 1.5rem
+  margin 0
+
+#first-scroll
+  padding 2rem 0rem 0rem 0rem
+
+
+span#ass-instance
+  color rgba(186,186,186,0.4)
+  opacity 1
+
+
+.scroll-script-line
+  color rgba(186, 186, 186, 0)
+
+
+.scroll.active
+  display block
+  opacity 1
+
+
+.scroll-container
+  background-color #d3bfa6
+  padding-bottom 50px
+  background linear-gradient(to bottom, #b6ebfc 0%, #fceab9 50%, #f5f5f5 100%)
+
+
+.scroll__text
+  position relative
+  padding 0
+  margin 0 auto
+  pointer-events none
+
+
+.scroll__graphic
+  font-family $roboto
+  position relative
+  width 100%
+  margin 0 auto
+  transform translate3d(0, 0, 0)
+  margin-top 5%
+  margin-bottom 50px
+  max-width 550px
+  width 90%
+
+.scroll__graphic .chart
+  text-align: justify
+  position: relative
+  width: 88%
+  height: 68%
+  font-style: normal
+  font-weight: normal
+  font-size: 12px
+  color: rgba(186, 186, 186, 0.4)
+  margin: auto
+  top:2
+
+.step
+  margin: 0 auto 0 auto
+  color: #333333
+  font-family $atlas
+
+.step p
+  text-align: left
+  font-size: 16px
+  line-height: 1.5
+  font-weight 400
+  padding 0 1.5rem
+  color #222
+
+
+.ass-label
+  padding-left 3%
+  padding-bottom 1%
+  top 3%
+  position relative
+  display block
+
+
+.ass-label.active
+  display:block
+
+.scroll-script-line
+  font-size 14px
+  color rgba(186, 186, 186, 0)
+
+.usage-examples
+  color #333333
+  display block
+  font-size 18px
+  text-align left
+  padding 0 1.5rem
+  margin-top 20px
+  font-weight 500
+  font-family $atlas
+  line-height 1.5
+  margin-top 30px
+
+.usage-examples.active
+  display block
+  pointer-events auto
+
+.usage-examples-hidden
+  display block
+
+.stack__container .prose
+  font-family $atlas
+  font-size 16px
+  text-align left
+  line-height 1.65rem
+  font-weight 400
+  padding 0 1.5rem
+
+#iceberg1
+  margin-bottom 5rem
+
+.slider-container
+  width calc(100% - 40px)
+  margin 0 auto
+  margin-top 60px
+  margin-bottom 10px
+  pointer-events auto
+  position relative
+  &:before
+    content 'Slide to view citations →'
+    position absolute
+    font-family 'Atlas Grotesk Web'
     font-size 12px
-    color rgba(186, 186, 186, 0.4)
-    margin auto
-    overflow hidden
-    opacity 0
-    font-family $roboto
-
-  .script-line.active
-    opacity 1
-    background-color #213338
-    color #f5f5f5
-
-  .pause-overlay
-    display flex
-    opacity 0
-    object-fit cover
-    overflow hidden
-    height 70%
-    width 100.3%
-    background-color rgba(235, 87, 87, 0.65)
-    justify-content center
-    align-items center
-    svg
-      circle, line
-        stroke white
-
-  .stepper__hed
-    font-family $atlas
-    position relative
-    //font-weight bold
-    font-weight 500
-    letter-spacing -1px
-    //text-shadow 2px 2px 2px #2693C2
-    font-size 34px
-    //position absolute
-    //top 21%
-    text-align center
-
-  .hed-highlight
-    color #f5f5f5
-    background-color #333333
-    padding 0 5px
-
-  #hed-ass
-    font-size inherit
-
-  .sound-warning
-    font-family $atlas
-    color #f5f5f5
-    position relative
-    z-index 100
-    font-size 11px
-    text-align center
-    margin-bottom 10px
-    margin-top 10px
-
-  .stepper__byline
-    text-align center
-    color #f5f5f5
-    font-family $atlas
-    font-size 12px
-    position relative
-    z-index 100
-    border-bottom 0px
-    margin 0 auto
-    background none
-    margin-bottom 10px
-    pointer-events all
-    margin-bottom 30px
-    a
-      pointer-events all
-      //text-decoration underline
-      //text-decoration-color white
-      border none
-
-
-  .stepper__byline strong
-    color #f5f5f5
-    text-decoration-color #f5f5f5
-    border-bottom 0px solid #f5f5f5
-
-  .tap--first
-    font-family $atlas
-    padding 5px
-    background-color #f5f5f5
-    text-align center
-    pointer-events none
-    opacity 0
-    margin 0 auto
-    color #333333
-    font-size 11px
-    letter-spacing 1px
-    position relative
-    z-index 100
-    border-radius 3px
-    margin-bottom 30px
-    max-width 300px
-    width 90%
-
-
-  .tap--right
-    left 55%
-    color white
-
-  .tap--left
-    right 55%
-    color white
-
-  .tap--back
-    height 30%
-    display flex
-    justify-content center
-    padding-top 5%
-    svg
-      width 25px
-
-  .stepper__tap
-    position absolute
-    opacity 0
-    display block
-    height 100%
-    width 100%
-    top 0%
-    left 0%
-
-  .tap
-    opacity 0
-    pointer-events auto
-    position absolute
-    bottom 5%
-    z-index 100
-    background #1B7EBE
-    background #70a5b5
-    border-radius 4px
-    padding 3px 2px
-    cursor pointer
-    svg
-      transform translate(0,1px)
-      rect
-        display none
-
-  .tap--final
-    background none
-    display none
-
-
-  .stepper__steps
-    font-family $atlas
-    position absolute
-    height 20%
-    width 100%
-    left 0px
-    top 70%
-    font-size 1rem
-    display flex
-    justify-content center
-    align-items center
-    text-align left
-
-
-  .stepper__annotation
-    opacity 0
-    span
-      font-size 14px
-      line-height 1.1
-
-
-  #video-annotation
-    position absolute
-    width 95%
-    max-width 550px
-    text-align left
-    font-size 14px
-
-  .scroll
-    opacity 0
-    display none
-    position relative
-
-  .section-title
-    font-size 24px
-    padding-left 6%
-    font-family $atlas
-    paddint-top 5%
-
-  div.step > p.first-graf
-    padding .5rem 1.5rem 1.5rem 1.5rem
-    margin 0
-
-  #first-scroll
-    padding 2rem 0rem 0rem 0rem
-
-
-  span#ass-instance
-    color rgba(186,186,186,0.4)
-    opacity 1
-
-
-  .scroll-script-line
-    color rgba(186, 186, 186, 0)
-
-
-  .scroll.active
-    display block
-    opacity 1
-
-
-  .scroll-container
-    background-color #d3bfa6
-    padding-bottom 50px
-    background linear-gradient(to bottom, #b6ebfc 0%, #fceab9 50%, #f5f5f5 100%)
-
-
-  .scroll__text
-    position relative
-    padding 0
-    margin 0 auto
-    pointer-events none
-
-
-  .scroll__graphic
-    font-family $roboto
-    position relative
-    width 100%
-    margin 0
-    transform translate3d(0, 0, 0)
-    margin-top 5%
-    margin-bottom 50px
-
-  .scroll__graphic .chart
-    text-align: justify
-    position: relative
-    width: 88%
-    height: 68%
-    font-style: normal
-    font-weight: normal
-    font-size: 12px
-    color: rgba(186, 186, 186, 0.4)
-    margin: auto
-    top:2
-
-  .step
-    margin: 0 auto 0 auto
-    color: #333333
-    font-family $atlas
-
-  .step p
-    text-align: left
-    font-size: 16px
-    line-height: 1.5
-    font-weight 400
-    padding 0 1.5rem
-
-
-  .ass-label
-    padding-left 3%
-    padding-bottom 1%
-    top 3%
-    position relative
-    display block
-
-
-  .ass-label.active
-    display:block
-
-  .scroll-script-line
-    font-size 14px
-    color rgba(186, 186, 186, 0)
-
-  .usage-examples
-    color #333333
-    display block
-    font-size 18px
-    text-align left
-    padding 0 1rem
-    margin-top 20px
-    font-weight 500
-    font-family $atlas
-    line-height 1.5
-    margin-top 30px
-
-  .usage-examples.active
-    display block
-    pointer-events auto
-
-  .usage-examples-hidden
-    display block
-
-  .stack__container .chart
-    background-image linear-gradient(#f5f5f5, #b2eafc)
-
-  .stack__container .prose
-    background-image linear-gradient(#b2eafc,#f5f5f5)
-    font-family $atlas
-    font-size 16px
-    padding-top 20%
-    padding-bottom 20%
-    padding-left 5%
-    padding-right 5%
-    text-align left
-    line-height 1.65rem
-
-  .slider-container
-    width calc(100% - 40px)
-    margin 0 auto
-    margin-top 60px
-    margin-bottom 10px
-    pointer-events auto
-    position relative
-    &:before
-      content 'Slide to view citations →'
-      position absolute
-      font-family 'Atlas Grotesk Web'
-      font-size 12px
-      left 50%
-      right 0px
-      top -15px
-      text-align center
-      transform translate(-50%,0)
-
-  .slider
-    -webkit-appearance: none
-    appearance: none
-    margin 0 auto
-    width 100%
-
-    border-radius 3px
-    height: 4px
-    background-color rgba(51,51,51,.31)
-    outline: none
-    opacity 1
-
-  .slider:hover
-    opacity: 1
-
-
-  .slider::-webkit-slider-thumb
-    -webkit-appearance: none
-    appearance: none
-    width: 16px
-    height: 16px
-    border-radius: 50%
-    background #F24C3D
-    cursor pointer
-
-  #iceberg0
-    pointer-events auto
-    .usage-wrapper
-      .usage-rows
-        opacity 1
-        &:first-of-type
-          display none
-          opacity .5
-        .def-container
-          .slider-container
-            margin-top 30px
-          .citationContainer
-            margin-bottom 60px
-            position relative
-            &:after
-              content ''
-              width 100px
-              height 2px
-              background black
-              opacity .2
-              position absolute
-              bottom -35px
-              left 0px
-              right 0px
-              margin 0 auto
-
-
-
-
-  .slider::-moz-range-thumb
-    width: 16px
-    height: 16px
-    border-radius: 50%
-    background: #F24C3D
-    cursor: pointer
-
-  .sliderIceberg
-    -webkit-appearance: none
-    appearance: none
-    border-radius: 3px
-    width: 80%
-    left:10%
-    height: 3px
-    background: #333333
-    outline: none
-    opacity: 0.7
-    -webkit-transition: .2s
-    transition: opacity .2s
-    position: absolute
-
-  .sliderIceberg:hover
-    opacity: 1
-
-
-  .sliderIceberg::-webkit-slider-thumb
-    -webkit-appearance: none
-    appearance: none
-    width: 15px
-    height: 15px
-    border-radius: 50%
-    background: #b2eafc
-    cursor: pointer
-
-
-  .sliderIceberg::-moz-range-thumb
-    width: 10px
-    height: 10px
-    border-radius: 50%
-    background: #b2eafc
-    cursor: pointer
-
-  .time-line
-    .background-bar
-      stroke-width 16px
-      stroke rgba(0, 0, 0, 0.16)
-    .citation
-      stroke rgba(93, 93, 93, 0.55)
-      stroke-width 3px
-    .active
-      opacity:1
-      stroke #f24c3d
-
-
-
-
-  .year-label
-    font-size: 14px
-    font-weight 600
-    fill: #333333
-    transform: translate(0px, -5px)
-    text-anchor middle
-
-
-  .stack
-    position: absolute
-    opacity: 0
-    display: none
-
-
-  .stack.active
-    display: inline
-    height: 100%
-
-  .stack .chart
-    font-family $atlas
-
-  .chart
-    height: 100%
-    text-align: center
-    overflow: hidden
-
-  .left-shape
-    shape-outside: polygon(0 0, 50% 0, 10% 20%, 10% 60%, 50% 100%, 0% 100%)
-    float: left
-    width: 50%
-
-
-  #left-shape1
-    height 106em
-
-
-  #right-shape1
-    height 106em
-
-
-  #left-shape2
-    height: 71em
-
-  #right-shape2
-    height: 71em
-
-  #left-shape3
-    height: 65em
-
-  #right-shape3
-    height 65em
-
-  #left-shape4
-    height: 155em
-
-  #right-shape4
-    height 155em
-
-  .right-shape
-    shape-outside: polygon(100% 0, 50% 0, 90% 20%, 90% 60%, 50% 100%, 100% 100%)
-    float: right
-    width: 50%
-
-  .overlay
-    position fixed
-    display none
-    width 100%
-    height 100%
-    top 0
-    left 0
-    right 0
-    bottom 0
-    background-color rgba(245,245,245,0.9)
-    z-index 2
-    cursor pointer
-
-  .overlay.active
-    display flex
-
-  .time-line
-    position relative
-    //top 10%
-    justify-content center
-    height 50px
-
-  .citationContainer
-    //background-color #b2eafc
-    width calc(100% - 40px)
-    //left 50%
-    //margin-left -40%
-    //top 37%
-    //position fixed
-    //padding-left 5%
-    //padding-right 5%
-    //padding-top 2%
-    //padding-bottom 2%
-    text-align left
-    color #f24c3d
-    font-weight 600
-    font-size 14px
-    margin 0 auto
-    margin-top 8px
-    margin-bottom 20px
-    //font-family $roboto
-
-  .citationContainerIceberg
-    background-color #b2eafc
-    width 80%
     left 50%
-    margin-left -40%
-    top 37%
-    position absolute
-    padding-left 5%
-    padding-right 5%
-    padding-top 2%
-    padding-bottom 2%
-    text-align left
-    color #333333
-    font-family $atlas
-
-  .chart-title
-    font-family $atlas
-    text-align left
-    font-size 24px
-    padding 0 1rem
-    font-weight 600
-    margin-top 50px
-
-  .stack__container .chart-title
+    right 0px
+    top -15px
     text-align center
-    margin-left 0%
+    transform translate(-50%,0)
 
-  .sense-container
-    width 80%
-    text-align left
+.slider
+  -webkit-appearance: none
+  appearance: none
+  margin 0 auto
+  width 100%
 
+  border-radius 3px
+  height: 4px
+  background-color rgba(51,51,51,.31)
+  outline: none
+  opacity 1
 
-  .word-container
-    text-align left
-    font-size 12px
-    padding 0 1rem
-    font-family $atlas
-    line-height 40px
-    margin 0 auto
-    line-height 1.5
-    .first
-      text-decoration underline
-    .sense-container
-      text-decoration none
+.slider:hover
+  opacity: 1
 
 
+.slider::-webkit-slider-thumb
+  -webkit-appearance: none
+  appearance: none
+  width: 16px
+  height: 16px
+  border-radius: 50%
+  background #F24C3D
+  cursor pointer
+
+#iceberg0
+  pointer-events auto
+  .usage-wrapper
+    .usage-rows
+      opacity 1
+      &:first-of-type
+        display none
+        opacity .5
+      .def-container
+        .slider-container
+          margin-top 30px
+        .citationContainer
+          margin-bottom 60px
+          position relative
+          &:after
+            content ''
+            width 100px
+            height 2px
+            background black
+            opacity .2
+            position absolute
+            bottom -35px
+            left 0px
+            right 0px
+            margin 0 auto
+
+
+
+
+.slider::-moz-range-thumb
+  width: 16px
+  height: 16px
+  border-radius: 50%
+  background: #F24C3D
+  cursor: pointer
+
+.sliderIceberg
+  -webkit-appearance: none
+  appearance: none
+  border-radius: 3px
+  width: 80%
+  left:10%
+  height: 3px
+  background: #333333
+  outline: none
+  opacity: 0.7
+  -webkit-transition: .2s
+  transition: opacity .2s
+  position: absolute
+
+.sliderIceberg:hover
+  opacity: 1
+
+
+.sliderIceberg::-webkit-slider-thumb
+  -webkit-appearance: none
+  appearance: none
+  width: 15px
+  height: 15px
+  border-radius: 50%
+  background: #b2eafc
+  cursor: pointer
+
+
+.sliderIceberg::-moz-range-thumb
+  width: 10px
+  height: 10px
+  border-radius: 50%
+  background: #b2eafc
+  cursor: pointer
+
+.time-line
+  .background-bar
+    stroke-width 16px
+    stroke rgba(0, 0, 0, 0.16)
+  .citation
+    stroke rgba(93, 93, 93, 0.55)
+    stroke-width 3px
   .active
-    opacity: 1
-    z-index: 101
+    opacity:1
+    stroke #f24c3d
+
+
+
+
+.year-label
+  font-size: 14px
+  font-weight 600
+  fill: #333333
+  transform: translate(0px, -5px)
+  text-anchor middle
+
+.stack
+  .stack__container
+    .chart-title
+      margin-top 90px
+      margin-bottom 50px
+    .chart
+      margin-bottom 50px
+
+.stack
+  background linear-gradient(#f5f5f5, #b2eafc, #fdebf0, #eefff9)
+  display: none
+
+
+.stack.active
+  display: block
+
+.stack .chart
+  font-family $atlas
+
+.chart
+  height: 100%
+  text-align: center
+  overflow: hidden
+
+
+.left-shape
+  shape-outside: polygon(0 0, 50% 0, 10% 20%, 10% 60%, 50% 100%, 0% 100%)
+  float: left
+  width: 50%
+
+
+#left-shape1
+  height 106em
+
+
+#right-shape1
+  height 106em
+
+
+#left-shape2
+  height: 71em
+
+#right-shape2
+  height: 71em
+
+#left-shape3
+  height: 65em
+
+#right-shape3
+  height 65em
+
+#left-shape4
+  height: 155em
+
+#right-shape4
+  height 155em
+
+.right-shape
+  shape-outside: polygon(100% 0, 50% 0, 90% 20%, 90% 60%, 50% 100%, 100% 100%)
+  float: right
+  width: 50%
+
+.overlay
+  position fixed
+  display none
+  width 100%
+  height 100%
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background-color rgba(245,245,245,0.9)
+  z-index 2
+  cursor pointer
+
+.overlay.active
+  display flex
+
+.time-line
+  position relative
+  //top 10%
+  justify-content center
+  height 50px
+
+.citationContainer
+  //background-color #b2eafc
+  width calc(100% - 40px)
+  //left 50%
+  //margin-left -40%
+  //top 37%
+  //position fixed
+  //padding-left 5%
+  //padding-right 5%
+  //padding-top 2%
+  //padding-bottom 2%
+  text-align left
+  color #f24c3d
+  font-weight 600
+  font-size 14px
+  margin 0 auto
+  margin-top 8px
+  margin-bottom 20px
+  //font-family $roboto
+
+.citationContainerIceberg
+  background-color #b2eafc
+  width 80%
+  left 50%
+  margin-left -40%
+  top 37%
+  position absolute
+  padding-left 5%
+  padding-right 5%
+  padding-top 2%
+  padding-bottom 2%
+  text-align left
+  color #333333
+  font-family $atlas
+
+.chart-title
+  font-family $atlas
+  text-align left
+  margin 0 auto
+  font-size 24px
+  padding 0 1.5rem
+  font-weight 600
+  margin-top 50px
+
+.stack__container
+  .chart-title
+    text-align center
+    margin 0 auto
+    margin-bottom 30px
+
+.sense-container
+  width 80%
+  text-align left
+
+
+.word-container
+  text-align left
+  font-size 12px
+  padding 0 1.5rem
+  font-family $atlas
+  line-height 40px
+  margin 0 auto
+  line-height 1.5
+  .first
+    text-decoration underline
+  .sense-container
+    text-decoration none
+
+
+.active
+  opacity: 1
+  z-index: 101
