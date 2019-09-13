@@ -83,7 +83,7 @@ function setupStepper() {
 
   function step1() {
 
-    stepsClicked = stepsClicked + 1 
+    stepsClicked = stepsClicked + 1
 
     //Remove full page click
       d3.select('.stepper')
@@ -135,7 +135,7 @@ function setupStepper() {
 
   function step2() {
 
-  stepsClicked = stepsClicked + 1 
+  stepsClicked = stepsClicked + 1
    // //activate script
    // d3.select('.script-container').classed("active",true)
    //  .transition()
@@ -186,7 +186,7 @@ function setupStepper() {
 
   function step3() {
 
-   stepsClicked = stepsClicked + 1  
+   stepsClicked = stepsClicked + 1
    console.log(stepsClicked)
    //activate script
    d3.select('.script-container').classed("active",true)
@@ -223,7 +223,7 @@ function setupStepper() {
 
   function step4() {
 
-    stepsClicked = stepsClicked + 1 
+    stepsClicked = stepsClicked + 1
     //stop the second video
     d3.select('video.ismo.step3')['_groups'][0][0].pause()
     d3.select('video.ismo.step3')['_groups'][0][0].currentTime = 0
@@ -259,7 +259,7 @@ function setupStepper() {
 
   function step5() {
 
-   stepsClicked = stepsClicked + 1 
+   stepsClicked = stepsClicked + 1
     //stop the third video
    d3.select('video.ismo.step4')['_groups'][0][0].pause()
    d3.select('video.ismo.step4')['_groups'][0][0].currentTime = 0
@@ -283,7 +283,7 @@ function setupStepper() {
       })
       .classed('active',true)
 
-  
+
       //Reactivate right click buttons on clickback
       d3.select(".tap.tap--right").classed("active", true).style("display",null).style("opacity",null)
       d3.select(".tap.tap--left").classed("active", true)
@@ -316,17 +316,17 @@ function setupStepper() {
     highlightWords(1)
 
     //scroll to offscreen text
-    setTimeout(function() { 
+    setTimeout(function() {
         var i = 10;
         var int = setInterval(function() {
           document.getElementsByClassName('script-container')[0].scrollTo(0, i);
           i += 10;
           if (i >= 200) clearInterval(int);
-        }, 20); 
+        }, 20);
     }, 13000);
 
     //reset auto scroll on clickback
-    stepperTriggered = false 
+    stepperTriggered = false
 
     //deactivate following sections on clickback
     d3.select('.scroll').classed('active',false)
@@ -339,7 +339,7 @@ function setupStepper() {
 
   function step6() {
 
-   stepsClicked = stepsClicked + 1 
+   stepsClicked = stepsClicked + 1
     //stop the fourth video
    d3.select('video.ismo.step5')['_groups'][0][0].pause()
    d3.select('video.ismo.step5')['_groups'][0][0].currentTime = 0
@@ -354,13 +354,13 @@ function setupStepper() {
       .style('opacity',0)
 
     //scroll back to top of text
-    setTimeout(function() { 
+    setTimeout(function() {
         var i = -10;
         var int = setInterval(function() {
           document.getElementsByClassName('script-container')[0].scrollTo(0, i);
           i -= 10;
           if (i <= -200) clearInterval(int);
-        }, 20); 
+        }, 20);
     }, 1000);
 
     // d3.select('.script-container').classed('active',false)
@@ -587,16 +587,17 @@ function setupStepper() {
    var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
    var numberWords = d3.selectAll('.script-line.active >span').size()
    var durationBetween = videoLength / numberWords
-   console.log(durationBetween)
+
+   console.log(durationModifier);
 
    d3.selectAll('.script-line.active >span')
-    .transition().duration(0)
-    .style('opacity',.4)
-      .transition().duration(500)
+      .transition()
+      .duration(0)
       .delay(function(d,i){ return i * 1000 * (durationBetween*durationModifier) })
-      .style('opacity',1)
       .attr('scrollTop',0)
-
+      .on("start",function(d){
+        d3.select(this).classed("highlighted",true);
+      })
   }
 
   // split sentences by word
@@ -1144,18 +1145,15 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
         })
 
       //add click to reveal
-      var reveals = spans.append('div')
+      var reveals = spans.append('span')
         .attr('class','reveal-click')
         .on('click', function (d) {
             d3.select(this).selectAll('*').remove()
             var data = d.citations
-            var container = d3.select(this)
+            var container = d3.select(this.parentNode)
             setupAssLine(data,container)
         })
-
-      reveals.append('p')
-        .attr('class','reveal-label')
-        .text('click to reveal citations')
+        .text("Reveal Citations");
 
     //end of function
     }).catch(function(error){
