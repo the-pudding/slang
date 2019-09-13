@@ -100,30 +100,17 @@ function setupStepper() {
       d3.select('.pause-overlay')
         .style('opacity',null)
 
+    if (stepsClicked === 1) {
+     splitSubtitle1()
+    }
+
+    highlightSubtitle1()
 
 
-
-
-    // function splitSubtitle() {
-    // var subtitleWords = document.getElementsByClassName('subtitle')[0]
-    // subtitleWords.innerHTML = "<span>".concat(subtitleWords.innerHTML)
-    // console.log(subtitleWords.innerHTML)
-    // subtitleWords.innerHTML = subtitleWords.innerHTML.replace(/ /g,"</span> <span>")
-    // console.log(subtitleWords.innerHTML)
-    // subtitleWords.innerHTML = subtitleWords.innerHTML.slice(0,-7)
-    // d3.selectAll('.subtitle>span').classed('subtitle-word',true)
-
-    // splitSubtitle = function() {}
-
-    // }
-
-    // splitSubtitle()
-
-
-    d3.select('.subtitle').classed('active',true)
-    d3.select('.subtitle')
+    d3.select('.subtitle.subtitle1').classed('active',true)
+    d3.select('.subtitle.subtitle1')
       .style('opacity',0)
-    d3.select('.subtitle').transition()
+    d3.select('.subtitle.subtitle1').transition()
       .delay(400)
       .duration(150)
       .style('opacity',1)
@@ -222,6 +209,8 @@ function setupStepper() {
      splitSentence()
     }
 
+    highlightWords(.87)
+
 
 
    //play the second video
@@ -259,6 +248,12 @@ function setupStepper() {
         .transition()
         .duration(1000)
         .style('color','rgba(0,255,243,0.4)')
+
+    if (stepsClicked === 4) {
+     splitSentence()
+    }
+
+    highlightWords(1)
   }
 
 
@@ -274,6 +269,10 @@ function setupStepper() {
    d3.select('video.ismo.step6')['_groups'][0][0].pause()
    d3.select('video.ismo.step6')['_groups'][0][0].currentTime = 0
 
+   d3.select('.script-container').transition()
+    .duration(1000)
+    .style('opacity',1)
+
    //deselect active text on clickback/clickthrough
     d3.selectAll('.script-line').classed("active",false)
 
@@ -284,16 +283,8 @@ function setupStepper() {
       })
       .classed('active',true)
 
-    //highlight instances of ass
-    highlightAss()
-
-    //reset text color on clickback
-      d3.selectAll('#ass-instance')
-        .transition()
-        .duration(1000)
-        .style('color','#00fff3')
-
-    //Reactivate right click buttons on clickback
+  
+      //Reactivate right click buttons on clickback
       d3.select(".tap.tap--right").classed("active", true).style("display",null).style("opacity",null)
       d3.select(".tap.tap--left").classed("active", true)
 
@@ -305,6 +296,44 @@ function setupStepper() {
       d3.select(".tap.tap--final").classed("active", false)
       d3.select(".tap.tap--final").transition()
         .style('opacity','0')
+
+    if (stepsClicked === 5) {
+     splitSentence()
+    }
+
+    //highlight instances of ass
+    highlightAss()
+
+    //reset text color on clickback
+      d3.selectAll('#ass-instance')
+        .transition()
+        .duration(250)
+        .style('color','rgba(186,186,186,0.4)')
+          .transition()
+          .duration(1000)
+          .style('color','#00fff3')
+
+    highlightWords(1)
+
+    //scroll to offscreen text
+    setTimeout(function() { 
+        var i = 10;
+        var int = setInterval(function() {
+          document.getElementsByClassName('script-container')[0].scrollTo(0, i);
+          i += 10;
+          if (i >= 200) clearInterval(int);
+        }, 20); 
+    }, 13000);
+
+    //reset auto scroll on clickback
+    stepperTriggered = false 
+
+    //deactivate following sections on clickback
+    d3.select('.scroll').classed('active',false)
+        // .attr('display','inline')
+      d3.select('.stack').classed('active',false)
+
+      d3.select('footer').style('display','none')
 
   }
 
@@ -318,14 +347,38 @@ function setupStepper() {
    d3.select('video.ismo.step6')['_groups'][0][0].play()
 
    //deselect active text on clickback/clickthrough
-    d3.selectAll('.script-line').classed("active",false)
+    window.setTimeout(function(d){ d3.selectAll('.script-line').classed("active",false) },500)
 
-   //select active text
-    d3.selectAll('.script-line')
-      .filter(function (d) {
-        return d.step_used == 'step5'
-      })
-      .classed('active',true)
+    d3.select('.script-container').transition()
+      .duration(1000)
+      .style('opacity',0)
+
+    //scroll back to top of text
+    setTimeout(function() { 
+        var i = -10;
+        var int = setInterval(function() {
+          document.getElementsByClassName('script-container')[0].scrollTo(0, i);
+          i -= 10;
+          if (i <= -200) clearInterval(int);
+        }, 20); 
+    }, 1000);
+
+    // d3.select('.script-container').classed('active',false)
+
+    if (stepsClicked === 6) {
+     splitSubtitle6()
+    }
+
+    highlightSubtitle6()
+
+
+    d3.select('.subtitle.subtitle6').classed('active',true)
+    d3.select('.subtitle.subtitle6')
+      .style('opacity',0)
+    d3.select('.subtitle.subtitle6').transition()
+      .delay(400)
+      .duration(150)
+      .style('opacity',1)
 
     window.setTimeout(function(d){
 
@@ -333,7 +386,7 @@ function setupStepper() {
       if(!stepperTriggered){
         d3.transition()
             .delay(0)
-            .duration(1000)
+            .duration(1200)
             .tween("scroll", scrollTween(window.innerHeight));
 
         function scrollTween(offset) {
@@ -369,7 +422,7 @@ function setupStepper() {
       d3.select('footer').style('display','block')
 
       //deselect active text on clickback/clickthrough
-      d3.selectAll('.script-line').classed("active",false)
+      // d3.selectAll('.script-line').classed("active",false)
 
       //activate tap back button
 
@@ -404,7 +457,7 @@ function setupStepper() {
 
       // d3.select('video.ismo.step6')['_groups'][0][0].pause()
 
-    },3000)
+    },3500)
 
     //Move out right-left click buttons
       // d3.select(".tap.tap--right").transition()
@@ -527,20 +580,76 @@ function setupStepper() {
         x.innerHTML = x.innerHTML.slice(0,-7)
         d3.selectAll('.script-line.active >span').classed('sentence-word',true)
       }
+    }
 
-     var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
-     var numberWords = d3.selectAll('.sentence-word').size()
+  //highlight words
+  function highlightWords(durationModifier) {
+   var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
+   var numberWords = d3.selectAll('.script-line.active >span').size()
+   var durationBetween = videoLength / numberWords
+   console.log(durationBetween)
+
+   d3.selectAll('.script-line.active >span')
+    .transition().duration(0)
+    .style('opacity',.4)
+      .transition().duration(500)
+      .delay(function(d,i){ return i * 1000 * (durationBetween*durationModifier) })
+      .style('opacity',1)
+      .attr('scrollTop',0)
+
+  }
+
+  // split sentences by word
+  function splitSubtitle1() {
+    var sentences = document.getElementsByClassName('subtitle subtitle1')
+    var x
+      for (x of sentences) {
+        x.innerHTML = "<span>".concat(x.innerHTML)
+        x.innerHTML = x.innerHTML.replace(/ /g,"</span> <span>")
+        x.innerHTML = x.innerHTML.slice(0,-7)
+        d3.selectAll('.subtitle.subtitle1 >span').classed('sentence-word',true)
+      }
+    }
+
+  function highlightSubtitle1() {
+    var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
+     var numberWords = d3.selectAll('.subtitle.subtitle1 >span').size()
      var durationBetween = videoLength / numberWords
      console.log(durationBetween)
 
-     d3.selectAll('.sentence-word')
+     d3.selectAll('.subtitle.subtitle1 >span')
       .transition().duration(0)
       .style('opacity',0)
-        .transition().duration(videoLength*1000)
-        .delay(function(d,i){ return i * durationBetween })
+        .transition().duration(500)
+        .delay(function(d,i){ return i * 1000 * (durationBetween*.69) })
         .style('opacity',1)
+  }
 
+  // split sentences by word
+  function splitSubtitle6() {
+    var sentences = document.getElementsByClassName('subtitle6')
+    var x
+      for (x of sentences) {
+        x.innerHTML = "<span>".concat(x.innerHTML)
+        x.innerHTML = x.innerHTML.replace(/ /g,"</span> <span>")
+        x.innerHTML = x.innerHTML.slice(0,-7)
+        d3.selectAll('.subtitle6 >span').classed('sentence-word',true)
+      }
     }
+
+  function highlightSubtitle6() {
+    var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
+     var numberWords = d3.selectAll('.subtitle6 >span').size()
+     var durationBetween = videoLength / numberWords
+     console.log(durationBetween)
+
+     d3.selectAll('.subtitle6 >span')
+      .transition().duration(0)
+      .style('opacity',0)
+        .transition().duration(500)
+        .delay(function(d,i){ return i * 1000 * (durationBetween*.69) })
+        .style('opacity',1)
+  }
 
   //highlight asses function
   function highlightAss() {
@@ -565,6 +674,7 @@ function setupStepper() {
         x.innerHTML = x.innerHTML.replace(/“ass”/g,'“<span id="ass-instance">ass</span>”');
         x.innerHTML = x.innerHTML.replace(/“ass.”/g,'“<span id="ass-instance">ass</span>.”');
         x.innerHTML = x.innerHTML.replace(/ ass,/g,' <span id="ass-instance">ass</span>,');
+        x.innerHTML = x.innerHTML.replace(/ass,/g,' <span id="ass-instance">ass</span>,');
         x.innerHTML = x.innerHTML.replace(/ ass /g,' <span id="ass-instance">ass</span> ');
       }
       highlightAss = function(){}
@@ -594,6 +704,7 @@ function setupStepper() {
         x.innerHTML = x.innerHTML.replace(/ ass\./g,' <span id="ass-instance">ass</span>.');
         x.innerHTML = x.innerHTML.replace(/“ass”/g,'“<span id="ass-instance">ass</span>”');
         x.innerHTML = x.innerHTML.replace(/“ass.”/g,'“<span id="ass-instance">ass</span>.”');
+        // x.innerHTML = x.innerHTML.replace(/ ass,/g,' <span id="ass-instance">ass</span>,');
         x.innerHTML = x.innerHTML.replace(/ ass,/g,' <span id="ass-instance">ass</span>,');
         x.innerHTML = x.innerHTML.replace(/ ass /g,' <span id="ass-instance">ass</span> ');
       }
@@ -629,7 +740,7 @@ function setupStepper() {
 //-------------//
 
 //define the data, run script function
-d3.csv('assets/data/ismo_script.csv').then(
+d3.csv('assets/data/ismo_script_final.csv').then(
 //begin script function
 function setupStepperScript(datapoints) {
 
@@ -663,11 +774,9 @@ function setupAssLine(datapoints,container) {
 
     //set up variables
     const margin = { top: 20, right: 26, bottom: 20, left: 26 }
-    console.log(container['_groups'][0][0].clientWidth)
     const height = (window.innerHeight - margin.top - margin.bottom) / 2
     // const width = Math.min(viewportWidth,550) - margin.left - margin.right
     const width = container['_groups'][0][0].clientWidth - margin.left - margin.right
-    console.log(width)
 
     var sliderContainer = container.append('div')
       .attr('class','slider-container')

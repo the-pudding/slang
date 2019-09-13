@@ -1,0 +1,29 @@
+text,step_used,first_unique_usage,usage_number,usage_example,greens_index_number
+"I thought I know English, but then I moved to America. Turns out, no. Like I didn't really know it, like all the things.",,FALSE,,,
+"Like I think the hardest word to truly master has been the word, “ass.”",step1,FALSE,,,
+"I thought it's really easy, it means a butt. But no. ",step2,TRUE,1,"“The hardest word to master has been the word, ‘ass.’ I thought it’s really easy, it means ‘a butt.’”",186
+"Like yes, sometimes it can mean a butt, but that's just the tip of the ass-berg.",step2,TRUE,7,“That's just the tip of the assberg.” ,N/A
+There are so many meanings of the word “ass.” I think it's the most complicated word in English.,step3,FALSE,,,
+I've been trying to write a whole dictionary about just “ass.”,step5,FALSE,,,
+"There are so many,",,FALSE,,,
+like for example “lazy-ass.” That means lazy.,step4,TRUE,4,“Like for example ‘lazy-ass.’  It's the same sentence without the ‘ass.’ Like ‘my lazy-ass husband.’”,200
+"Like “my lazy-ass husband.” It's the same sentence without the “ass.” We have, the ass, the ass is just optional there. And long-ass, means long. Like a long-ass flight, it's a long flight. But if you want to make it longer you're going to add the ass.",,FALSE,4,,
+"And my definite favorite one: I'm a grown-ass man. It turns out, it means a grown man. The entire man is grown. Not only his ass.",,FALSE,4,,
+"So I learned that you can just you can just add ass to anything, and then it sounds a little bit cooler. Like anything, I just bought this blue-ass shirt. Oh",,FALSE,4,,
+thank you. That was some good-ass meatballs.,step4,FALSE,4,,
+"Anything, but you have to be careful. But sometimes if you add “ass” for something it can actually reverse the meaning of the original word. Like for example",,FALSE,,,
+badass. That's good.,step4,TRUE,5,“Like for example badass. That's good.”,
+Bad is bad but badass? It's good.,,FALSE,,,
+But not always. Like,,FALSE,,,
+dumbass is still dumb.,step4,TRUE,6,“Dumbass is still dumb.” ,
+So how do you know? You have to know specifically which ones are flipped.,,FALSE,,,
+"And then there's the concept of “your ass.” And your ass, that means like yourself.",,TRUE,8,"“And your ass, that means like yourself.  Like, like ‘move your ass!’”",94
+"Like, like “move your ass!” That's like move everything, move your ass and the rest of your body. Like everything. If you have a car, that's included in the ass.",,FALSE,8,,
+"All of them, same direction. Just move. ""Your ass"" means yourself plus all you have.",,FALSE,8,,
+"But “my ass.” My ass, that means like, no. Like if I say “wow, this car is really fast,” and you say “fast my ass.” So it's means like, no. It's not fast.",,TRUE,9,"“My ass, that means like, no.” ",
+"And to make it even more complicated, ass can be divided. ",step4,TRUE,2,"“If you’re an ass, you're being stupid.” ",185
+Like,,,,,
+"if you are an ass, that means that you're being stupid.",step4,FALSE,2,"“If you’re an ass, you're being stupid.” ",185
+"But if you're half-assed, then it means, it means that you are not concentrating properly.",,TRUE,3,"“But if you're half-assed, then it means, it means that you are not concentrating properly.”",
+"And if you go even smaller,",,,,,
+"if you are a “piece of ass,” then you are beautiful.",step4,TRUE,10,"“If you are a ‘piece of ass,’ then you are beautiful.”",
