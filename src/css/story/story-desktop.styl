@@ -36,6 +36,9 @@
         left 0px
         top 0px
 
+    .stepper
+      background-image linear-gradient(rgb(245, 245, 245) 0%, rgb(178, 234, 252) 100%);
+
     .stepper__graphics
       position absolute
       height 100%
@@ -43,8 +46,38 @@
       left 0px
       top 0px
 
+    .stepper__video
+      display flex
+      justify-content center
+
+    video
+      object-fit contain
+      margin-top 1%
+      object-position initial
+      max-width 90%
+
+    img
+      visibility hidden
+      display block
+      object-fit contain
+      margin-top 1%
+      -o-object-position initial
+      object-position initial
+      position absolute
+      height 70%
+      max-width 90%
+
+    .pause-overlay
+      margin-top 1%
+      position relative
+      object-fit contain
+
+    .script-container
+      margin-top 1%
+      
+
     .script-line
-      font-size 20px
+      font-size 18px
 
     .tap--final
       background none

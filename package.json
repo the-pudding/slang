@@ -11,6 +11,7 @@
 		"cli-error-notifier": "2.1.0",
 		"d3-simple-slider": "^1.5.4",
 		"intersection-observer": "^0.7.0",
+		"jquery": "^3.4.1",
 		"lodash.debounce": "4.0.8",
 		"nouislider": "14.0.2",
 		"rimraf": "2.6.3",

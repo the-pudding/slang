@@ -165,11 +165,56 @@ function setupStepper() {
    d3.select('.stepper__video.step1').classed('active',true)
    // d3.select('video.ismo.step1')['_groups'][0][0].currentTime = 0
 
-   d3.select('.pause-overlay')
+    //resize overlay based on video size
+     function getRenderedSize(contains, cWidth, cHeight, width, height, pos){
+    var oRatio = width / height,
+          cRatio = cWidth / cHeight;
+      return function() {
+        if (contains ? (oRatio > cRatio) : (oRatio < cRatio)) {
+          this.width = cWidth;
+          this.height = cWidth / oRatio;
+        } else {
+          this.width = cHeight * oRatio;
+          this.height = cHeight;
+        }      
+        this.left = (cWidth - this.width)*(pos/100);
+        this.right = this.width + this.left;
+        return this;
+      }.call({});
+    }
+
+    function getImgSizeInfo(img) {
+      var pos = window.getComputedStyle(img).getPropertyValue('object-position').split(' ');
+      return getRenderedSize(true,
+                             img.width,
+                             img.height,
+                             img.naturalWidth,
+                             img.naturalHeight,
+                             parseInt(pos[0]));
+    }
+
+   var img = document.getElementsByTagName('img')[0] 
+   var img_sizes = getImgSizeInfo(img) 
+
+   console.log(img_sizes)
+
+   var body = document.getElementsByTagName('body')[0]
+
+  if (body.classList.contains('is-mobile')) {
+    d3.select('.pause-overlay')
     .style('opacity',1)
 
+  } else {d3.select('.pause-overlay')
+    .style('height',img_sizes.height + 'px')
+    .style('width',img_sizes.width + 'px')
+    .style('opacity',1);
+  d3.select('.script-container')
+    .style('height',img_sizes.height + 'px')
+    .style('width',img_sizes.width*.9 + 'px');
+    }
 
-         //deactivate script on clickback
+
+   //deactivate script on clickback
    d3.select('.script-container').classed("active",false)
    d3.select('.subtitle').classed('active',false)
    d3.select('.subtitle')
@@ -207,10 +252,21 @@ function setupStepper() {
 
     if (stepsClicked === 3) {
      splitSentence()
-    }
+    }    
 
-    highlightWords(.87)
+    d3.selectAll('.highlighted').transition()
+      .duration(250)
+      .on('start', function (d) {
+        d3.select(this).classed('highlighted',false)
+      })
 
+    var highlightTimes = [.1,.3,.5,.7,1.0,1.3,1.8,2,2.3,
+    3.7,3.9,
+    5.5,5.7,6,6.1,6.4,6.5,6.9,7.1,7.2,7.4,
+    8.2,8.5,8.6,8.7,9.8,9.9,10.1,11.1]
+    var video = d3.select('video.ismo.step3')['_groups'][0][0]
+
+    highlightWordsStaggered(video,highlightTimes)
 
 
    //play the second video
@@ -222,6 +278,16 @@ function setupStepper() {
   }
 
   function step4() {
+
+    //scroll back to top of text on clickback
+    setTimeout(function() {
+        var i = -10;
+        var int = setInterval(function() {
+          document.getElementsByClassName('script-container')[0].scrollTo(0, i);
+          i -= 10;
+          if (i <= -200) clearInterval(int);
+        }, 20);
+    }, 1000);
 
     stepsClicked = stepsClicked + 1
     //stop the second video
@@ -253,7 +319,18 @@ function setupStepper() {
      splitSentence()
     }
 
-    highlightWords(1)
+    d3.selectAll('.highlighted').transition()
+      .duration(250)
+      .on('start', function (d) {
+        d3.select(this).classed('highlighted',false)
+      })
+
+    var highlightTimes = [.7,.9,1.1,1.2,1.3,1.5,1.7,1.9,2,
+    2.6,2.9,3.1,3.3,3.7,
+    3.8,4.2,4.5,4.7]
+    var video = d3.select('video.ismo.step4')['_groups'][0][0]
+
+    highlightWordsStaggered(video,highlightTimes)
   }
 
 
@@ -313,7 +390,11 @@ function setupStepper() {
           .duration(1000)
           .style('color','#00fff3')
 
-    highlightWords(1)
+    d3.selectAll('.highlighted').transition()
+      .duration(250)
+      .on('start', function (d) {
+        d3.select(this).classed('highlighted',false)
+      })
 
     //scroll to offscreen text
     setTimeout(function() {
@@ -321,9 +402,35 @@ function setupStepper() {
         var int = setInterval(function() {
           document.getElementsByClassName('script-container')[0].scrollTo(0, i);
           i += 10;
-          if (i >= 200) clearInterval(int);
+          if (i >= 400) clearInterval(int);
         }, 20);
     }, 13000);
+
+    var highlightTimes = [.1,.3,.5,1.4,2.8,3,4,4.2,5,5.1,5.3,5.5,5.7,5.9,6.2,
+    7.1,8,9.5,9.7,10.5,
+    11.2,11.7,11.9,12.1,
+    12.7,12.9,13.1,13.3,13.5,13.7,13.7,14.4,15.5,15.7,15.9,16.2,16.5,16.5,
+    17,17.2,17.4,17.6,17.8,18.6,18.8,19,19.2,19.4,19.6,20,
+    20.2,20.3,20.4,20.5,20.8,21,21.3,24,24.2,24.5,24.8]
+    var video = d3.select('video.ismo.step5')['_groups'][0][0]
+    console.log()
+
+
+    highlightWordsStaggered(video,highlightTimes)
+
+    // var highlightInterval = setInterval(function () { 
+
+    //   d3.selectAll('.script-line.active >span').transition()
+    //     .duration(0)
+    //     .on('start',function (d,i) {
+    //       if (video.currentTime > highlightTimes[i]) {
+    //           d3.select(this).classed('highlighted',true)
+    //       }
+    //     })
+
+    // },100)
+
+    // setTimeout(function( ) { clearInterval( highlightInterval ); }, video.duration * 1000)
 
     //reset auto scroll on clickback
     stepperTriggered = false
@@ -584,6 +691,13 @@ function setupStepper() {
 
   //highlight words
   function highlightWords(durationModifier) {
+
+     d3.selectAll('.highlighted').transition()
+      .duration(250)
+      .on('start', function (d) {
+        d3.select(this).classed('highlighted',false)
+      })
+
    var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
    var numberWords = d3.selectAll('.script-line.active >span').size()
    var durationBetween = videoLength / numberWords
@@ -598,6 +712,22 @@ function setupStepper() {
       .on("start",function(d){
         d3.select(this).classed("highlighted",true);
       })
+  }
+
+  function highlightWordsStaggered(video,highlightTimes) {
+    var highlightInterval = setInterval(function () { 
+
+      d3.selectAll('.script-line.active >span').transition()
+        .duration(0)
+        .on('start',function (d,i) {
+          if (video.currentTime > highlightTimes[i]) {
+              d3.select(this).classed('highlighted',true)
+          }
+        })
+
+    },100)
+
+    setTimeout(function( ) { clearInterval( highlightInterval ); }, video.duration * 1000)
   }
 
   // split sentences by word
