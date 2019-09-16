@@ -176,7 +176,7 @@ function setupStepper() {
         } else {
           this.width = cHeight * oRatio;
           this.height = cHeight;
-        }      
+        }
         this.left = (cWidth - this.width)*(pos/100);
         this.right = this.width + this.left;
         return this;
@@ -193,8 +193,8 @@ function setupStepper() {
                              parseInt(pos[0]));
     }
 
-   var img = document.getElementsByTagName('img')[0] 
-   var img_sizes = getImgSizeInfo(img) 
+   var img = document.getElementsByTagName('img')[0]
+   var img_sizes = getImgSizeInfo(img)
 
    console.log(img_sizes)
 
@@ -204,14 +204,16 @@ function setupStepper() {
     d3.select('.pause-overlay')
     .style('opacity',1)
 
-  } else {d3.select('.pause-overlay')
-    .style('height',img_sizes.height + 'px')
-    .style('width',img_sizes.width + 'px')
-    .style('opacity',1);
-  d3.select('.script-container')
-    .style('height',img_sizes.height + 'px')
-    .style('width',img_sizes.width*.9 + 'px');
-    }
+  } else {
+
+    d3.select('.pause-overlay')
+      // .style('height',img_sizes.height + 'px')
+      // .style('width',img_sizes.width + 'px')
+      .style('opacity',1);
+    // d3.select('.script-container')
+    //   .style('height',img_sizes.height + 'px')
+    //   .style('width',img_sizes.width*.9 + 'px');
+  }
 
 
    //deactivate script on clickback
@@ -252,7 +254,7 @@ function setupStepper() {
 
     if (stepsClicked === 3) {
      splitSentence()
-    }    
+    }
 
     d3.selectAll('.highlighted').transition()
       .duration(250)
@@ -418,7 +420,7 @@ function setupStepper() {
 
     highlightWordsStaggered(video,highlightTimes)
 
-    // var highlightInterval = setInterval(function () { 
+    // var highlightInterval = setInterval(function () {
 
     //   d3.selectAll('.script-line.active >span').transition()
     //     .duration(0)
@@ -715,7 +717,7 @@ function setupStepper() {
   }
 
   function highlightWordsStaggered(video,highlightTimes) {
-    var highlightInterval = setInterval(function () { 
+    var highlightInterval = setInterval(function () {
 
       d3.selectAll('.script-line.active >span').transition()
         .duration(0)
