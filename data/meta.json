@@ -1,17 +1,17 @@
 {
 	"title": "Is 'Ass' The Most Complicated Word in English?",
-	"description": "Slang stuff",
+	"description": "An investigation into the mutability of slang.",
 	"site": "https://pudding.cool",
 	"siteName": "The Pudding",
-	"url": "https://pudding.cool/year/month/name/",
-	"keywords": "tk",
+	"url": "https://pudding.cool/2019/08/slang/",
+	"keywords": "slang,ass,language,culture,comedy,ismo",
 	"imgFacebook": "https://pudding.cool/year/month/name/assets/social/social-facebook.jpg",
 	"imgTwitter": "https://pudding.cool/year/month/name/assets/social/social-twitter.jpg",
 	"author": {
 		"name": "Kevin Litman-Navarro",
 		"url": "https://pudding.cool/author/the-pudding-team",
-		"twitterHandle": "@puddingviz"
+		"twitterHandle": "@kevselfpromotes"
 	},
-	"analytics": "",
+	"analytics": "UA-90567923-1",
 	"lorem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis neque sit amet sollicitudin vehicula. Maecenas fringilla mi non lacus mattis elementum. Curabitur dignissim faucibus justo."
 }

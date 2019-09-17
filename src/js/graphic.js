@@ -22,19 +22,19 @@ function setupStepper() {
 
   var stepsClicked = 0
 
+  var chartsBuilt = false
+
   //define click events on right-left buttons
   var tapLeft = d3.selectAll('.tap')
     .on('click', function () {
       if(d3.select(this).classed("tap--left")){
         currentStep = currentStep - 1
         switchStep(currentStep)
-        console.log('back')
         d3.event.stopPropagation()
       }
       else {
         currentStep = currentStep + 1
         switchStep(currentStep)
-        console.log('forward')
       }
     })
   // var tapRight = d3.select('svg.tap--right')
@@ -47,7 +47,6 @@ function setupStepper() {
     .on('click', function () {
       currentStep = currentStep + 1
       switchStep(currentStep)
-      console.log('clicked')
       document.querySelector('.step').scrollIntoView({ behavior: 'smooth' })
     })
 
@@ -195,9 +194,6 @@ function setupStepper() {
 
    var img = document.getElementsByTagName('img')[0]
    var img_sizes = getImgSizeInfo(img)
-
-   console.log(img_sizes)
-
    var body = document.getElementsByTagName('body')[0]
 
   if (body.classList.contains('is-mobile')) {
@@ -234,7 +230,6 @@ function setupStepper() {
   function step3() {
 
    stepsClicked = stepsClicked + 1
-   console.log(stepsClicked)
    //activate script
    d3.select('.script-container').classed("active",true)
 
@@ -415,24 +410,8 @@ function setupStepper() {
     17,17.2,17.4,17.6,17.8,18.6,18.8,19,19.2,19.4,19.6,20,
     20.2,20.3,20.4,20.5,20.8,21,21.3,24,24.2,24.5,24.8]
     var video = d3.select('video.ismo.step5')['_groups'][0][0]
-    console.log()
-
 
     highlightWordsStaggered(video,highlightTimes)
-
-    // var highlightInterval = setInterval(function () {
-
-    //   d3.selectAll('.script-line.active >span').transition()
-    //     .duration(0)
-    //     .on('start',function (d,i) {
-    //       if (video.currentTime > highlightTimes[i]) {
-    //           d3.select(this).classed('highlighted',true)
-    //       }
-    //     })
-
-    // },100)
-
-    // setTimeout(function( ) { clearInterval( highlightInterval ); }, video.duration * 1000)
 
     //reset auto scroll on clickback
     stepperTriggered = false
@@ -545,6 +524,7 @@ function setupStepper() {
         .classed('active',true)
 
       //build charts
+      if (chartsBuilt == false) {
       buildIcebergTextList('assets/data/ass_ismo_citations_final.json','#iceberg0','#overlay0')
       buildIcebergTextChart('assets/data/ass_long_data.json','#iceberg1','#overlay1')
       buildIcebergTextChart('assets/data/fuck_long_data.json','#iceberg2','#overlay2')
@@ -560,7 +540,8 @@ function setupStepper() {
            // handle error
         })
         //end of data read/script
-
+       chartsBuilt = true
+      }
 
       //pause the fifth video
 
@@ -626,55 +607,6 @@ function setupStepper() {
   }
 
     function step7() {
-      //remove the stepper and activate the scroller
-      // d3.select('.stepper__graphics').classed('active',false)
-      //   .attr('display','none')
-
-      // d3.select('.stepper').classed('active',false)
-      // d3.select('.script-container')
-      //   .classed('active',false)
-      // d3.select('.tap.tap--final')
-      //   .classed('active',false)
-      // d3.select(".tap.tap--final").transition()
-      //   .duration(1000)
-      //   .style('opacity',0)
-      //
-      // d3.select('.scroll').classed('active',true)
-      //   .attr('display','inline')
-      // d3.select('.stack').classed('active',true)
-      // //deselect active text on clickback/clickthrough
-      // d3.selectAll('.script-line').classed("active",false)
-      //
-      // //activate tap back button
-      //
-      //   var tapBack = d3.select('svg.tap--back')
-      //     .on('click', function () {
-      //       currentStep = currentStep - 1
-      //       switchStep(currentStep)
-      //       console.log('clicked')
-      //     })
-      //
-      // d3.select('svg.tap--back')
-      //   .classed('active',true)
-      //
-      // d3.select('svg.tap--back').transition()
-      //   .duration(1000)
-      //   .style('opacity',1)
-      //
-      // //pause the fifth video
-      // d3.select('video.ismo.step6')['_groups'][0][0].pause()
-      //
-      // //deactivate leftright click button
-      // d3.select('.tap.tap--left')
-      //   .classed('active',false)
-      // d3.select('.tap.tap--right')
-      //   .classed('active',false)
-      //
-      // d3.select('.tap.tap--left').transition()
-      //   .style('opacity','0')
-      // d3.select('.tap.tap--right').transition()
-      //   .style('opacity','0')
-
 
   }
   //end of step functions
@@ -703,8 +635,6 @@ function setupStepper() {
    var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
    var numberWords = d3.selectAll('.script-line.active >span').size()
    var durationBetween = videoLength / numberWords
-
-   console.log(durationModifier);
 
    d3.selectAll('.script-line.active >span')
       .transition()
@@ -748,7 +678,6 @@ function setupStepper() {
     var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
      var numberWords = d3.selectAll('.subtitle.subtitle1 >span').size()
      var durationBetween = videoLength / numberWords
-     console.log(durationBetween)
 
      d3.selectAll('.subtitle.subtitle1 >span')
       .transition().duration(0)
@@ -774,7 +703,6 @@ function setupStepper() {
     var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
      var numberWords = d3.selectAll('.subtitle6 >span').size()
      var durationBetween = videoLength / numberWords
-     console.log(durationBetween)
 
      d3.selectAll('.subtitle6 >span')
       .transition().duration(0)
@@ -855,7 +783,6 @@ function setupStepper() {
       d3.select(".stepper__video.step" + currentStep).classed("active", true);
       d3.selectAll(".stepper__intro").classed("active", false);
       d3.select(".stepper__intro.step" + currentStep).classed("active", true);
-      //console.log(steps[("step" + currentStep)])
 
       //run that step
       steps[(currentStep)]()
@@ -897,10 +824,31 @@ function setupStepperScript(datapoints) {
 
 function setupAssLine(datapoints,container) {
 
+  var x 
+  if (datapoints.length > 1) {
+  for (x of datapoints) {
+    if (Array.isArray(x.date)) {
+      var cleanDate = ''
+      cleanDate = x.date[0]
+      x.date = cleanDate
+    }
+  }}
+
+  else {
+    if (Array.isArray(datapoints.date)) {
+      var cleanDate = ''
+      cleanDate = datapoints.date[0]
+      datapoints.date = cleanDate
+    }
+  }
 
   if (datapoints.length > 1) {
-    var citationData = datapoints;
+    var citationData = datapoints.filter(function (d) {return (d['#text'] !== undefined && d['#text'] != 'in' && d['#text'] != 'questionaire' && d['#text'] != 'in questionaire' && d['#text'] != '[Internet]') });
+  }
+  
 
+  if (typeof citationData !== 'undefined' && citationData.length > 1) {
+    //var citationData = datapoints.filter(function (d) {return (d['#text'] !== undefined && d['#text'] != 'in' && d['#text'] != 'questionaire' && d['#text'] != '[Internet]') });
 
     var viewportWidth = document.getElementById('content').offsetWidth;
 
@@ -995,7 +943,7 @@ function setupAssLine(datapoints,container) {
         .attr('x1',function (d) {
           if (d.date.length >4)
             {return  xPositionScale(d.date.slice(0,4))}
-          else
+          else 
             {return xPositionScale(d.date)}
 
         })
@@ -1020,9 +968,12 @@ function setupAssLine(datapoints,container) {
         });
 
     //add the selected citation container
+    var citationText = citationData[0]['#text']
+    if (citationData[0]['#text'].slice(0,2) == 'in') { citationText = citationData[0]['#text'].slice(2,) };
+
     var citationContainer = container.append('div')
       .attr('class','citationContainer')
-      .text('(' + citationData[0].date + ') ' + citationData[0]['#text'])
+      .text('(' + citationData[0].date + ') ' + citationText)
 
     sliderContainer
       .append('input')
@@ -1050,8 +1001,11 @@ function setupAssLine(datapoints,container) {
             if(+d.date == selected){
               var text = d["#text"];
 
+              if (d['#text'].slice(0,2) == 'in') { text = d['#text'].slice(2,) };
+
+
               citationContainer
-                .text('(' + selected + ') ' + d["#text"])
+                .text('(' + selected + ') ' + text)
 
               return true;
             }
@@ -1060,13 +1014,26 @@ function setupAssLine(datapoints,container) {
         })
 
   }
-  else {
+
+  else if (typeof citationData !== 'undefined' && citationData.length == 1) {
 
     var citationData = datapoints;
 
     var citationContainer = container.append('div')
       .attr('class','citationContainer')
+      .text('(' + citationData[0].date + ') ' + citationData[0]['#text'])
+
+  }
+
+  else {
+
+    var citationData = datapoints;
+
+    if (typeof citationData.date !== 'undefined' && typeof citationData['#text'] !== 'undefined') {
+    var citationContainer = container.append('div')
+      .attr('class','citationContainer')
       .text('(' + citationData.date + ') ' + citationData['#text'])
+    }
 
   }
 
@@ -1256,6 +1223,7 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
       var citationsLengths = datapoints.map(function (d) {return d.number_of_citations})
 
 
+
       //set up scales
       var colorScale = d3.scaleOrdinal()
         .domain(['noun','compound','phrase','adjective','suffix','verb','adverb'])
@@ -1276,11 +1244,14 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
           return d.word + "—<span>" +d.definition + '</span>'
         })
 
+
       //add click to reveal
+      var reveal_counter = 0
       var reveals = spans.append('span')
         .attr('class','reveal-click')
         .on('click', function (d) {
-            d3.select(this).selectAll('*').remove()
+
+            d3.select(this).style('pointer-events','none')
             var data = d.citations
             var container = d3.select(this.parentNode)
             setupAssLine(data,container)
@@ -1339,27 +1310,6 @@ function buildIcebergTextList(filename,icebergnumber,overlaynumber) {
           setupAssLine(data,container)
         })
 
-      // var senseContainer = usages.append('p')
-      //   .attr('class','sense-container')
-      //   .text(function(d){
-      //     return
-        // })
-
-
-
-
-        // .on('click', function (d,i) {
-        //
-        //   // var overlay = d3.select(overlaynumber)
-        //   //   .classed('active',true)
-        //   //   .on('click', d3.select(this).classed('active',false))
-        //
-        //
-        //   console.log(usageData,icebergnumber,overlaynumber);
-        //
-        //   buildCitationTimeline(usageData,icebergnumber,overlaynumber)
-        // })
-
     //end of function
     }).catch(function(error){
          // handle error
@@ -1369,7 +1319,6 @@ function buildIcebergTextList(filename,icebergnumber,overlaynumber) {
 
 //run functions
 function init() {
-  console.log('Make something awesome!');
   //Run the stepper
   setupStepper()
   //Build charts moved to last step of stepper
