@@ -1,4 +1,5 @@
 var stepperTriggered = false;
+var ready = false;
 
 /* global d3 */
 function resize() {}
@@ -27,12 +28,12 @@ function setupStepper() {
   //define click events on right-left buttons
   var tapLeft = d3.selectAll('.tap')
     .on('click', function () {
-      if(d3.select(this).classed("tap--left")){
+      if(d3.select(this).classed("tap--left") && ready){
         currentStep = currentStep - 1
         switchStep(currentStep)
         d3.event.stopPropagation()
       }
-      else {
+      else if(ready) {
         currentStep = currentStep + 1
         switchStep(currentStep)
       }
@@ -56,8 +57,10 @@ function setupStepper() {
 
     var entirePage = d3.select('.stepper')
       .on('click', function (d) {
-      currentStep = currentStep + 1
-      switchStep(currentStep)
+        if(ready){
+          currentStep = currentStep + 1
+          switchStep(currentStep)
+        }
     })
 
     //activate container
@@ -824,7 +827,7 @@ function setupStepperScript(datapoints) {
 
 function setupAssLine(datapoints,container) {
 
-  var x 
+  var x
   if (datapoints.length > 1) {
   for (x of datapoints) {
     if (Array.isArray(x.date)) {
@@ -845,7 +848,7 @@ function setupAssLine(datapoints,container) {
   if (datapoints.length > 1) {
     var citationData = datapoints.filter(function (d) {return (d['#text'] !== undefined && d['#text'] != 'in' && d['#text'] != 'questionaire' && d['#text'] != 'in questionaire' && d['#text'] != '[Internet]') });
   }
-  
+
 
   if (typeof citationData !== 'undefined' && citationData.length > 1) {
     //var citationData = datapoints.filter(function (d) {return (d['#text'] !== undefined && d['#text'] != 'in' && d['#text'] != 'questionaire' && d['#text'] != '[Internet]') });
@@ -859,8 +862,8 @@ function setupAssLine(datapoints,container) {
     // const width = Math.min(viewportWidth,550) - margin.left - margin.right
     const width = container['_groups'][0][0].clientWidth - margin.left - margin.right
 
-    var sliderContainer = container.append('div')
-      .attr('class','slider-container')
+    var citationContainer = container.append('div')
+      .attr('class','citationContainer')
 
     var svg = container
       .append('svg')
@@ -869,6 +872,9 @@ function setupAssLine(datapoints,container) {
       .attr('height',height+margin.bottom+margin.top)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+
+    var sliderContainer = container.append('div')
+      .attr('class','slider-container')
 
     var lineFunction = d3.line()
       .x(function(d) { return d.x; })
@@ -943,7 +949,7 @@ function setupAssLine(datapoints,container) {
         .attr('x1',function (d) {
           if (d.date.length >4)
             {return  xPositionScale(d.date.slice(0,4))}
-          else 
+          else
             {return xPositionScale(d.date)}
 
         })
@@ -971,9 +977,11 @@ function setupAssLine(datapoints,container) {
     var citationText = citationData[0]['#text']
     if (citationData[0]['#text'].slice(0,2) == 'in') { citationText = citationData[0]['#text'].slice(2,) };
 
-    var citationContainer = container.append('div')
-      .attr('class','citationContainer')
-      .text('(' + citationData[0].date + ') ' + citationText)
+    var firstCitation = citationContainer.html("<span>"+citationData[0].date + ' ('+citationData[0].aut+', '+citationData[0].tit+')</span> &ldquo;' + citationText+'&rdquo;')
+
+    //var firstHeight = firstCitation.node().offsetHeight;
+    //firstCitation.style("min-height",firstHeight+"px");
+    citationContainer.style("min-height",80+"px");
 
     sliderContainer
       .append('input')
@@ -1001,11 +1009,13 @@ function setupAssLine(datapoints,container) {
             if(+d.date == selected){
               var text = d["#text"];
 
+
               if (d['#text'].slice(0,2) == 'in') { text = d['#text'].slice(2,) };
 
 
               citationContainer
-                .text('(' + selected + ') ' + text)
+                .html("<span>"+selected + ' ('+d.aut+', '+d.tit+')</span> &ldquo;' + text+'&rdquo;')
+                //.text('(' + selected + ') ' + text)
 
               return true;
             }
@@ -1322,6 +1332,26 @@ function init() {
   //Run the stepper
   setupStepper()
   //Build charts moved to last step of stepper
+
+
+  var videos = d3.selectAll("video");
+  var size = videos.size();
+  var count = 0;
+  videos.each(function(d,i){
+    d3.select(this).node().addEventListener('canplaythrough', () => {
+        count = count + 1;
+        if(count == size){
+          ready = true;
+          d3.select(".tap--first").text("TAP ANYWHERE TO FIND OUT");
+        }
+    });
+    // fallback 5s loading time
+    setTimeout(function(){
+      ready = true;
+      d3.select(".tap--first").text("TAP ANYWHERE TO FIND OUT");
+    }, 5000);
+  })
+
 }
 
 
