@@ -500,13 +500,13 @@ function setupStepper() {
       //activate tap back button
 
       if (chartsBuilt == false) {
-        buildIcebergTextList('assets/data/ass_ismo_citations_final.json','#iceberg0','#overlay0')
-        buildIcebergTextChart('assets/data/ass_long_data.json','#iceberg1','#overlay1')
-        buildIcebergTextChart('assets/data/fuck_long_data.json','#iceberg2','#overlay2')
-        buildIcebergTextChart('assets/data/dog_long_data.json','#iceberg3','#overlay3')
-        buildIcebergTextChart('assets/data/shit_long_data.json','#iceberg4','#overlay4')
+        buildIcebergTextList('assets/data/ass_ismo_citations_censored.json','#iceberg0','#overlay0')
+        buildIcebergTextChart('assets/data/ass_long_data_censored.json','#iceberg1','#overlay1')
+        buildIcebergTextChart('assets/data/fuck_long_data_censored.json','#iceberg2','#overlay2')
+        buildIcebergTextChart('assets/data/dog_long_data_censored.json','#iceberg3','#overlay3')
+        buildIcebergTextChart('assets/data/shit_long_data_censored.json','#iceberg4','#overlay4')
         chartsBuilt = true
-        d3.json('assets/data/ass_long_data.json').then(function(d){
+        d3.json('assets/data/ass_long_data_censored.json').then(function(d){
           setupAssLine(d[186].citations,d3.select("#graphic2"))
         })
         .catch(function(error){
@@ -1005,7 +1005,7 @@ function setupAssLine(datapoints,container) {
               var text = d["#text"];
 
 
-              if (d['#text'].slice(0,2) == 'in') { text = d['#text'].slice(2,) };
+              if (d['#text']== 'in') { text = d['#text'].concat(d.tit)};
 
 
               citationContainer
