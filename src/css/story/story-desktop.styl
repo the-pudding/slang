@@ -21,21 +21,13 @@
 
     .iceberg-text
       font-size 15px
-      width 32%
-      span
-        font-size 14px
       .reveal-click
         font-size 11px
       .slider-container
-        margin-top 30px
         &:before
           font-size 12px
-    #iceberg0
-      .slider-container
-        margin-top 60px
     .chart-title
       font-size 36px
-      opacity .9
     .stepper__intro
       .stepper__hed
         font-size 48px
@@ -94,10 +86,6 @@
       position absolute
       height 70%
       max-width 90%
-
-    .script-line
-      font-size 18px
-
     .tap--final
       background none
 
@@ -121,7 +109,6 @@
       font-size 16px
       line-height 1.5
       font-weight 400
-      padding 0 1.5rem
 
     .scroll.active
       display block
@@ -142,44 +129,8 @@
     .slider-container
       &:before
         font-size 14px
-
-
-    .slider
-      -webkit-appearance: none
-      appearance: none
-      margin 0 auto
-      width 100%
-
-      border-radius 3px
-      height: 4px
-      background-color rgba(51,51,51,.31)
-      outline: none
-      opacity 1
-
-    .slider:hover
-      opacity: 1
-
-
-    .slider::-webkit-slider-thumb
-      -webkit-appearance: none
-      appearance: none
-      width: 16px
-      height: 16px
-      border-radius: 50%
-      background #F24C3D
-      cursor pointer
-
     #iceberg0
       pointer-events auto
-
-
-    .slider::-moz-range-thumb
-      width: 16px
-      height: 16px
-      border-radius: 50%
-      background: #F24C3D
-      cursor: pointer
-
     .sliderIceberg
       -webkit-appearance: none
       appearance: none
@@ -215,25 +166,12 @@
       background: #b2eafc
       cursor: pointer
 
-    .time-line
-      path
-        stroke-width 16px
-        stroke rgba(0, 0, 0, 0.16)
-      line
-        stroke rgba(93, 93, 93, 0.55)
-        stroke-width 3px
-
-    line.active
-      opacity:1
-      stroke #f24c3d
-
     .stack .chart
       font-family $atlas
       text-align center
-      overflow hidden
 
     .reveal-click
-      display inline-block
+      //display inline-block
       font-size: 10px;
 
 
@@ -300,4 +238,3 @@
 
     .stack__container .chart-title
       text-align center
-      margin-left 0%

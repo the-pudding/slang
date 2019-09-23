@@ -9,6 +9,17 @@
     position fixed
     height 70%
     top 0%
+  .home-logo
+    .logo
+      position absolute
+      left 1rem
+      top 1rem
+      margin 0
+      z-index 10000000
+      svg
+        width 100px
+        @media (max-width 800px)
+          fill white
 
 .highlighted
   opacity 1
@@ -48,7 +59,6 @@ body
 
 #graphic2
   .word-container
-    text-align center
     font-size 18px
 
 .stack__container
@@ -56,19 +66,17 @@ body
     display flex
     flex-wrap wrap
     margin 0 auto
-    width 95%
     justify-content space-between
     margin-bottom 10px
     .iceberg-text
-      width 47%
       text-align left
       margin-bottom 5px
-      font-size 12px
       margin-top 0px
       margin-bottom 15px
       span
-        font-size 12px
         font-weight 400
+      .reveal-click
+        display none
 
 .left-shape, .right-shape
   display none
@@ -140,12 +148,7 @@ body
 body
   background-color #f5f5f5
   color #333333
-
-
-
-
-
-.logo
+a.logo
   text-align center
   font-family $atlas
   position relative
@@ -157,9 +160,16 @@ body
   font-size 11px
   letter-spacing 1px
   font-weight 600
+  border none
+  text-decoration none
+  svg
+    border none
+    text-decoration none
   p
     margin 0 auto
     font-size 12px
+    border none
+    text-decoration none
 
 
 .header-image
@@ -217,6 +227,14 @@ video
   overflow hidden
   opacity 0
   font-family $roboto
+  .script-line
+    font-size 18px
+    @media (max-width: 800px)
+      font-size 16px
+    @media (max-width: 500px)
+      font-size 14px
+    @media (max-width: 400px)
+      font-size 12px
 
 .pause-overlay
   display flex
@@ -328,9 +346,9 @@ video
   position absolute
   opacity 0
   display block
-  height 100%
+  height calc(100% - 50px)
   width 100%
-  top 0%
+  bottom 0%
   left 0%
 
 .tap
@@ -388,13 +406,18 @@ video
   align-items center
   text-align left
   pointer-events none
+  z-index 10000
 
 
 .stepper__annotation
   opacity 0
+  pointer-events none
   span
     font-size 14px
     line-height 1.1
+    pointer-events none
+    a
+      pointer-events all
 
 
 #video-annotation
@@ -416,8 +439,8 @@ video
   paddint-top 5%
 
 div.step > p.first-graf
-  padding .5rem 1.5rem 1.5rem 1.5rem
-  margin 0
+  margin 0 auto
+  margin-bottom 1.5rem
 
 #first-scroll
   padding 2rem 0rem 0rem 0rem
@@ -439,8 +462,9 @@ div.step > p.first-graf
 
 .scroll-container
   background-color #d3bfa6
-  padding-bottom 50px
-  background linear-gradient(to bottom, #b6ebfc 0%, #fceab9 50%, #f5f5f5 100%)
+  background #b6ebfc
+  padding-bottom 30px
+
 
 
 .scroll__text
@@ -456,10 +480,11 @@ div.step > p.first-graf
   width 100%
   margin 0 auto
   transform translate3d(0, 0, 0)
-  margin-top 5%
-  margin-bottom 50px
+  margin-bottom 1.5rem
   max-width 550px
   width 90%
+  @media (max-width: 550px)
+    width 100%
 
 .scroll__graphic .chart
   text-align: justify
@@ -486,6 +511,7 @@ div.step > p.first-graf
   color #222
   width 90%
   margin 0 auto
+  margin-bottom 1.5rem
 
 
 .ass-label
@@ -503,16 +529,26 @@ div.step > p.first-graf
   font-size 14px
   color rgba(186, 186, 186, 0)
 
+#graphic1
+  .usage-examples
+    margin-top 3rem
+    //width 90%
+    margin-bottom 3rem
+
+
 .usage-examples
   color #333333
   display block
-  font-size 18px
+  font-size 24px
   text-align left
-  margin-top 20px
-  font-weight 500
+  margin 0 auto
+  margin-top 5em
+  font-weight 300
   font-family $atlas
   line-height 1.5
-  margin-top 30px
+  width calc(100% - 40px)
+  margin-bottom .5rem
+
 
 .usage-examples.active
   display block
@@ -529,16 +565,14 @@ div.step > p.first-graf
   font-weight 400
   padding 0 1.5rem
 
-#iceberg1
-  margin-bottom 5rem
-
 .slider-container
   width calc(100% - 32px)
   margin 0 auto
   margin-top 0px
-  margin-bottom 10px
+  margin-bottom 50px
   pointer-events auto
   position relative
+
   &:after
     content ''
     width 100%
@@ -587,7 +621,7 @@ div.step > p.first-graf
   width: 20px
   height: 20px
   border-radius: 50%
-  background #F24C3D
+  background #084356
   cursor pointer
 
 .slider::-moz-range-thumb
@@ -595,24 +629,37 @@ div.step > p.first-graf
   width: 20px
   height: 20px
   border-radius: 50%
-  background #F24C3D
+  background #084356
   cursor pointer
 
 #iceberg0
   pointer-events auto
+  margin-bottom 1rem
+  width 90%
+  max-width none
+  @media (max-width: 550px)
+    width 100%
   .usage-wrapper
+    display flex
+    margin 0 auto
+    flex-wrap wrap
+    justify-content center
+    max-width 1150px
+    width 100%
     .usage-rows
       opacity 1
+      width 550px
       margin-top 50px
+
+
+      .usage-examples
+        margin-top 0px
       &:first-of-type
         display none
         opacity .5
       .def-container
         .slider-container
           margin-top 10px
-        .citationContainer
-          position relative
-          background rgba(0, 0, 0, 0.08)
 
 
 
@@ -668,7 +715,7 @@ div.step > p.first-graf
     stroke-width 3px
   .active
     opacity:1
-    stroke #f24c3d
+    stroke #084356
 
 
 
@@ -683,15 +730,203 @@ div.step > p.first-graf
 .stack
   padding-bottom 100px
   .stack__container
-    .chart-title
-      margin-top 90px
-      margin-bottom 50px
-    .chart
-      margin-bottom 50px
+    padding-top 2rem
+    .list-container
+      padding-top 2rem
+      display flex
+      flex-direction column
+      background white
+      font-size 12px
+      position relative
+      margin-bottom 5rem
+      margin-top 5rem
+      &:before
+        content 'Explore + Scroll Right →'
+        right 0
+        left 0
+        text-align center
+        margin 0 auto
+        bottom 5rem
+        font-size 16px
+        text-shadow 0 0 5px white
+        //background white
+        position absolute
+        z-index 10000
+        font-family 'Atlas Grotesk Web'
+        pointer-events none
+        //background linear-gradient(90deg, transparent 70%, transparent 71%, white 85%)
+      &:after
+        content ''
+        width 100%
+        height 600px
+        bottom 0px
+        background white
+        position absolute
+        z-index 1000
+        pointer-events none
+        background linear-gradient(90deg, transparent 77%, transparent 78%, white 95%)
+      .legend
+        order 2
+        flex-wrap wrap
+        max-width 500px
+        margin 0 auto
+        text-align center
+        display flex
+        font-family 'Atlas Grotesk Web'
+        justify-content center
+
+
+        p
+          font-size 14px
+          margin 0
+          font-weight 400
+        .legend-parts
+          display flex
+          margin-left 10px
+          p
+            margin-right 5px
+
+
+      .chart-title
+        order 1
+        margin-bottom 1rem
+        font-weight 300
+        color rgba(0,0,0,.8)
+      .chart
+        //margin-bottom 50px
+        order 3
+        width 100%
+        padding-top 2rem
+
+        overflow visible
+        overflow-x scroll
+        padding-bottom 5rem
+        .wrapper
+          height 500px
+          display flex
+
+
+          flex-direction row
+          //flex-wrap wrap
+          flex-direction column
+          flex-wrap wrap
+          padding-left 1.5rem
+          .decade
+            display flex
+            writing-mode vertical-lr
+            flex-wrap wrap
+            //min-width 100px
+            position relative
+            //background #f7f7f7
+            margin-bottom 1rem
+            margin-right 2rem
+            //margin-left 1rem
+            &:first-of-type
+              .decade-label
+                position relative
+                overflow visible
+                &:before
+                  content 'Year'
+                  position absolute
+                  top -4px
+                  left 2px
+                  font-size 12px
+                  margin 0
+                  font-weight 500
+                  transform translate(0,-100%)
+            &:last-of-type
+              width 300px
+
+            .decade-label
+              //position absolute
+              //top 10px
+              //left 1rem
+              font-weight 300
+              font-size 24px
+              line-height 18px
+              text-align left
+              margin 0
+              color #949494
+              writing-mode horizontal-tb
+              margin-right 1rem
+              margin-bottom 5px
+
+            .iceberg-text
+              writing-mode horizontal-tb
+              display block
+              margin-right 1rem
+              //background #e7e7e7
+              //width 150px
+              //padding .5rem 1rem
+              border-radius 5px
+              user-select none
+              cursor pointer
+              margin 0
+              position relative
+              padding-right 1rem
+
+              .overlay-container
+                display none
+                background white
+                width 350px
+                border 1px solid #c1c1c1
+                border-radius 5px
+                padding 10px
+                box-shadow 0px 0px 9px rgba(0, 0, 0, 0.2)
+                .slider-container
+                  margin-bottom 1rem
+                p
+                  margin 0
+                  font-weight 400
+                  font-size 13px
+                  line-height 1.3
+                  span
+                    margin-right 5px
+                    font-size 13px
+                    font-weight 500
+                .citationContainer
+                  margin 0
+                  width 100%
+                  padding 0
+                  margin-top 10px
+                  height auto
+                  margin-bottom 1rem
+                  &:after
+                    background linear-gradient(180deg, transparent 0px, transparent 50px, white)
+
+
+                  .citation-wrapper
+                    font-size 12px
+                    span
+                      font-size 12px
+
+
+              .overlay-container-active
+                display block
+                position absolute
+                top -10px
+                left -10px
+                z-index 10000
+              .default-container
+                p
+                  margin 0
+                  font-weight 400
+                  line-height 1.5
+                  font-size 13px
+                  span
+                    margin-right 5px
+                    font-size 13px
+    .prose
+      max-width 550px
+      width 90%
+      p
+        width 90%
+
 
 .stack
-  background linear-gradient(#f5f5f5, #b2eafc, #fdebf0, #eefff9)
+  background linear-gradient(#fff, #fdebf0, #eefff9)
   display: none
+  //padding-top 5rem
 
 
 .stack.active
@@ -785,13 +1020,16 @@ div.step > p.first-graf
   //left 50%
   //margin-left -40%
   //top 37%
+  position relative
+  background rgba(255, 255, 255, 0.31)
+  padding .5rem 1rem
   //position fixed
   //padding-left 5%
   //padding-right 5%
   //padding-top 2%
   //padding-bottom 2%
   text-align left
-  color #f24c3d
+  color #084356
   font-weight 600
   font-size 14px
   margin 0 auto
@@ -799,9 +1037,45 @@ div.step > p.first-graf
   margin-bottom 20px
   //font-family $roboto
   line-height 1.3
+  height 100px
+  overflow hidden
   span
     color black
     font-weight 400
+
+.overflow-citation
+  cursor pointer
+  &:before
+    content 'Read More'
+    position absolute
+    right 0px
+    left 0px
+    margin 0 auto
+    width 60px
+    text-align center
+    bottom .4rem
+    z-index 1000
+    line-height 12px
+    background #084356
+    color white
+    border 5px
+    font-size 12px
+    font-weight 600
+    padding .2rem .4rem
+    border-radius 3px
+  &:after
+    content ''
+    height 100%
+    width 100%
+    position absolute
+    left 0px
+    top 0px
+    background linear-gradient(180deg, transparent 0px, transparent 50px, #b6ebfc)
+
+.overflow-citation-expand
+  height auto
+  &:after, &:before
+    display none
 
 .citationContainerIceberg
   background-color #b2eafc
@@ -823,9 +1097,11 @@ div.step > p.first-graf
   text-align left
   margin 0 auto
   font-size 24px
-  padding 0 1.5rem
-  font-weight 600
-  margin-top 50px
+  //padding 0 1.5rem
+  font-weight 300
+  width 90%
+  margin-top 4rem
+  margin-bottom 1.5rem
 
 .stack__container
   .chart-title
@@ -845,6 +1121,7 @@ div.step > p.first-graf
   line-height 40px
   margin 0 auto
   font-weight 400
+  width calc(100% - 40px)
   line-height 1.5
   .first
     text-decoration underline
@@ -854,7 +1131,10 @@ div.step > p.first-graf
 
 .active
   opacity: 1
-  z-index: 101
+  z-index 101
+
+.active.stepper__intro
+  z-index 100000000
 
 @media screen and (max-width: 376px)
   .word-container, .usage-examples

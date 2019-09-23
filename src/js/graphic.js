@@ -23,8 +23,6 @@ function setupStepper() {
 
   var stepsClicked = 0
 
-  var chartsBuilt = false
-
   //define click events on right-left buttons
   var tapLeft = d3.selectAll('.tap')
     .on('click', function () {
@@ -489,23 +487,6 @@ function setupStepper() {
         }
       }
 
-
-
-
-
-      ////remove the stepper and activate the scroller
-      //d3.select('.stepper__graphics').classed('active',false)
-      //  .attr('display','none')
-
-      // d3.select('.stepper').classed('active',false)
-      // d3.select('.script-container')
-      //   .classed('active',false)
-      // d3.select('.tap.tap--final')
-      //   .classed('active',false)
-      // d3.select(".tap.tap--final").transition()
-      //   .duration(1000)
-      //   .style('opacity',0)
-
       d3.select('.scroll').classed('active',true)
         .attr('display','inline')
       d3.select('.stack').classed('active',true)
@@ -517,6 +498,26 @@ function setupStepper() {
 
       //activate tap back button
 
+      var chartsBuilt = false;
+      if (chartsBuilt == false) {
+        buildIcebergTextList('assets/data/ass_ismo_citations_final.json','#iceberg0','#overlay0')
+        buildIcebergTextChart('assets/data/ass_long_data.json','#iceberg1','#overlay1')
+        buildIcebergTextChart('assets/data/fuck_long_data.json','#iceberg2','#overlay2')
+        buildIcebergTextChart('assets/data/dog_long_data.json','#iceberg3','#overlay3')
+        buildIcebergTextChart('assets/data/shit_long_data.json','#iceberg4','#overlay4')
+
+
+        d3.json('assets/data/ass_long_data.json').then(function(d){
+          setupAssLine(d[186].citations,d3.select("#graphic2"))
+        })
+        .catch(function(error){
+           // handle error
+        })
+
+       chartsBuilt = true
+      }
+
+
       var tapBack = d3.select('svg.tap--back')
         .on('click', function () {
           currentStep = currentStep - 1
@@ -525,26 +526,6 @@ function setupStepper() {
 
       d3.select('svg.tap--back')
         .classed('active',true)
-
-      //build charts
-      if (chartsBuilt == false) {
-      buildIcebergTextList('assets/data/ass_ismo_citations_final.json','#iceberg0','#overlay0')
-      buildIcebergTextChart('assets/data/ass_long_data.json','#iceberg1','#overlay1')
-      buildIcebergTextChart('assets/data/fuck_long_data.json','#iceberg2','#overlay2')
-      buildIcebergTextChart('assets/data/dog_long_data.json','#iceberg3','#overlay3')
-      buildIcebergTextChart('assets/data/shit_long_data.json','#iceberg4','#overlay4')
-
-      //last chart
-      //define the data, run function
-      d3.json('assets/data/ass_long_data.json').then(function(d){
-        setupAssLine(d[186].citations,d3.select("#graphic2"))
-      })
-      .catch(function(error){
-           // handle error
-        })
-        //end of data read/script
-       chartsBuilt = true
-      }
 
       //pause the fifth video
 
@@ -827,7 +808,7 @@ function setupStepperScript(datapoints) {
 
 function setupAssLine(datapoints,container) {
 
-  var x
+  var x;
   if (datapoints.length > 1) {
   for (x of datapoints) {
     if (Array.isArray(x.date)) {
@@ -855,15 +836,29 @@ function setupAssLine(datapoints,container) {
 
     var viewportWidth = document.getElementById('content').offsetWidth;
 
-
     //set up variables
     const margin = { top: 20, right: 26, bottom: 20, left: 26 }
     const height = (window.innerHeight - margin.top - margin.bottom) / 2
     // const width = Math.min(viewportWidth,550) - margin.left - margin.right
-    const width = container['_groups'][0][0].clientWidth - margin.left - margin.right
 
-    var citationContainer = container.append('div')
+    let width;
+    if(container.classed("overlay-container")){
+      width = 328 - margin.left - margin.right;
+    } else {
+      if(viewportWidth < 550){
+        width = viewportWidth - margin.left - margin.right
+      }
+      else {
+        width = 550 - margin.left - margin.right
+      }
+    }
+
+    var citationContainerWrapper = container.append('div')
       .attr('class','citationContainer')
+
+    var citationContainer = citationContainerWrapper
+      .append("div")
+      .attr("class","citation-wrapper")
 
     var svg = container
       .append('svg')
@@ -881,8 +876,6 @@ function setupAssLine(datapoints,container) {
       .y(function(d) { return d.y; })
 
     var lineData = [ { "x": 0,   "y": height*.02},  { "x": width,  "y": height*.02} ]
-
-
 
     //filter data
 
@@ -979,9 +972,9 @@ function setupAssLine(datapoints,container) {
 
     var firstCitation = citationContainer.html("<span>"+citationData[0].date + ' ('+citationData[0].aut+', '+citationData[0].tit+')</span> &ldquo;' + citationText+'&rdquo;')
 
-    //var firstHeight = firstCitation.node().offsetHeight;
-    //firstCitation.style("min-height",firstHeight+"px");
-    citationContainer.style("min-height",80+"px");
+    if(!container.classed("overlay-container")){
+      citationContainer.style("min-height",80+"px");
+    }
 
     sliderContainer
       .append('input')
@@ -995,8 +988,12 @@ function setupAssLine(datapoints,container) {
         .attr('dates',citationDates.map(function(d){
           return +d;
         }))
-
+        .on("click",function(){
+          d3.event.stopPropagation();
+        })
         .on("input",function(d){
+          d3.event.stopPropagation();
+
           var value = d3.select(this).property("value")
 
           var dates = citationDates.map(function(d){
@@ -1021,7 +1018,31 @@ function setupAssLine(datapoints,container) {
             }
             return false;
           })
+
+          citationContainerWrapper.classed("overflow-citation",false);
+          citationContainerWrapper.classed("overflow-citation-expand",false)
+
+          if(citationContainer.node().offsetHeight > 80){
+            citationContainerWrapper.classed("overflow-citation",true);
+            citationContainerWrapper.classed("overflow-citation-expand",false);
+
+            citationContainerWrapper.on("click",function(d){
+              d3.event.stopPropagation()
+
+              citationContainerWrapper.classed("overflow-citation-expand",true);
+            })
+          }
+
         })
+
+    if(citationContainer.node().offsetHeight > 80){
+      citationContainerWrapper.classed("overflow-citation",true);
+      citationContainerWrapper.on("click",function(d){
+        d3.event.stopPropagation()
+
+        citationContainerWrapper.classed("overflow-citation-expand",true);
+      })
+    }
 
   }
 
@@ -1031,7 +1052,15 @@ function setupAssLine(datapoints,container) {
 
     var citationContainer = container.append('div')
       .attr('class','citationContainer')
-      .text('(' + citationData[0].date + ') ' + citationData[0]['#text'])
+      .append("div")
+      .attr("class","citation-wrapper")
+
+
+    citationContainer
+      .html(+"<span>"+citationData[0].date + ' ('+citationData[0].aut+', '+citationData[0].tit+')</span> &ldquo;' + citationData[0]['#text']+'&rdquo;')
+
+
+      //.text('(' + citationData[0].date + ') ' + citationData[0]['#text'])
 
   }
 
@@ -1042,7 +1071,11 @@ function setupAssLine(datapoints,container) {
     if (typeof citationData.date !== 'undefined' && typeof citationData['#text'] !== 'undefined') {
     var citationContainer = container.append('div')
       .attr('class','citationContainer')
-      .text('(' + citationData.date + ') ' + citationData['#text'])
+      .append("div")
+      .attr("class","citation-wrapper")
+      .html("<span>"+citationData.date + ' ('+citationData.aut+', '+citationData.tit+')</span> &ldquo;' + citationData['#text']+'&rdquo;')
+
+      //.text('(' + citationData.date + ') ' + citationData['#text'])
     }
 
   }
@@ -1223,6 +1256,11 @@ function buildCitationTimeline(usageData,icebergnumber,overlaynumber) {
 
 //---------------------///
 
+
+var colorScaleNew = d3.scaleOrdinal()
+  .domain(['noun','compound','phrase','adjective','suffix','verb','adverb'])
+  .range(['#2e7d21','#bd22ae','#8633FF','#986210','#dc2919','#1e77bd','#676767'])
+
 function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
       //time to make some charts
 
@@ -1235,38 +1273,138 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
 
 
       //set up scales
-      var colorScale = d3.scaleOrdinal()
-        .domain(['noun','compound','phrase','adjective','suffix','verb','adverb'])
-        .range(['#FABD21','#DB2CCA','#8633FF','#DB772C','#F24C3D','green','gray'])
+
+      //var colorScaleNew = d3.scaleLinear().domain([0,nested.length-1]).range(["#750082","#bf5d1c"])
 
 
       var container = d3.select(icebergnumber)
+      var legend = null;
+
+      container.each(function(){
+        legend = d3.select(this.parentNode).append("div").attr("class","legend");
+      });
+
+
+
+      legend
+        .append("p")
+        .text("Sorted by first citation date. Color = Parts of speech:")
+
+      legend.append("div")
+        .attr("class","legend-parts")
+        .selectAll("p")
+        .data(colorScaleNew.domain())
+        .enter()
+        .append("p")
+        .text(function(d){
+          return d
+        })
+        .style("color",function(d){
+          return colorScaleNew(d);
+        })
+        ;
+
+
+
+
+      var nestedByDecade = d3.nest().key(function(d){
+        var dateFirst = null;
+        if(Array.isArray(d.first_citation_date)){
+          dateFirst = +d.first_citation_date[0];
+          // console.log(dateFirst);
+        }else{
+          dateFirst = +d.first_citation_date;
+        }
+        return Math.floor(dateFirst/10)*10;
+      })
+      .sortKeys(function(a,b){
+        return a - b;
+      })
+      .entries(datapoints);
+
+      var nested = d3.nest().key(function(d){
+
+        return d.part_of_speech;
+      })
+      .entries(datapoints).map(function(d){ return d.key});
+
+
+
+
 
       //append span groups to svg
-      var spans = container.selectAll('p')
-        .data(datapoints)
-        .enter().append('p')
-        .sort(function(x, y){
-          return y.number_of_citations - x.number_of_citations
+      var decade = container.append("div").attr("class","wrapper").selectAll('div')
+        .data(nestedByDecade)
+        .enter()
+        .append('div')
+        .attr("class","decade")
+
+      decade.append("p")
+        .attr("class","decade-label")
+        .text(function(d){
+          return d.key;
         })
+
+      var spans = decade
+        .selectAll(".iceberg-text")
+        .data(function(d){
+          return d.values;
+        })
+        .enter()
+        .append("div")
+        // .sort(function(x, y){
+        //   return y.number_of_citations - x.number_of_citations
+        // })
         .attr('class','iceberg-text')
+
+      spans.append("div")
+        .attr("class","default-container")
         .html(function(d) {
-          return d.word + "—<span>" +d.definition + '</span>'
+          var partOfSpeech = d.part_of_speech;
+          if(partOfSpeech == "sfx"){
+            partOfSpeech = "suffix";
+          }
+          var color = colorScaleNew(partOfSpeech);
+          return "<p><span style='color:"+color+";'>"+d.word + "</span>»</p> "//"<span>" +d.definition + '</span>'
+        })
+        .on("click",function(d){
+          overlays.classed("overlay-container-active",false);
+
+          d3.select(this.parentNode).select(".overlay-container").classed("overlay-container-active",true);
+        })
+
+      container.on("click",function(){
+        //overlays.classed("overlay-container-active",false);
+      })
+
+      var overlays = spans.append("div")
+        .attr("class","overlay-container")
+        .each(function(d){
+
+          var word = d.word;
+          var definition = d.definition;
+
+          d3.select(this).append("p")
+            .html(function(){
+              return "<p><span>"+word+":</span>"+definition+"</p>";
+            })
+
+          var data = d.citations
+          var container = d3.select(this);
+          setupAssLine(data,container)
+        })
+        .on("click",function(d){
+          overlays.classed("overlay-container-active",false);
         })
 
 
       //add click to reveal
-      var reveal_counter = 0
-      var reveals = spans.append('span')
-        .attr('class','reveal-click')
-        .on('click', function (d) {
-
-            d3.select(this).style('pointer-events','none')
-            var data = d.citations
-            var container = d3.select(this.parentNode)
-            setupAssLine(data,container)
-        })
-        .text("Reveal Citations");
+      // var reveal_counter = 0
+      // var reveals = spans.append('span')
+      //   .attr('class','reveal-click')
+      //   .on('click', function (d) {
+      //   })
+      //   .text("Reveal Citations");
 
     //end of function
     }).catch(function(error){
@@ -1345,12 +1483,17 @@ function init() {
           d3.select(".tap--first").text("TAP ANYWHERE TO FIND OUT");
         }
     });
+
+
     // fallback 5s loading time
     setTimeout(function(){
       ready = true;
       d3.select(".tap--first").text("TAP ANYWHERE TO FIND OUT");
     }, 5000);
+
   })
+
+  var chartsBuilt = false
 
 }
 
