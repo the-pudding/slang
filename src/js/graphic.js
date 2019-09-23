@@ -1286,7 +1286,7 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
 
       legend
         .append("p")
-        .text("Sorted by first citation date. Color = Parts of speech:")
+        .text("Sorted by first citation date. Parts of speech:")
 
       legend.append("div")
         .attr("class","legend-parts")
@@ -1381,10 +1381,11 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
 
           var word = d.word;
           var definition = d.definition;
+          var part = d.part_of_speech;
 
           d3.select(this).append("p")
             .html(function(){
-              return "<p><span>"+word+":</span>"+definition+"</p>";
+              return "<p><span>"+word+":</span>"+definition+", "+part+"</p>";
             })
 
           var data = d.citations
