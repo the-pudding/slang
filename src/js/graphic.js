@@ -1,5 +1,6 @@
 var stepperTriggered = false;
 var ready = false;
+var chartsBuilt = false;
 
 /* global d3 */
 function resize() {}
@@ -498,15 +499,13 @@ function setupStepper() {
 
       //activate tap back button
 
-      var chartsBuilt = false;
       if (chartsBuilt == false) {
         buildIcebergTextList('assets/data/ass_ismo_citations_final.json','#iceberg0','#overlay0')
         buildIcebergTextChart('assets/data/ass_long_data.json','#iceberg1','#overlay1')
         buildIcebergTextChart('assets/data/fuck_long_data.json','#iceberg2','#overlay2')
         buildIcebergTextChart('assets/data/dog_long_data.json','#iceberg3','#overlay3')
         buildIcebergTextChart('assets/data/shit_long_data.json','#iceberg4','#overlay4')
-
-
+        chartsBuilt = true
         d3.json('assets/data/ass_long_data.json').then(function(d){
           setupAssLine(d[186].citations,d3.select("#graphic2"))
         })
@@ -514,7 +513,6 @@ function setupStepper() {
            // handle error
         })
 
-       chartsBuilt = true
       }
 
 
@@ -1492,8 +1490,6 @@ function init() {
     }, 5000);
 
   })
-
-  var chartsBuilt = false
 
 }
 
