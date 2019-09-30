@@ -572,6 +572,9 @@ div.step > p.first-graf
   margin-bottom 50px
   pointer-events auto
   position relative
+  @media (max-width:550px)
+    width calc(100% - 82px)
+
 
   &:after
     content ''
@@ -594,6 +597,9 @@ div.step > p.first-graf
     text-align center
     transform translate(-50%,0)
     width 220px
+    @media (max-width:600px)
+      top 38px
+
 
 .slider
   -webkit-appearance: none
@@ -607,6 +613,8 @@ div.step > p.first-graf
   outline: none
   opacity 1
   position relative
+  @media (max-width:600px)
+    height 55px
 
 
 
@@ -618,16 +626,16 @@ div.step > p.first-graf
 .slider::-webkit-slider-thumb
   -webkit-appearance: none
   appearance: none
-  width: 20px
-  height: 20px
+  width: 35px
+  height: 35px
   border-radius: 50%
   background #084356
   cursor pointer
 
 .slider::-moz-range-thumb
   appearance: none
-  width: 20px
-  height: 20px
+  width: 35px
+  height: 35px
   border-radius: 50%
   background #084356
   cursor pointer
@@ -764,7 +772,7 @@ div.step > p.first-graf
         position absolute
         z-index 1000
         pointer-events none
-        background linear-gradient(90deg, transparent 77%, transparent 78%, white 95%)
+        background linear-gradient(90deg, rgba(255,255,255,0) 77%, rgba(255,255,255,0) 78%, white 95%)
       .legend
         order 2
         flex-wrap wrap
@@ -892,7 +900,7 @@ div.step > p.first-graf
                   height auto
                   margin-bottom 1rem
                   &:after
-                    background linear-gradient(180deg, transparent 0px, transparent 50px, white)
+                    background linear-gradient(180deg, rgba(255,255,255,0) 0px, rgba(255,255,255,0) 50px, white)
 
 
                   .citation-wrapper
@@ -1070,7 +1078,7 @@ div.step > p.first-graf
     position absolute
     left 0px
     top 0px
-    background linear-gradient(180deg, transparent 0px, transparent 50px, #b6ebfc)
+    background linear-gradient(180deg, rgba(182, 235, 252, 0) 0px, rgba(182, 235, 252,0) 50px, #b6ebfc)
 
 .overflow-citation-expand
   height auto

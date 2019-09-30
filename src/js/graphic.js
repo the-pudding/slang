@@ -253,11 +253,7 @@ function setupStepper() {
      splitSentence()
     }
 
-    d3.selectAll('.highlighted').transition()
-      .duration(250)
-      .on('start', function (d) {
-        d3.select(this).classed('highlighted',false)
-      })
+    d3.selectAll('.sentence-word').classed('highlighted',false);
 
     var highlightTimes = [.1,.3,.5,.7,1.0,1.3,1.8,2,2.3,
     3.7,3.9,
@@ -318,11 +314,14 @@ function setupStepper() {
      splitSentence()
     }
 
-    d3.selectAll('.highlighted').transition()
-      .duration(250)
-      .on('start', function (d) {
-        d3.select(this).classed('highlighted',false)
-      })
+    d3.selectAll('.sentence-word').classed('highlighted',false);
+
+    //
+    // d3.selectAll('.highlighted').transition()
+    //   .duration(250)
+    //   .on('start', function (d) {
+    //     d3.select(this).classed('highlighted',false)
+    //   })
 
     var highlightTimes = [.7,.9,1.1,1.2,1.3,1.5,1.7,1.9,2,
     2.6,2.9,3.1,3.3,3.7,
@@ -389,11 +388,15 @@ function setupStepper() {
           .duration(1000)
           .style('color','#00fff3')
 
-    d3.selectAll('.highlighted').transition()
-      .duration(250)
-      .on('start', function (d) {
-        d3.select(this).classed('highlighted',false)
-      })
+
+      d3.selectAll('.sentence-word').classed('highlighted',false);
+
+
+    // d3.selectAll('.highlighted').transition()
+    //   .duration(250)
+    //   .on('start', function (d) {
+    //     d3.select(this).classed('highlighted',false)
+    //   })
 
     //scroll to offscreen text
     setTimeout(function() {
@@ -608,18 +611,27 @@ function setupStepper() {
   //highlight words
   function highlightWords(durationModifier) {
 
-     d3.selectAll('.highlighted').transition()
-      .duration(250)
-      .on('start', function (d) {
-        d3.select(this).classed('highlighted',false)
-      })
+    d3.selectAll('.sentence-word').classed('highlighted',false);
+
+
+     // d3.selectAll('.highlighted').transition()
+     //  .duration(250)
+     //  .on('start', function (d) {
+     //    d3.select(this).classed('highlighted',false)
+     //  })
 
    var videoLength = d3.select('.stepper__video.active>video')['_groups'][0][0]['duration']
    var numberWords = d3.selectAll('.script-line.active >span').size()
    var durationBetween = videoLength / numberWords
 
    d3.selectAll('.script-line.active >span')
-      .transition()
+      .transition("highlights")
+      .duration(0)
+      .delay(0)
+      ;
+
+   d3.selectAll('.script-line.active >span')
+      .transition("highlights")
       .duration(0)
       .delay(function(d,i){ return i * 1000 * (durationBetween*durationModifier) })
       .attr('scrollTop',0)
@@ -629,7 +641,11 @@ function setupStepper() {
   }
 
   function highlightWordsStaggered(video,highlightTimes) {
+    d3.selectAll('.sentence-word').classed('highlighted',false);
+
     var highlightInterval = setInterval(function () {
+
+      //d3.selectAll('.sentence-word').classed('highlighted',false);
 
       d3.selectAll('.script-line.active >span').transition()
         .duration(0)
@@ -639,9 +655,14 @@ function setupStepper() {
           }
         })
 
+        if(video.currentTime == video.duration){
+          clearInterval( highlightInterval )
+        }
+
+        //setTimeout(function( ) { clearInterval( highlightInterval ); }, video.duration * 1000)
+
     },100)
 
-    setTimeout(function( ) { clearInterval( highlightInterval ); }, video.duration * 1000)
   }
 
   // split sentences by word
@@ -835,7 +856,7 @@ function setupAssLine(datapoints,container) {
     var viewportWidth = document.getElementById('content').offsetWidth;
 
     //set up variables
-    const margin = { top: 20, right: 26, bottom: 20, left: 26 }
+    let margin = { top: 20, right: 26, bottom: 20, left: 26 }
     const height = (window.innerHeight - margin.top - margin.bottom) / 2
     // const width = Math.min(viewportWidth,550) - margin.left - margin.right
 
@@ -844,6 +865,8 @@ function setupAssLine(datapoints,container) {
       width = 328 - margin.left - margin.right;
     } else {
       if(viewportWidth < 550){
+        margin.left = 60;
+        margin.right = 60;
         width = viewportWidth - margin.left - margin.right
       }
       else {
@@ -975,6 +998,9 @@ function setupAssLine(datapoints,container) {
     }
 
     sliderContainer
+      .on("touchmove",function(e){
+        d3.event.stopPropagation();
+      })
       .append('input')
         .attr('type','range')
         .attr('min',firstDate)
@@ -989,6 +1015,15 @@ function setupAssLine(datapoints,container) {
         .on("click",function(){
           d3.event.stopPropagation();
         })
+        .on("touchmove",function(e){
+          d3.event.stopPropagation();
+        })
+
+        // .on("touchstart touchmove",function(e){
+        //   e.stopPropagation();
+        //   e.preventDefault();
+        //   d3.event.stopPropagation();
+        // })
         .on("input",function(d){
           d3.event.stopPropagation();
 
@@ -1491,6 +1526,8 @@ function init() {
     }, 5000);
 
   })
+
+  document.addEventListener('touchmove', function (e) {if(e.target.id != 'rangeSLider'){e.preventDefault(); }}, false);
 
 }
 
