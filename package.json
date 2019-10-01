@@ -13,7 +13,7 @@
 		"intersection-observer": "^0.7.0",
 		"jquery": "^3.4.1",
 		"lodash.debounce": "4.0.8",
-		"nouislider": "14.0.2",
+		"nouislider": "^14.0.2",
 		"rimraf": "2.6.3",
 		"scrollama": "^2.0.1",
 		"superagent": "5.1.0"

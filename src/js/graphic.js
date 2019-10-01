@@ -1,6 +1,10 @@
+import noUiSlider from 'nouislider';
+
+var changing = false;
 var stepperTriggered = false;
 var ready = false;
 var chartsBuilt = false;
+var highlightInterval = null;
 
 /* global d3 */
 function resize() {}
@@ -107,31 +111,19 @@ function setupStepper() {
 
     highlightSubtitle1()
 
-
     d3.select('.subtitle.subtitle1').classed('active',true)
     d3.select('.subtitle.subtitle1')
       .style('opacity',0)
+
     d3.select('.subtitle.subtitle1').transition()
       .delay(400)
       .duration(150)
       .style('opacity',1)
-    // var subtitleHighlights = d3.selectAll('.subtitle-word')
-    // subtitleHighlights.transition()
-    //   .delay(400)
-    //   .duration(200)
-    //   .style('color','white')
-
-
-
-
-
-
-
 
       //play the first video
       d3.select('video.ismo.step1')['_groups'][0][0].currentTime = 0
       d3.select('video.ismo.step1')['_groups'][0][0].play()
-
+      d3.select('video.ismo.step1')['_groups'][0][0].muted = false;
   }
 
   function step2() {
@@ -266,6 +258,7 @@ function setupStepper() {
 
    //play the second video
    d3.select('video.ismo.step3')['_groups'][0][0].play()
+   d3.select('video.ismo.step3')['_groups'][0][0].muted = false;
   //pause the third video on clickback
    d3.select('video.ismo.step4')['_groups'][0][0].pause()
    d3.select('video.ismo.step4')['_groups'][0][0].currentTime = 0
@@ -290,6 +283,7 @@ function setupStepper() {
     d3.select('video.ismo.step3')['_groups'][0][0].currentTime = 0
    //play the third video
     d3.select('video.ismo.step4')['_groups'][0][0].play()
+    d3.select('video.ismo.step4')['_groups'][0][0].muted = false;
     //pause the fourth video on clickback
     d3.select('video.ismo.step5')['_groups'][0][0].pause()
     d3.select('video.ismo.step5')['_groups'][0][0].currentTime = 0
@@ -304,11 +298,9 @@ function setupStepper() {
       })
       .classed('active',true)
 
-    //reset text color on clickback
-      d3.selectAll('#ass-instance')
-        .transition()
-        .duration(1000)
-        .style('color','rgba(0,255,243,0.4)')
+
+    d3.selectAll('#ass-instance').style('color',null);
+
 
     if (stepsClicked === 4) {
      splitSentence()
@@ -340,6 +332,7 @@ function setupStepper() {
    d3.select('video.ismo.step4')['_groups'][0][0].currentTime = 0
    //play the fourth video
    d3.select('video.ismo.step5')['_groups'][0][0].play()
+   d3.select('video.ismo.step5')['_groups'][0][0].muted = false;
    //pause the fifth video on clickback
    d3.select('video.ismo.step6')['_groups'][0][0].pause()
    d3.select('video.ismo.step6')['_groups'][0][0].currentTime = 0
@@ -380,13 +373,8 @@ function setupStepper() {
     highlightAss()
 
     //reset text color on clickback
-      d3.selectAll('#ass-instance')
-        .transition()
-        .duration(250)
-        .style('color','rgba(186,186,186,0.4)')
-          .transition()
-          .duration(1000)
-          .style('color','#00fff3')
+    d3.selectAll('#ass-instance')
+        .style('color','#00fff3')
 
 
       d3.selectAll('.sentence-word').classed('highlighted',false);
@@ -438,6 +426,7 @@ function setupStepper() {
    d3.select('video.ismo.step5')['_groups'][0][0].currentTime = 0
    //play the fifth video
    d3.select('video.ismo.step6')['_groups'][0][0].play()
+   d3.select('video.ismo.step6')['_groups'][0][0].muted = false;
 
    //deselect active text on clickback/clickthrough
     window.setTimeout(function(d){ d3.selectAll('.script-line').classed("active",false) },500)
@@ -642,8 +631,10 @@ function setupStepper() {
 
   function highlightWordsStaggered(video,highlightTimes) {
     d3.selectAll('.sentence-word').classed('highlighted',false);
+    clearInterval( highlightInterval )
 
-    var highlightInterval = setInterval(function () {
+
+    highlightInterval = setInterval(function () {
 
       //d3.selectAll('.sentence-word').classed('highlighted',false);
 
@@ -996,77 +987,146 @@ function setupAssLine(datapoints,container) {
     if(!container.classed("overlay-container")){
       citationContainer.style("min-height",80+"px");
     }
+    //
+    // sliderContainer.attr("id","newSlider");
+    // var range = document.getElementById('newSlider');
 
-    sliderContainer
-      .on("touchmove",function(e){
+
+    noUiSlider.create(sliderContainer.node(), {
+        start: [firstDate],
+        range: {
+            'min': [firstDate],
+            'max': [lastDate]
+        }
+    })
+
+    sliderContainer.node().noUiSlider.on("start",function(){
+      changing = true;
+    })
+    sliderContainer.node().noUiSlider.on("end",function(){
+      setTimeout(function(d){
+        changing = false;
+      },500)
+
+    })
+
+    sliderContainer.node().noUiSlider.on("update",function(values, handle, unencoded, tap, positions){
+
+      var value = +values[0]
+
+      var dates = citationDates.map(function(d){
+        return +d;
+      })
+
+      var selected = dates.reduce((prev, curr) => Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
+
+      citationCircles.classed("active",function(d){
+        if(+d.date == selected){
+          var text = d["#text"];
+
+
+          if (d['#text']== 'in') { text = d['#text'].concat(d.tit)};
+
+
+          citationContainer
+            .html("<span>"+selected + ' ('+d.aut+', '+d.tit+')</span> &ldquo;' + text+'&rdquo;')
+            //.text('(' + selected + ') ' + text)
+
+          return true;
+        }
+        return false;
+      })
+
+      citationContainerWrapper.classed("overflow-citation",false);
+      citationContainerWrapper.classed("overflow-citation-expand",false)
+
+      if(citationContainer.node().offsetHeight > 80){
+        citationContainerWrapper.classed("overflow-citation",true);
+        citationContainerWrapper.classed("overflow-citation-expand",false);
+
+        citationContainerWrapper.on("click",function(d){
+          d3.event.stopPropagation()
+
+          citationContainerWrapper.classed("overflow-citation-expand",true);
+        })
+      }
+
+
+    })
+
+    sliderContainer.selectAll(".noUi-touch-area")
+      .on("click",function(){
         d3.event.stopPropagation();
       })
-      .append('input')
-        .attr('type','range')
-        .attr('min',firstDate)
-        .attr('max',lastDate)
-        .attr('id','rangeSLider')
-        .attr('value',firstDate)
-        .attr('step',1)
-        .attr('class','slider')
-        .attr('dates',citationDates.map(function(d){
-          return +d;
-        }))
-        .on("click",function(){
-          d3.event.stopPropagation();
-        })
-        .on("touchmove",function(e){
-          d3.event.stopPropagation();
-        })
-
-        // .on("touchstart touchmove",function(e){
-        //   e.stopPropagation();
-        //   e.preventDefault();
-        //   d3.event.stopPropagation();
-        // })
-        .on("input",function(d){
-          d3.event.stopPropagation();
-
-          var value = d3.select(this).property("value")
-
-          var dates = citationDates.map(function(d){
-            return +d;
-          })
-
-          var selected = dates.reduce((prev, curr) => Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
-
-          citationCircles.classed("active",function(d){
-            if(+d.date == selected){
-              var text = d["#text"];
 
 
-              if (d['#text']== 'in') { text = d['#text'].concat(d.tit)};
 
 
-              citationContainer
-                .html("<span>"+selected + ' ('+d.aut+', '+d.tit+')</span> &ldquo;' + text+'&rdquo;')
-                //.text('(' + selected + ') ' + text)
-
-              return true;
-            }
-            return false;
-          })
-
-          citationContainerWrapper.classed("overflow-citation",false);
-          citationContainerWrapper.classed("overflow-citation-expand",false)
-
-          if(citationContainer.node().offsetHeight > 80){
-            citationContainerWrapper.classed("overflow-citation",true);
-            citationContainerWrapper.classed("overflow-citation-expand",false);
-
-            citationContainerWrapper.on("click",function(d){
-              d3.event.stopPropagation()
-
-              citationContainerWrapper.classed("overflow-citation-expand",true);
-            })
-          }
-
-        })
+      // .append('input')
+      //   .attr('type','range')
+      //   .attr('min',firstDate)
+      //   .attr('max',lastDate)
+      //   .attr('id','rangeSLider')
+      //   .attr('value',firstDate)
+      //   .attr('step',1)
+      //   .attr('class','slider')
+      //   .attr('dates',citationDates.map(function(d){
+      //     return +d;
+      //   }))
+      //   .on("click",function(){
+      //     d3.event.stopPropagation();
+      //   })
+      //   // .on("touchstart",function(e){
+      //   //   // d3.event.preventDefault();
+      //   //   d3.event.stopPropagation();
+      //   // })
+      //   .on("touchmove",function(e){
+      //     // d3.event.preventDefault();
+      //     d3.event.stopPropagation();
+      //   })
+      //   .on("input",function(d){
+      //     d3.event.stopPropagation();
+      //
+      //     var value = d3.select(this).property("value")
+      //
+      //     var dates = citationDates.map(function(d){
+      //       return +d;
+      //     })
+      //
+      //     var selected = dates.reduce((prev, curr) => Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
+      //
+      //     citationCircles.classed("active",function(d){
+      //       if(+d.date == selected){
+      //         var text = d["#text"];
+      //
+      //
+      //         if (d['#text']== 'in') { text = d['#text'].concat(d.tit)};
+      //
+      //
+      //         citationContainer
+      //           .html("<span>"+selected + ' ('+d.aut+', '+d.tit+')</span> &ldquo;' + text+'&rdquo;')
+      //           //.text('(' + selected + ') ' + text)
+      //
+      //         return true;
+      //       }
+      //       return false;
+      //     })
+      //
+      //     citationContainerWrapper.classed("overflow-citation",false);
+      //     citationContainerWrapper.classed("overflow-citation-expand",false)
+      //
+      //     if(citationContainer.node().offsetHeight > 80){
+      //       citationContainerWrapper.classed("overflow-citation",true);
+      //       citationContainerWrapper.classed("overflow-citation-expand",false);
+      //
+      //       citationContainerWrapper.on("click",function(d){
+      //         d3.event.stopPropagation()
+      //
+      //         citationContainerWrapper.classed("overflow-citation-expand",true);
+      //       })
+      //     }
+      //
+      //   })
 
     if(citationContainer.node().offsetHeight > 80){
       citationContainerWrapper.classed("overflow-citation",true);
@@ -1076,6 +1136,8 @@ function setupAssLine(datapoints,container) {
         citationContainerWrapper.classed("overflow-citation-expand",true);
       })
     }
+
+    // document.addEventListener('touchmove', function (e) {if(e.target.id == 'rangeSLider'){e.preventDefault(); }}, {passive: false});
 
   }
 
@@ -1356,39 +1418,73 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
       .entries(datapoints);
 
       var nested = d3.nest().key(function(d){
-
         return d.part_of_speech;
       })
       .entries(datapoints).map(function(d){ return d.key});
 
 
+      var newArray = [];
 
+      for (var decadeItem in nestedByDecade){
+        for (var word in nestedByDecade[decadeItem].values){
+          nestedByDecade[decadeItem].values[word].first = false;
+          nestedByDecade[decadeItem].values[word].yearLabel = nestedByDecade[decadeItem].key;
+          if(word == 0){
+            nestedByDecade[decadeItem].values[word].first = true;
+          }
+          newArray.push(nestedByDecade[decadeItem].values[word]);
+        }
+      }
+
+      console.log(newArray);
 
 
       //append span groups to svg
-      var decade = container.append("div").attr("class","wrapper").selectAll('div')
-        .data(nestedByDecade)
+      var spans = container.append("div").attr("class","wrapper")
+        .selectAll('.iceberg-text')
+        .data(newArray)
         .enter()
         .append('div')
-        .attr("class","decade")
-
-      decade.append("p")
-        .attr("class","decade-label")
-        .text(function(d){
-          return d.key;
+        .attr('class','iceberg-text')
+        .classed("first",function(d){
+          if(d.first){
+            return true;
+          }
+          return false;
         })
+        ;
 
-      var spans = decade
-        .selectAll(".iceberg-text")
-        .data(function(d){
-          return d.values;
-        })
-        .enter()
-        .append("div")
+
+
+        // .attr("class","decade")
+
+      // decade.append("p")
+      //   .attr("class","decade-label")
+      //   .text(function(d){
+      //     return d.key;
+      //   })
+
+      // var spans = decade
+      //   .selectAll(".iceberg-text")
+      //   .data(function(d){
+      //     return d.values;
+      //   })
+      //   .enter()
+      //   .append("div")
         // .sort(function(x, y){
         //   return y.number_of_citations - x.number_of_citations
         // })
-        .attr('class','iceberg-text')
+
+      spans.filter(function(d){
+          if(d.first){
+            return true;
+          }
+        })
+        .append("span")
+        .attr("class","year")
+        .text(function(d){
+          return d.yearLabel;
+        })
 
       spans.append("div")
         .attr("class","default-container")
@@ -1402,8 +1498,12 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
         })
         .on("click",function(d){
           overlays.classed("overlay-container-active",false);
-
-          d3.select(this.parentNode).select(".overlay-container").classed("overlay-container-active",true);
+          var element = d3.select(this.parentNode).select(".overlay-container")
+          var offset = d3.select(this.parentNode).node().offsetTop + d3.select(this.parentNode.parentNode).node().offsetTop;
+          if(offset > 175 + 300){
+            element.style("transform","translate(0,-100%)")
+          }
+          element.classed("overlay-container-active",true);
         })
 
       container.on("click",function(){
@@ -1428,7 +1528,9 @@ function buildIcebergTextChart(filename,icebergnumber,overlaynumber) {
           setupAssLine(data,container)
         })
         .on("click",function(d){
-          overlays.classed("overlay-container-active",false);
+          if(!changing){
+            overlays.classed("overlay-container-active",false);
+          }
         })
 
 
@@ -1509,25 +1611,29 @@ function init() {
   var videos = d3.selectAll("video");
   var size = videos.size();
   var count = 0;
+
   videos.each(function(d,i){
+    var element = d3.select(this).node();
     d3.select(this).node().addEventListener('canplaythrough', () => {
         count = count + 1;
+        console.log(count);
         if(count == size){
           ready = true;
+          element.pause();
           d3.select(".tap--first").text("TAP ANYWHERE TO FIND OUT");
         }
     });
 
 
     // fallback 5s loading time
-    setTimeout(function(){
-      ready = true;
-      d3.select(".tap--first").text("TAP ANYWHERE TO FIND OUT");
-    }, 5000);
+    // setTimeout(function(){
+    //
+    //   ready = true;
+    //   d3.select(".tap--first").text("TAP ANYWHERE TO FIND OUT");
+    // }, 1000);
 
   })
 
-  document.addEventListener('touchmove', function (e) {if(e.target.id != 'rangeSLider'){e.preventDefault(); }}, false);
 
 }
 
